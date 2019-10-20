@@ -5,8 +5,12 @@ import store from './store';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 
+import {
+  Lazyload
+} from "vant";
 
 Vue.use(Vant);
+Vue.use(Lazyload);
 Vue.config.productionTip = false;
 
 new Vue({

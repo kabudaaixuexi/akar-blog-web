@@ -29,10 +29,15 @@
           </h4>
           <abbr>《航海王》动画二十周年纪念制作</abbr>
           <p class="list_date">今日9117家影院11111场</p>
-          <p class="list_bottom">
-            <span class="list_biao"></span>
+          <nav class="list_bottom">
+            <ul class="list_biao">
+              <li>日语</li>
+              <li>2D</li>
+              <li>中国巨幕</li>
+              <li>全景声</li>
+            </ul>
             <span class="list_xuan">选座购票</span>
-          </p>
+          </nav>
         </div>
       </figure>
     </article>
@@ -86,6 +91,11 @@ export default {
 .list_title small {
   color: darkorchid;
 }
+.now_list div {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  align-items: center;
+}
 .now_list div abbr {
   color: blueviolet;
   font-size: 0.24rem;
@@ -99,6 +109,8 @@ export default {
   justify-content: space-between;
 }
 .list_biao {
+  display: flex;
+  font-size: 0.24rem;
 }
 .list_xuan {
   text-align: center;
