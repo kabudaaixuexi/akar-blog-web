@@ -2,7 +2,7 @@
   <div>
     <transition name="fade">
       <header v-show="show">
-        <nav @click="Dizhi">1111</nav>
+        <nav @click="Dizhi">{{n}}</nav>
         <nav>影院通</nav>
         <nav>55</nav>
       </header>
@@ -168,9 +168,23 @@
 export default {
   data() {
     return {
+      n: "",
       activetag: 0,
       show: false
     };
+  },
+  created() {
+    const city = this.$route.query.name;
+    if (this.$route.query.name != undefined) {
+      localStorage.setItem("city", JSON.stringify(city));
+      this.n = JSON.parse(localStorage.getItem("city"));
+    } else {
+      if (localStorage.getItem("city")) {
+        this.n = JSON.parse(localStorage.getItem("city"));
+      } else {
+        this.n = "选择城市";
+      }
+    }
   },
   methods: {
     Dizhi() {

@@ -135,7 +135,12 @@ export default {
       this.arr = cityList;
     },
     Cityn(a) {
-      this.$router.push("/");
+      this.$router.push({
+        path: "/",
+        query: {
+          name: a
+        }
+      });
     }
   }
 };
