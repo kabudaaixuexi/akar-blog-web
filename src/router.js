@@ -14,7 +14,17 @@ export default new Router({
     {
       path: '/shop',
       name: 'shop',
-      component: () => import('./views/Shop.vue')
+      redirect: {
+        path: '/shop/now'
+      },
+      component: () => import('./views/Shop.vue'),
+      children: [{
+        path: 'now',
+        component: () => import('./views/Shop/Nowsold.vue'),
+      }, {
+        path: 'will',
+        component: () => import('./views/Shop/Willsold.vue'),
+      }]
     },
     {
       path: '/movie',
@@ -26,5 +36,15 @@ export default new Router({
       name: 'wode',
       component: () => import('./views/My.vue'),
     },
+    {
+      path: '/city',
+      name: 'city',
+      component: () => import('./views/City/index.vue'),
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('./views/Search/index.vue'),
+    }
   ],
 });

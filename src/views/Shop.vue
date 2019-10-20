@@ -1,15 +1,39 @@
 <template>
   <div>
     <header class="header">
-      <p>
-        <span>影院</span>
-        <span>电影</span>
+      <p v-model="active">
+        <span>
+          <router-link to="/shop/now">正在售票</router-link>
+        </span>
+        <span>
+          <router-link to="/shop/will">即将上映</router-link>
+        </span>
       </p>
+
+      <van-tabbar v-model="activetag">
+        <van-tabbar-item to="/">首页</van-tabbar-item>
+        <van-tabbar-item to="/shop" icon="search">购票</van-tabbar-item>
+        <van-tabbar-item to="/movie" icon="setting-o">影院</van-tabbar-item>
+        <van-tabbar-item to="/wode" icon="wode">我的</van-tabbar-item>
+      </van-tabbar>
     </header>
+    <section class="con_">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </section>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "shop",
+  data() {
+    return {
+      activetag: 1,
+      active: 0
+    };
+  }
+};
 </script>
 <style scoped>
 .header {
@@ -24,11 +48,20 @@ export default {};
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.header p a {
+  color: #fff;
+}
 .header p span {
+  font-size: 0.28rem;
   display: grid;
   place-items: center;
 }
 .header p span:nth-child(1) {
   border-right: 1px solid #fff;
 }
+
+.con_ {
+  padding-top: 0.9rem;
+}
 </style>
+1

@@ -2,7 +2,7 @@
   <div>
     <transition name="fade">
       <header v-show="show">
-        <nav>广州</nav>
+        <nav @click="Dizhi">1111</nav>
         <nav>影院通</nav>
         <nav>55</nav>
       </header>
@@ -154,6 +154,13 @@
       </article>
 
       <footer>院线通</footer>
+
+      <van-tabbar v-model="activetag">
+        <van-tabbar-item to="/">首页</van-tabbar-item>
+        <van-tabbar-item to="/shop" icon="search">购票</van-tabbar-item>
+        <van-tabbar-item to="/movie" icon="setting-o">影院</van-tabbar-item>
+        <van-tabbar-item to="/wode" icon="wode">我的</van-tabbar-item>
+      </van-tabbar>
     </section>
   </div>
 </template>
@@ -161,12 +168,13 @@
 export default {
   data() {
     return {
+      activetag: 0,
       show: false
     };
   },
   methods: {
-    onClickLeft() {
-      alert("ll");
+    Dizhi() {
+      this.$router.push("/city");
     }
   },
 
@@ -178,11 +186,11 @@ export default {
       //旧数据大于当前位置，表示滚动条top向上滚动
       if (oldTop > top) {
         this.show = false;
-        console.log("↑");
+        // console.log("↑");
       } else {
         //相反...
         this.show = true;
-        console.log("↓");
+        // console.log("↓");
       }
       oldTop = top; //更新旧的位置
     };
@@ -190,10 +198,6 @@ export default {
 };
 </script>
 <style  scoped>
-section {
-  background: rgba(204, 202, 202, 0.2);
-  padding: 0.001rem 0.3rem 55px;
-}
 img {
   display: block;
   width: 100%;
