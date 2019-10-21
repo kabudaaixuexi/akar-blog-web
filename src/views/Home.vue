@@ -33,7 +33,9 @@
         <span>热门推荐</span>
         <span style="font-size:0.28rem">
           更多
-          <span>></span>
+          <span class="arrow">
+            <van-icon name="arrow" />
+          </span>
         </span>
       </p>
 
@@ -226,6 +228,8 @@ img {
 * {
   margin: 0;
 }
+
+/**navbar */
 .tap_live {
   margin: 0.4rem 0 0.3rem;
   border-left: 0.1rem solid darkmagenta;
@@ -234,6 +238,10 @@ img {
   justify-content: space-between;
   color: darkmagenta;
 }
+.tap_live span:nth-child(1) {
+  font-size: 0.32rem;
+}
+/**热门推荐 */
 .hot_One {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -277,6 +285,7 @@ img {
   margin-top: 0.2rem;
 }
 
+/**最新资讯 */
 .hot_life {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -328,5 +337,10 @@ footer {
   height: 1rem;
   display: grid;
   place-items: center;
+}
+
+.arrow {
+  height: 0.4rem;
+  line-height: 0.4rem;
 }
 </style>

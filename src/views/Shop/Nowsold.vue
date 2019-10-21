@@ -105,6 +105,9 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.list_title span {
+  font-size: 0.31rem;
+}
 .list_title small {
   color: darkorchid;
 }

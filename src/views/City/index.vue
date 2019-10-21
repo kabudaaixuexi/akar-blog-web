@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div id="bg">
     <transition name="fade">
       <header v-show="show">
         <span @click="History_go">
@@ -148,6 +148,9 @@ export default {
 };
 </script>
 <style scoped>
+#bg {
+  font-size: 0.33rem;
+}
 .con_ {
   padding: 0.9rem 0 0 0;
 }
