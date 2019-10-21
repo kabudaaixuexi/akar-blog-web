@@ -3,7 +3,9 @@
   <div>
     <transition name="fade">
       <header v-show="show">
-        <span @click="History_go"><</span>
+        <span @click="History_go">
+          <van-icon name="arrow-left" />
+        </span>
         <abbr>城市选择</abbr>
         <span></span>
       </header>

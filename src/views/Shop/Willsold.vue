@@ -21,7 +21,7 @@
 
     <article class="now_list">
       <figure v-for="item in moviecomings" @click="Todetail(item.id)">
-        <img :src="item.image" alt v-lazy="item.image" />
+        <img :src="item.image" alt />
         <div>
           <h4 class="list_title">
             <span>{{item.title}}</span>

@@ -1,12 +1,7 @@
 <template>
   <div>
     <p class="fiexd">
-      <van-search
-        @click="aa"
-        placeholder="请输入搜索关键词"
-        background="rgba(250, 250, 250, 0.1)"
-        v-model="value"
-      />
+      <van-search @click="aa" placeholder="请输入搜索关键词" background="rgba(250, 250, 250, 0.1)" />
     </p>
     <article class="swipe_">
       <van-swipe :autoplay="3000" indicator-color="white">
@@ -20,21 +15,21 @@
     </article>
 
     <article class="now_list">
-      <figure>
-        <img src="../../assets/grilfriend.jpg" alt />
+      <figure v-for="item in Willbuy" @click="Todetail(item.movieId)">
+        <img :src="item.img" v-lazy="item.img" alt />
         <div>
           <h4 class="list_title">
-            <span>航海王：狂热行动</span>
-            <small>8.5</small>
+            <span>{{item.titleCn}}</span>
+            <small>{{item.ratingFinal==-1?"暂无评分":item.ratingFinal}}</small>
           </h4>
-          <abbr>《航海王》动画二十周年纪念制作</abbr>
+          <abbr>{{item.commonSpecial}}</abbr>
           <p class="list_date">今日9117家影院11111场</p>
           <nav class="list_bottom">
             <ul class="list_biao">
-              <li>日语</li>
-              <li>2D</li>
-              <li>中国巨幕</li>
-              <li>全景声</li>
+              <li>{{item.is3D==false?"":'3D'}}</li>
+              <li>{{item.isDMAX==false?"":'DMAX'}}</li>
+              <li>{{item.is3D==false?"":'3D'}}</li>
+              <li>{{item.is3D==false?"":'3D'}}</li>
             </ul>
             <span class="list_xuan">选座购票</span>
           </nav>
@@ -48,12 +43,34 @@ export default {
   name: "nowsold",
   data() {
     return {
-      value: ""
+      Willbuy: []
     };
+  },
+  created() {
+    axios
+      .post("http://localhost:3000/proxy", {
+        url:
+          "https://api-m.mtime.cn/PageSubArea/HotPlayMovies.api?locationId=290"
+      })
+      .then(res => {
+        if (res.statusText === "OK") {
+          this.Willbuy = res.data.info.movies;
+          console.log(this.Willbuy);
+        }
+      });
   },
   methods: {
     aa() {
       this.$router.push("/search");
+    },
+    Todetail(movieId) {
+      console.log(movieId);
+      this.$router.push({
+        name: "detail",
+        query: {
+          id: movieId
+        }
+      });
     }
   }
 };

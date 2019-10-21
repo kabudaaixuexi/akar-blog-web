@@ -1,41 +1,21 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
-
+import movieIndex from './AllRouter/index';
+import movieShop from './AllRouter/shopcart';
+import movieYing from './AllRouter/movieho';
+import movieWode from './AllRouter/mycon';
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [{
-      path: '/',
-      name: 'home',
-      component: () => import('./views/Home.vue'),
-    },
-    {
-      path: '/shop',
-      name: 'shop',
-      redirect: {
-        path: '/shop/now'
-      },
-      component: () => import('./views/Shop.vue'),
-      children: [{
-        path: 'now',
-        component: () => import('./views/Shop/Nowsold.vue'),
-      }, {
-        path: 'will',
-        component: () => import('./views/Shop/Willsold.vue'),
-      }]
-    },
-    {
-      path: '/movie',
-      name: 'movie',
-      component: () => import('./views/Movie.vue'),
-    },
-    {
-      path: '/wode',
-      name: 'wode',
-      component: () => import('./views/My.vue'),
-    },
+  mode: 'history',
+  bash: process.env.BASH_URL,
+  routes: [
+    movieIndex,
+    movieShop,
+    movieYing,
+    movieWode,
+
     {
       path: '/city',
       name: 'city',
@@ -50,6 +30,11 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       component: () => import('./views/Shop/Detail.vue')
-    }
+    },
+
+    {
+      path: '/*',
+      redirect: '/',
+    },
   ],
 });

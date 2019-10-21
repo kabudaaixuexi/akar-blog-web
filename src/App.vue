@@ -40,6 +40,7 @@ section {
 }
 
 header {
+  font-size: 0.34rem;
   z-index: 1;
   position: fixed;
   box-sizing: border-box;
