@@ -31,7 +31,16 @@ export default new Router({
       name: 'detail',
       component: () => import('./views/Shop/Detail.vue')
     },
-
+    {
+      path: '/myping',
+      name: 'myping',
+      component: () => import('./views/Ping/index.vue')
+    },
+    {
+      path: '/yugao',
+      name: 'yugao',
+      component: () => import('./views/Home/Yugao.vue')
+    },
     {
       path: '/*',
       redirect: '/',

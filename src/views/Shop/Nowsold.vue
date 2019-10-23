@@ -23,13 +23,13 @@
             <small>{{item.ratingFinal==-1?"暂无评分":item.ratingFinal}}</small>
           </h4>
           <abbr>{{item.commonSpecial}}</abbr>
-          <p class="list_date">今日9117家影院11111场</p>
+          <p
+            class="list_date"
+          >今日{{item.nearestShowtime.nearestShowtimeCount}}家影院{{item.wantedCount}}场</p>
           <nav class="list_bottom">
             <ul class="list_biao">
-              <li>{{item.is3D==false?"":'3D'}}</li>
-              <li>{{item.isDMAX==false?"":'DMAX'}}</li>
-              <li>{{item.is3D==false?"":'3D'}}</li>
-              <li>{{item.is3D==false?"":'3D'}}</li>
+              <li>{{item.is3D==false?"中国巨幕":'3D'}}</li>
+              <li>&nbsp;{{item.isDMAX==false?"全景声":'DMAX'}}</li>
             </ul>
             <span class="list_xuan">选座购票</span>
           </nav>
@@ -56,6 +56,7 @@ export default {
         if (res.statusText === "OK") {
           this.Willbuy = res.data.info.movies;
           console.log(this.Willbuy);
+          this.Willbuy.map((item, index) => {});
         }
       });
   },
@@ -130,7 +131,17 @@ export default {
 }
 .list_biao {
   display: flex;
-  font-size: 0.24rem;
+  font-size: 0.2rem;
+  align-items: center;
+}
+.list_biao li {
+  color: rgb(96, 97, 99);
+  display: flex;
+  margin-right: 0.02rem;
+  align-items: center;
+  padding: 0 0.06rem;
+  border: 1px solid rgb(95, 95, 97);
+  border-radius: 10%;
 }
 .list_xuan {
   text-align: center;

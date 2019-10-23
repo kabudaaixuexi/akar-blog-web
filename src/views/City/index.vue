@@ -12,22 +12,34 @@
     </transition>
 
     <nav class="fade_search">
-      <van-search background v-model="searchVal" placeholder="请输入搜索关键词" show-action shape="round">
-        <div slot="action">搜索</div>
+      <van-search
+        @input="searchInput"
+        @focus="Focus"
+        background
+        v-model="searchVal"
+        placeholder="请输入搜索关键词"
+        show-action
+        shape="round"
+      >
+        <div @click="baibai" slot="action">取消</div>
       </van-search>
     </nav>
-
-    <section class="con_">
+    <!-- js自动完成 -->
+    <ul v-show="Autoshow" class="autoover">
+      <li v-for="item in newarr" @click="Cityn(item.nm,item.id)">{{item.nm}}</li>
+    </ul>
+    <!--  -->
+    <section v-show="Secshow" class="con_">
       <div class="con_head">热门城市</div>
 
       <article class="con_hot">
-        <p v-for="item in hot">{{item}}</p>
+        <p v-for="item in hot" @click="Cityn(item.nm,item.id)">{{item.nm}}</p>
       </article>
 
       <van-index-bar>
         <ul class="ul" v-for="item in arr">
           <van-index-anchor :index="item.index" />
-          <li v-for="a in item.list" @click="Cityn(a.n)">{{a.n}}</li>
+          <li v-for="a in item.list" @click="Cityn(a.n,a.id)">{{a.n}}</li>
         </ul>
       </van-index-bar>
     </section>
@@ -39,35 +51,35 @@ export default {
   name: "City",
   data() {
     return {
+      Secshow: true,
+      Autoshow: false,
+      res: [],
+      newarr: [],
       searchVal: "",
       show: true,
-      hot: [
-        "上海",
-        "北京",
-        "杭州",
-        "厦门",
-        "广东",
-        "南京",
-        "郑州",
-        "珠海",
-        "深圳",
-        "青岛"
-      ],
-      arr: []
+      arr: [],
+      hot: [],
+      citynm: ""
     };
   },
   mounted() {
     axios
       .post("http://localhost:3000/proxy", {
-        url: "https://api-m.mtime.cn/Showtime/HotCitiesByCinema.api"
+        url: "http://39.97.33.178/api/cityList"
       })
       .then(res => {
         var msg = res.statusText;
         if (msg === "OK") {
           console.log(res);
-          var Citer = res.data.info.p;
+          var Citer = res.data.info.data.cities;
+          this.res = Citer;
           // [{ index: "A", list: [{ nm: "阿城", id: 123 }] }];
           this.formatCityList(Citer);
+          res.data.info.data.cities.forEach((item, index) => {
+            if (item.isHot == 1) {
+              this.hot.push(item);
+            }
+          });
         }
       });
 
@@ -99,18 +111,18 @@ export default {
       var cityList = [];
       var hotList = [];
       for (var i = 0; i < Citer.length; i++) {
-        var firstLetter = Citer[i].pinyinFull.substring(0, 1).toUpperCase();
+        var firstLetter = Citer[i].py.substring(0, 1).toUpperCase();
         if (Tocom(firstLetter)) {
           //新添加的index
           cityList.push({
             index: firstLetter,
-            list: [{ n: Citer[i].n, id: Citer[i].id }]
+            list: [{ n: Citer[i].nm, id: Citer[i].id }]
           });
         } else {
           //累加到已有的index
           for (var j = 0; j < cityList.length; j++) {
             if (cityList[j].index === firstLetter) {
-              cityList[j].list.push({ n: Citer[i].n, id: Citer[i].id });
+              cityList[j].list.push({ n: Citer[i].nm, id: Citer[i].id });
             }
           }
         }
@@ -135,14 +147,41 @@ export default {
         return true;
       }
       this.arr = cityList;
+      console.log(this.arr);
     },
-    Cityn(a) {
+    Cityn(a, b) {
+      localStorage.setItem("CITYID", JSON.stringify(b));
       this.$router.push({
         path: "/",
         query: {
           name: a
         }
       });
+    },
+    ////////http://39.97.33.178/api/searchList 搜索传城市id与searchVal
+    searchInput() {
+      console.log(this.searchVal);
+
+      this.newarr = [];
+      for (var i = 0; i < this.res.length; i++) {
+        if (
+          this.res[i].py.indexOf(this.searchVal) != -1 ||
+          this.res[i].nm.indexOf(this.searchVal) != -1
+        ) {
+          this.newarr.push(this.res[i]);
+        }
+      }
+    },
+    // 显示与隐藏
+    Focus() {
+      this.Secshow = false;
+      this.Autoshow = true;
+    },
+    // 取消
+    baibai() {
+      this.Secshow = true;
+      this.Autoshow = false;
+      this.searchVal = "";
     }
   }
 };
@@ -163,11 +202,11 @@ export default {
 .con_hot {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   /* grid-row-gap: 0rem; */
   place-items: center;
   background: rgba(180, 177, 174, 0.1);
-  height: 3rem;
+  height: 2rem;
 }
 .con_hot p {
   background: #eee;
@@ -214,4 +253,18 @@ header {
   border: 0.2rem solid rgba(204, 204, 202, 0.5);
   border-radius: 50%;
 } */
+.autoover {
+  position: fixed;
+  top: 1rem;
+  z-index: 999;
+  width: 100%;
+}
+.autoover li {
+  line-height: 0.9rem;
+  padding-left: 0.2rem;
+  background: #fff;
+  width: 100%;
+  height: 0.9rem;
+  border-bottom: 1px solid rgba(93, 96, 97, 0.1);
+}
 </style>

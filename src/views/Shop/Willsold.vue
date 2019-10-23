@@ -27,7 +27,7 @@
             <span>{{item.title}}</span>
             <small>{{item.wantedCount}}人想看</small>
           </h4>
-          <abbr>❀《航海王》动画二十周年纪念制作</abbr>
+          <abbr>❀{{item.actor1}},{{item.actor2}},{{item.director}}</abbr>
           <p>{{item.releaseDate}}</p>
         </div>
       </figure>
@@ -123,6 +123,9 @@ export default {
 .now_list div abbr {
   color: blueviolet;
   font-size: 0.24rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .now_list p {
   color: rgb(165, 161, 161);

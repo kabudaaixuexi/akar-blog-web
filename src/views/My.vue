@@ -1,6 +1,13 @@
 <template>
   <div>
-    11
+    <header>
+      <span></span>
+      <span>个人中心</span>
+      <span></span>
+    </header>
+    <section>
+      <article class="User"></article>
+    </section>
     <van-tabbar v-model="activetag">
       <van-tabbar-item to="/">首页</van-tabbar-item>
       <van-tabbar-item to="/shop" icon="search">购票</van-tabbar-item>
@@ -18,3 +25,13 @@ export default {
   }
 };
 </script>
+<style scoped>
+section {
+}
+.User {
+  padding-top: 0.9rem;
+  height: 3rem;
+  background: rgb(10, 17, 17);
+  width: 100%;
+}
+</style>

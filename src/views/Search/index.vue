@@ -1,6 +1,18 @@
 <template>
   <div>
-    <van-search id="text" placeholder="请输入搜索关键词" v-model="value" />
+    <nav class="fade_search">
+      <van-search
+        @input="searchInput"
+        @focus="Focus"
+        background
+        v-model="searchVal"
+        placeholder="请输入搜索关键词"
+        show-action
+        shape="round"
+      >
+        <div class="sousuo" @click="baibai" slot="action">搜索</div>
+      </van-search>
+    </nav>
   </div>
 </template>
 <script>
@@ -19,3 +31,5 @@ export default {
   }
 };
 </script>
+ <style scoped>
+</style>

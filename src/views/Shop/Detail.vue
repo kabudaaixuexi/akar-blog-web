@@ -77,22 +77,26 @@
       </article>
 
       <footer class="pinglun">
-        <div>网友评论（）</div>
-        <article>
+        <div>网友评论（{{Pinglun.length}}）</div>
+        <article v-for="item in Pinglun">
           <p class="pl_list_top">
-            <img src alt />
+            <img :src="item.headImg" alt />
             <span>
-              白骨恒运
+              {{item.nickname}}
               <br />
               <small>2019-10-18</small>
             </span>
           </p>
-          <p class="pl_list_bottom">太好看了，我哭了，虽然剧情很老套，但是最后一刻埃斯的影响库曾狗</p>
+          <p class="pl_list_bottom">{{item.content}}</p>
         </article>
       </footer>
     </section>
 
-    <div class="footer"></div>
+    <div class="footer">
+      <p @click="Go_Ping">写评论</p>
+      <p>为它评分</p>
+      <button>选座购票</button>
+    </div>
   </div>
 </template>
 <script>
@@ -105,29 +109,63 @@ export default {
       videoSrc2: "https://p5-v1.xpccdn.com/040448520_main_xl.mp4",
       posterSrc: "",
       story: "",
-      basic: ""
+      basic: {
+        releaseDate: "",
+        director: {
+          name: ""
+        },
+        actors: {
+          name: ""
+        },
+        stageImg: {
+          list: ""
+        }
+      },
+      Pinglun: ""
     };
   },
   mounted() {
     this.id = this.$route.query.id;
+    localStorage.setItem("ID", JSON.stringify(this.id));
+    var str = localStorage.getItem("ID");
+    var obj = JSON.parse(str);
+    console.log(obj);
+
     axios
       .post("http://localhost:3000/proxy", {
-        url: `https://ticket-api-m.mtime.cn/movie/detail.api?locationId=290&movieId=${this.id}`
+        url: `https://ticket-api-m.mtime.cn/movie/detail.api?locationId=290&movieId=${obj}`
       })
       .then(res => {
+        console.log(res);
+
         const data = res.data.info.data;
         const zy = data.actors;
-        console.log(data);
         this.basic = data.basic;
         this.img = data.basic.img;
         this.videoSrc = data.basic.video.url;
         this.posterSrc = data.basic.video.img;
         this.story = data.basic.story;
+        console.log(this.basic, this.img, this.videoSrc);
+      });
+
+    axios
+      .post("http://localhost:3000/proxy", {
+        url: `https://ticket-api-m.mtime.cn/movie/hotComment.api?movieId=${obj}`
+      })
+      .then(res => {
+        if (res.statusText === "OK") {
+          console.log(res);
+
+          this.Pinglun = res.data.info.data.mini.list;
+        }
       });
   },
   methods: {
     History_go() {
-      this.$router.history.go(-1);
+      this.$router.push("/shop/now");
+    },
+    Go_Ping() {
+      this.$router.push("/myping");
     }
   }
 };
@@ -270,7 +308,7 @@ section article .secphoto {
 }
 .pinglun {
   margin: 0.2rem;
-  height: 5rem;
+  margin-bottom: 1rem;
 }
 .pl_list_top {
   display: flex;
@@ -280,11 +318,63 @@ section article .secphoto {
   color: rgb(170, 173, 173);
 }
 .pl_list_top img {
-  width: 1rem;
-  height: 1rem;
-  display: inline-block;
+  border-radius: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  display: block;
+  margin-right: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 .pl_list_bottom {
   padding: 0.1rem 0;
+}
+
+.footer {
+  align-items: center;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    color-stop(0%, #edeaf0),
+    color-stop(0%, #a05386),
+    color-stop(50%, #e990d3),
+    color-stop(0%, #9d74cc),
+    color-stop(100%, #f1eef5)
+  );
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  padding-left: 0.2rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 1rem;
+  border-top: 0.02rem solid rgba(37, 33, 33, 0.5);
+}
+.footer p {
+  color: #eee;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 5%;
+  height: 0.7rem;
+  width: 90%;
+  background: rgba(99, 17, 88, 0.8);
+}
+
+.footer button {
+  border: none;
+  color: #eee;
+  font-size: 0.34rem;
+  height: 100%;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    color-stop(0%, #2b2a2c),
+    color-stop(0%, #442d5e),
+    color-stop(50%, #7b7c79),
+    color-stop(0%, #715c8b),
+    color-stop(100%, #5a585c)
+  );
 }
 </style>

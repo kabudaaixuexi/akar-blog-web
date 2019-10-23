@@ -57,7 +57,7 @@ header {
   max-width: 100%;
   min-width: 100%;
   color: #fff;
-  height: 0.92rem;
+  height: 0.98rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

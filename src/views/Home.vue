@@ -31,7 +31,7 @@
     <section>
       <p class="tap_live">
         <span>热门推荐</span>
-        <span style="font-size:0.28rem">
+        <span style="font-size:0.28rem" @click="Go_shopwill">
           更多
           <span class="arrow">
             <van-icon name="arrow" />
@@ -40,90 +40,39 @@
       </p>
 
       <article class="hot_One">
-        <figure>
+        <figure v-for="item in data" @click="Todetail(item.id)">
           <div>
-            <img src="../assets/grilfriend.jpg" alt />
+            <img :src="item.image" v-lazy="item.image" />
           </div>
           <div class="two">
             <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱savsvsvsvdvd</abbr>
-              <span>广州正佳演绎影院</span>
+              <abbr>{{item.title}}</abbr>
+              <span>{{item.rYear}}-{{item.releaseDate}}</span>
             </p>
           </div>
         </figure>
       </article>
 
       <p class="tap_live">
-        <span>热门活动</span>
-        <span style="font-size:0.28rem">
+        <span>预告片</span>
+        <span style="font-size:0.28rem" @click="Go_yugao">
           更多
           <span>></span>
         </span>
       </p>
 
       <article class="hot_life">
-        <figure>
-          <img src="../assets/goutou.jpg" alt />
-          <div>全国通用电影券兑换上线了</div>
-        </figure>
-        <figure>
-          <img src="../assets/goutou2.jpg" alt />
-          <div>全国通用电影券兑换上线了</div>
+        <figure v-for="item in Video">
+          <video
+            :src="item.hightUrl"
+            autoplay="autoplay"
+            controls="controls"
+            width="100%"
+            :poster="item.image"
+          >
+            <p>不支持播放</p>
+          </video>
+          <div>{{item.title}}</div>
         </figure>
       </article>
 
@@ -172,10 +121,36 @@ export default {
     return {
       n: "",
       activetag: 0,
-      show: false
+      show: false,
+      data: [],
+      Video: "",
+      ID: []
     };
   },
   created() {
+    axios
+      .post("http://localhost:3000/proxy", {
+        url: "https://api-m.mtime.cn/Movie/MovieComingNew.api?locationId=290"
+      })
+      .then(res => {
+        console.log(res);
+        this.data = res.data.info.moviecomings.reverse();
+        this.data.forEach(item => {
+          this.ID.push(item.id);
+        });
+        console.log(this.ID);
+        const index = Math.floor(Math.random() * this.ID.length);
+        console.log(this.ID[index]);
+        ///预告片
+        axios
+          .post("http://localhost:3000/proxy", {
+            url: `https://api-m.mtime.cn/Movie/Video.api?pageIndex=1&movieId=${this.ID[index]}`
+          })
+          .then(res => {
+            this.Video = res.data.info.videoList;
+          });
+      });
+    ///热门推荐
     const city = this.$route.query.name;
     if (this.$route.query.name != undefined) {
       localStorage.setItem("city", JSON.stringify(city));
@@ -191,6 +166,26 @@ export default {
   methods: {
     Dizhi() {
       this.$router.push("/city");
+    },
+    Todetail(a) {
+      this.$router.push({
+        name: "detail",
+        query: {
+          id: a
+        }
+      });
+    },
+    //
+    Go_shopwill() {
+      this.$router.push({
+        path: "/shop/will"
+      });
+    },
+    //
+    Go_yugao() {
+      this.$router.push({
+        name: "yugao"
+      });
     }
   },
 
@@ -210,6 +205,7 @@ export default {
       }
       oldTop = top; //更新旧的位置
     };
+    //热门推荐go详情页
   }
 };
 </script>
@@ -244,9 +240,9 @@ img {
 /**热门推荐 */
 .hot_One {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 0.2rem;
+  grid-auto-flow: column;
+  overflow: auto;
+  grid-column-gap: 0.22rem;
 }
 .hot_One img {
   height: 2.8rem;
@@ -285,25 +281,34 @@ img {
   margin-top: 0.2rem;
 }
 
-/**最新资讯 */
+/**预告片 */
 .hot_life {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  width: 100%;
+  overflow: auto;
   grid-column-gap: 0.3rem;
 }
 .hot_life figure {
+  height: 2rem;
+  width: 3.2rem;
   position: relative;
   background: slategrey;
 }
+.hot_life figure video {
+  width: 100%;
+  height: 90%;
+}
 .hot_life div {
+  font-family: Georgia, "Times New Roman", Times, serif;
   color: #fff;
   text-align: center;
-  line-height: 0.44rem;
-  font-size: 0.24rem;
+  line-height: 0.36rem;
+  font-size: 0.2rem;
   position: absolute;
   bottom: 0;
   background: rgba(22, 22, 22, 0.8);
-  height: 0.44rem;
+  height: 0.36rem;
   width: 100%;
 }
 
