@@ -7,7 +7,7 @@ import movieWode from './AllRouter/mycon';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   bash: process.env.BASH_URL,
   routes: [
@@ -18,6 +18,7 @@ export default new Router({
 
     {
       path: '/city',
+      meta: '111',
       name: 'city',
       component: () => import('./views/City/index.vue'),
     },
@@ -42,8 +43,27 @@ export default new Router({
       component: () => import('./views/Home/Yugao.vue')
     },
     {
+      path: '/loginin',
+      name: 'loginin',
+      component: () => import('./views/Wode/Loginin.vue')
+    },
+    {
       path: '/*',
       redirect: '/',
     },
   ],
 });
+
+// 前置守卫
+router.beforeEach((to, from, next) => {
+  // console.log(to);
+
+  next();
+});
+
+// 后置钩子
+router.afterEach((to, from) => {
+  // console.log("--------");
+
+});
+export default router;

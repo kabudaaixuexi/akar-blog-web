@@ -22,6 +22,11 @@ export default {
     return {
       activetag: 3
     };
+  },
+  created() {
+    console.log(this.$store);
+
+    this.$store.commit("Willsold");
   }
 };
 </script>

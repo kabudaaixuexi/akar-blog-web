@@ -4,30 +4,32 @@
       <header v-show="show">
         <nav @click="Dizhi">{{n}}</nav>
         <nav>影院通</nav>
-        <nav>55</nav>
+        <nav @click="search">
+          <van-icon name="search" />
+        </nav>
       </header>
     </transition>
-
-    <nav class="swiper">
-      <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item>
-          <img src="../assets/bg_.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/star.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/yellow.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/me.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/qqqqq.jpg" alt />
-        </van-swipe-item>
-      </van-swipe>
-    </nav>
-
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <nav class="swiper">
+        <van-swipe :autoplay="3000" indicator-color="white">
+          <van-swipe-item>
+            <img src="../assets/bg_.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/star.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/yellow.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/me.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/qqqqq.jpg" alt />
+          </van-swipe-item>
+        </van-swipe>
+      </nav>
+    </van-pull-refresh>
     <section>
       <p class="tap_live">
         <span>热门推荐</span>
@@ -63,13 +65,7 @@
 
       <article class="hot_life">
         <figure v-for="item in Video">
-          <video
-            :src="item.hightUrl"
-            autoplay="autoplay"
-            controls="controls"
-            width="100%"
-            :poster="item.image"
-          >
+          <video preload controls="controls" :src="item.hightUrl" width="100%" :poster="item.image">
             <p>不支持播放</p>
           </video>
           <div>{{item.title}}</div>
@@ -119,11 +115,12 @@
 export default {
   data() {
     return {
+      isLoading: false,
       n: "",
       activetag: 0,
       show: false,
       data: [],
-      Video: "",
+      Video: [],
       ID: []
     };
   },
@@ -147,7 +144,14 @@ export default {
             url: `https://api-m.mtime.cn/Movie/Video.api?pageIndex=1&movieId=${this.ID[index]}`
           })
           .then(res => {
-            this.Video = res.data.info.videoList;
+            if (res.data.info.videoList.length == 0) {
+              this.Video = [
+                "http://video.699pic.com/videos/54/03/95/b_iuwtcDKQP7Ew1540540395_10s.mp4",
+                "http://video.699pic.com/videos/70/71/92/b_DXX8r235kI7Y1540707192_10s.mp4"
+              ];
+            } else {
+              this.Video = res.data.info.videoList;
+            }
           });
       });
     ///热门推荐
@@ -175,6 +179,14 @@ export default {
         }
       });
     },
+    //下拉刷新
+    onRefresh() {
+      setTimeout(() => {
+        this.$router.history.go(0);
+        this.$toast("刷新成功");
+        this.isLoading = false;
+      }, 500);
+    },
     //
     Go_shopwill() {
       this.$router.push({
@@ -186,6 +198,10 @@ export default {
       this.$router.push({
         name: "yugao"
       });
+    },
+    //跳搜索页
+    search() {
+      toast("llll");
     }
   },
 

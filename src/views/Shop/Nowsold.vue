@@ -60,6 +60,12 @@ export default {
         }
       });
   },
+  mounted() {
+    // this.$store.commit("print/setPrint", {
+    //   Data: this.Willbuy,
+    //   BrandID: 402
+    // });
+  },
   methods: {
     aa() {
       this.$router.push("/search");
