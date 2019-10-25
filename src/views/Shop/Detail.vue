@@ -155,8 +155,14 @@ export default {
       .then(res => {
         if (res.statusText === "OK") {
           console.log(res);
-
-          this.Pinglun = res.data.info.data.mini.list;
+          const id = this.$route.query.id;
+          if (JSON.parse(localStorage.getItem(id))) {
+            this.Pinglun = JSON.parse(localStorage.getItem(id));
+          } else {
+            const Plist = res.data.info.data.mini.list;
+            localStorage.setItem(id, JSON.stringify(Plist));
+            this.Pinglun = JSON.parse(localStorage.getItem(id));
+          }
         }
       });
   },
@@ -165,7 +171,12 @@ export default {
       this.$router.push("/shop/now");
     },
     Go_Ping() {
-      this.$router.push("/myping");
+      this.$router.push({
+        name: "myping",
+        query: {
+          id: this.$route.query.id
+        }
+      });
     }
   }
 };

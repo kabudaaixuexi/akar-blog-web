@@ -20,7 +20,7 @@
       <p>{{Pinf}}</p>
     </article>
     <article class="Text">
-      <textarea placeholder="我想说...">{{textvalue}}</textarea>
+      <textarea placeholder="我想说..." v-model="textvalue">{{textvalue}}</textarea>
     </article>
   </div>
 </template>
@@ -85,6 +85,24 @@ export default {
       });
     },
     MyOpinion() {
+      var date = new Date();
+      //发表评论 {img:"",nickname:"",date:"",content:""}
+      console.log(this.textvalue);
+      const id = this.$route.query.id;
+      const pinglun = JSON.parse(localStorage.getItem(id));
+      const Newp = [
+        {
+          aid: Date.now(),
+          img: "",
+          nickname: "刘德华",
+          date: date,
+          content: this.textvalue
+        }
+      ];
+      const pinglun1 = Newp.concat(pinglun);
+      localStorage.setItem(id, JSON.stringify(pinglun1));
+
+      //结束
       var Id = JSON.parse(localStorage.getItem("ID"));
       Toast.success("操作成功");
       this.$router.push({

@@ -1,7 +1,7 @@
 const state = {
   all: {
-    Data: '111',
-    BrandID: '111'
+    Data: '',
+    BrandID: ''
   }
 }
 

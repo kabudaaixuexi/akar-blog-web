@@ -38,7 +38,6 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
 export default {
   name: "search",
   data() {
@@ -47,11 +46,6 @@ export default {
       aList: [],
       newList: []
     };
-  },
-  computed: {
-    ...mapState({
-      print: state => state.print.all
-    })
   },
   created() {
     this.$store.commit("Will");

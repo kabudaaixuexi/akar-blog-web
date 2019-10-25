@@ -56,16 +56,15 @@ export default {
         if (res.statusText === "OK") {
           this.Willbuy = res.data.info.movies;
           console.log(this.Willbuy);
-          this.Willbuy.map((item, index) => {});
+          //把数据存入print中
+          this.$store.commit("print/setPrint", {
+            Data: this.Willbuy,
+            BrandID: 402
+          });
         }
       });
   },
-  mounted() {
-    // this.$store.commit("print/setPrint", {
-    //   Data: this.Willbuy,
-    //   BrandID: 402
-    // });
-  },
+  mounted() {},
   methods: {
     aa() {
       this.$router.push("/search");

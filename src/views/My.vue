@@ -7,26 +7,34 @@
     </header>
     <section>
       <article class="User"></article>
+      <p></p>
     </section>
     <van-tabbar v-model="activetag">
-      <van-tabbar-item to="/">首页</van-tabbar-item>
-      <van-tabbar-item to="/shop" icon="search">购票</van-tabbar-item>
-      <van-tabbar-item to="/movie" icon="setting-o">影院</van-tabbar-item>
-      <van-tabbar-item to="/wode" icon="wode">我的</van-tabbar-item>
+      <van-tabbar-item to="/" icon="wap-home">首页</van-tabbar-item>
+      <van-tabbar-item to="/shop" icon="coupon">购票</van-tabbar-item>
+      <van-tabbar-item to="/movie" icon="video">影院</van-tabbar-item>
+      <van-tabbar-item to="/wode" icon="manager">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      activetag: 3
+      activetag: 3,
+      Data: ""
     };
+  },
+  computed: {
+    ...mapState({
+      print: state => state.print.all
+    })
   },
   created() {
     console.log(this.$store);
-
-    this.$store.commit("Willsold");
+    console.log(this.print);
+    // this.$store.commit("Willsold");
   }
 };
 </script>
