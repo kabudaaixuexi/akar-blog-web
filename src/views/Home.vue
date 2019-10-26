@@ -81,23 +81,18 @@
       </p>
 
       <article class="what_life">
-        <figure>
+        <figure v-for="item in print.Img">
           <div>
-            <img src="../assets/goutou2.jpg" alt />
+            <img :src="item.image" alt />
           </div>
-          <div class="detail">
+          <!-- <div class="detail">
             <p>一次相遇，相守一生！最好的陪伴，给你最暖的行动</p>
             <p>
               <span>691</span>
               <span>0</span>
             </p>
-          </div>
+          </div>-->
         </figure>
-        <figure></figure>
-        <figure></figure>
-        <figure></figure>
-        <figure></figure>
-        <figure></figure>
       </article>
 
       <footer>院线通</footer>
@@ -112,6 +107,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -130,15 +126,17 @@ export default {
         url: "https://api-m.mtime.cn/Movie/MovieComingNew.api?locationId=290"
       })
       .then(res => {
-        console.log(res);
         this.data = res.data.info.moviecomings.reverse();
         this.data.forEach(item => {
           this.ID.push(item.id);
         });
-        console.log(this.ID);
+        // console.log(this.ID);
         const index = Math.floor(Math.random() * this.ID.length);
-        console.log(this.ID[index]);
+        // console.log(this.ID[index]);
         ///预告片
+        this.$store.commit("print/Juzhao", {
+          ID: this.ID[index]
+        });
         axios
           .post("http://localhost:3000/proxy", {
             url: `https://api-m.mtime.cn/Movie/Video.api?pageIndex=1&movieId=${this.ID[index]}`
@@ -166,6 +164,12 @@ export default {
         this.n = "选择城市";
       }
     }
+    console.log(this.print);
+  },
+  computed: {
+    ...mapState({
+      print: state => state.print.Juzhao
+    })
   },
   methods: {
     Dizhi() {
@@ -328,7 +332,7 @@ img {
   width: 100%;
 }
 
-.what_life {
+/* .what_life {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-row-gap: 0.2rem;
@@ -342,7 +346,7 @@ img {
 }
 .what_life figure div:nth-child(1) {
   height: 1.6rem;
-}
+} */
 .detail {
   font-size: 0.28rem;
   display: flex;

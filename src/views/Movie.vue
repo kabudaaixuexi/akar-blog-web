@@ -30,6 +30,8 @@
           <span></span>
         </p>
       </figure>
+
+      <p>{{searchlist}}</p>
     </section>
     <van-tabbar v-model="activetag">
       <van-tabbar-item to="/" icon="wap-home">首页</van-tabbar-item>
@@ -40,23 +42,33 @@
   </div>
 </template>
 <script>
+import { log } from "util";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       activetag: 2,
-      searchVal: ""
+      searchVal: "",
+      searchlist: []
     };
   },
   created() {
-    const ID = JSON.parse(localStorage.getItem("CITYID"));
-    axios
-      .post("http://localhost:3000/proxy", {
-        url: `http://39.97.33.178/api/cinemaList?city=${ID}`
-      })
-      .then(res => {});
+    this.$store.commit("Yugao");
   },
+  mounted() {},
+  computed: mapState(["List"]),
   methods: {
-    searchInput() {},
+    searchInput() {
+      this.searchlist = [];
+      this.List.data.info.movies.forEach(item => {
+        if (item.titleCn.indexOf(this.searchVal) != -1) {
+          this.searchlist.push(item);
+          if (this.searchVal.length == 0) {
+            this.searchlist = [];
+          }
+        }
+      });
+    },
     Focus() {},
     baibai() {}
   }

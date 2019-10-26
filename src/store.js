@@ -10,7 +10,8 @@ export default new Vuex.Store({
   },
   state: {
     list: [],
-    ID: [],
+    ImgJuzhao: [],
+    List: []
   },
   mutations: {
     Will(state) {
@@ -23,11 +24,13 @@ export default new Vuex.Store({
 
     Yugao(state) {
       axios.post("http://localhost:3000/proxy", {
-        url: `https://api-m.mtime.cn/Movie/Video.api?pageIndex=?&movieId=217896`
+        url: `https://api-m.mtime.cn/PageSubArea/HotPlayMovies.api?locationId=290`
       }).then(res => {
-        console.log(res);
+        state.List = res
       })
-    }
+    },
+
+
   },
   actions: {
 

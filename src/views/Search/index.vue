@@ -38,6 +38,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   name: "search",
   data() {
@@ -50,18 +51,18 @@ export default {
   created() {
     this.$store.commit("Will");
   },
-  mounted() {
-    this.aList = this.$store.state.list.data.info.moviecomings;
-    console.log(this.$store.state.list.data.info.moviecomings);
-  },
+  computed: mapState(["list"]),
+  mounted() {},
   methods: {
     searchInput() {
       this.show = true;
-      console.log(this.searchVal);
       this.newList = [];
-      this.aList.forEach(item => {
+      this.list.data.info.moviecomings.forEach(item => {
         if (item.title.indexOf(this.searchVal) != -1) {
           this.newList.push(item);
+          if (this.searchVal.length == 0) {
+            this.newList = [];
+          }
         }
       });
     },

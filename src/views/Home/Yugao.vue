@@ -8,10 +8,10 @@
       <span></span>
     </header>
     <section>
-      <figure v-for="item in 10" class="figure">
-        <img src alt />
+      <figure v-for="item in print.Img" class="figure">
+        <img :src="item.image" alt />
         <div>
-          <p>yvgovvyuvovoyv</p>
+          <p></p>
           <p>
             <span></span>
             <span></span>
@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {};
@@ -29,6 +30,12 @@ export default {
   created() {
     this.$store.commit("Willsold");
     this.$store.commit("Yugao");
+    console.log(this.print);
+  },
+  computed: {
+    ...mapState({
+      print: state => state.print.Juzhao
+    })
   },
   methods: {
     Go_back() {
