@@ -2,126 +2,73 @@
   <div>
     <transition name="fade">
       <header v-show="show">
-        <nav>广州</nav>
+        <nav @click="Dizhi">{{n}}</nav>
         <nav>影院通</nav>
-        <nav>55</nav>
+        <nav @click="search">
+          <van-icon name="search" />
+        </nav>
       </header>
     </transition>
-
-    <nav class="swiper">
-      <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item>
-          <img src="../assets/bg_.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/star.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/yellow.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/me.jpg" alt />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../assets/qqqqq.jpg" alt />
-        </van-swipe-item>
-      </van-swipe>
-    </nav>
-
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <nav class="swiper">
+        <van-swipe :autoplay="3000" indicator-color="white">
+          <van-swipe-item>
+            <img src="../assets/bg_.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/star.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/yellow.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/me.jpg" alt />
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../assets/qqqqq.jpg" alt />
+          </van-swipe-item>
+        </van-swipe>
+      </nav>
+    </van-pull-refresh>
     <section>
       <p class="tap_live">
         <span>热门推荐</span>
-        <span style="font-size:0.28rem">
+        <span style="font-size:0.28rem" @click="Go_shopwill">
           更多
-          <span>></span>
+          <span class="arrow">
+            <van-icon name="arrow" />
+          </span>
         </span>
       </p>
 
       <article class="hot_One">
-        <figure>
+        <figure v-for="item in data" @click="Todetail(item.id)">
           <div>
-            <img src="../assets/grilfriend.jpg" alt />
+            <img :src="item.image" v-lazy="item.image" />
           </div>
           <div class="two">
             <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱</abbr>
-              <span>广州正佳演绎影院</span>
-            </p>
-          </div>
-        </figure>
-        <figure>
-          <div>
-            <img src alt />
-          </div>
-          <div class="two">
-            <p>
-              <abbr>航海王：草帽酱savsvsvsvdvd</abbr>
-              <span>广州正佳演绎影院</span>
+              <abbr>{{item.title}}</abbr>
+              <span>{{item.rYear}}-{{item.releaseDate}}</span>
             </p>
           </div>
         </figure>
       </article>
 
       <p class="tap_live">
-        <span>热门活动</span>
-        <span style="font-size:0.28rem">
+        <span>预告片</span>
+        <span style="font-size:0.28rem" @click="Go_yugao">
           更多
           <span>></span>
         </span>
       </p>
 
       <article class="hot_life">
-        <figure>
-          <img src="../assets/goutou.jpg" alt />
-          <div>全国通用电影券兑换上线了</div>
-        </figure>
-        <figure>
-          <img src="../assets/goutou2.jpg" alt />
-          <div>全国通用电影券兑换上线了</div>
+        <figure v-for="item in Video">
+          <video preload controls="controls" :src="item.hightUrl" width="100%" :poster="item.image">
+            <p>不支持播放</p>
+          </video>
+          <div>{{item.title}}</div>
         </figure>
       </article>
 
@@ -134,39 +81,131 @@
       </p>
 
       <article class="what_life">
-        <figure>
+        <figure v-for="item in print.Img">
           <div>
-            <img src="../assets/goutou2.jpg" alt />
+            <img :src="item.image" alt />
           </div>
-          <div class="detail">
+          <!-- <div class="detail">
             <p>一次相遇，相守一生！最好的陪伴，给你最暖的行动</p>
             <p>
               <span>691</span>
               <span>0</span>
             </p>
-          </div>
+          </div>-->
         </figure>
-        <figure></figure>
-        <figure></figure>
-        <figure></figure>
-        <figure></figure>
-        <figure></figure>
       </article>
 
       <footer>院线通</footer>
+
+      <van-tabbar v-model="activetag">
+        <van-tabbar-item to="/" icon="wap-home">首页</van-tabbar-item>
+        <van-tabbar-item to="/shop" icon="coupon">购票</van-tabbar-item>
+        <van-tabbar-item to="/movie" icon="video">影院</van-tabbar-item>
+        <van-tabbar-item to="/wode" icon="manager">我的</van-tabbar-item>
+      </van-tabbar>
     </section>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      show: false
+      isLoading: false,
+      n: "",
+      activetag: 0,
+      show: false,
+      data: [],
+      Video: [],
+      ID: []
     };
   },
+  created() {
+    axios
+      .post("http://localhost:3000/proxy", {
+        url: "https://api-m.mtime.cn/Movie/MovieComingNew.api?locationId=290"
+      })
+      .then(res => {
+        this.data = res.data.info.moviecomings.reverse();
+        this.data.forEach(item => {
+          this.ID.push(item.id);
+        });
+        // console.log(this.ID);
+        const index = Math.floor(Math.random() * this.ID.length);
+        // console.log(this.ID[index]);
+        ///预告片
+        this.$store.commit("print/Juzhao", {
+          ID: this.ID[index]
+        });
+        axios
+          .post("http://localhost:3000/proxy", {
+            url: `https://api-m.mtime.cn/Movie/Video.api?pageIndex=1&movieId=${this.ID[index]}`
+          })
+          .then(res => {
+            if (res.data.info.videoList.length == 0) {
+              this.Video = [
+                "http://video.699pic.com/videos/54/03/95/b_iuwtcDKQP7Ew1540540395_10s.mp4",
+                "http://video.699pic.com/videos/70/71/92/b_DXX8r235kI7Y1540707192_10s.mp4"
+              ];
+            } else {
+              this.Video = res.data.info.videoList;
+            }
+          });
+      });
+    ///热门推荐
+    const city = this.$route.query.name;
+    if (this.$route.query.name != undefined) {
+      localStorage.setItem("city", JSON.stringify(city));
+      this.n = JSON.parse(localStorage.getItem("city"));
+    } else {
+      if (localStorage.getItem("city")) {
+        this.n = JSON.parse(localStorage.getItem("city"));
+      } else {
+        this.n = "选择城市";
+      }
+    }
+    console.log(this.print);
+  },
+  computed: {
+    ...mapState({
+      print: state => state.print.Juzhao
+    })
+  },
   methods: {
-    onClickLeft() {
-      alert("ll");
+    Dizhi() {
+      this.$router.push("/city");
+    },
+    Todetail(a) {
+      this.$router.push({
+        name: "detail",
+        query: {
+          id: a
+        }
+      });
+    },
+    //下拉刷新
+    onRefresh() {
+      setTimeout(() => {
+        this.$router.history.go(0);
+        this.$toast("刷新成功");
+        this.isLoading = false;
+      }, 500);
+    },
+    //
+    Go_shopwill() {
+      this.$router.push({
+        path: "/shop/will"
+      });
+    },
+    //
+    Go_yugao() {
+      this.$router.push({
+        name: "yugao"
+      });
+    },
+    //跳搜索页
+    search() {
+      toast("llll");
     }
   },
 
@@ -178,22 +217,19 @@ export default {
       //旧数据大于当前位置，表示滚动条top向上滚动
       if (oldTop > top) {
         this.show = false;
-        console.log("↑");
+        // console.log("↑");
       } else {
         //相反...
         this.show = true;
-        console.log("↓");
+        // console.log("↓");
       }
       oldTop = top; //更新旧的位置
     };
+    //热门推荐go详情页
   }
 };
 </script>
 <style  scoped>
-section {
-  background: rgba(204, 202, 202, 0.2);
-  padding: 0.001rem 0.3rem 55px;
-}
 img {
   display: block;
   width: 100%;
@@ -208,6 +244,8 @@ img {
 * {
   margin: 0;
 }
+
+/**navbar */
 .tap_live {
   margin: 0.4rem 0 0.3rem;
   border-left: 0.1rem solid darkmagenta;
@@ -216,11 +254,15 @@ img {
   justify-content: space-between;
   color: darkmagenta;
 }
+.tap_live span:nth-child(1) {
+  font-size: 0.32rem;
+}
+/**热门推荐 */
 .hot_One {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 0.2rem;
+  grid-auto-flow: column;
+  overflow: auto;
+  grid-column-gap: 0.22rem;
 }
 .hot_One img {
   height: 2.8rem;
@@ -259,28 +301,38 @@ img {
   margin-top: 0.2rem;
 }
 
+/**预告片 */
 .hot_life {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  width: 100%;
+  overflow: auto;
   grid-column-gap: 0.3rem;
 }
 .hot_life figure {
+  height: 2rem;
+  width: 3.2rem;
   position: relative;
   background: slategrey;
 }
+.hot_life figure video {
+  width: 100%;
+  height: 90%;
+}
 .hot_life div {
+  font-family: Georgia, "Times New Roman", Times, serif;
   color: #fff;
   text-align: center;
-  line-height: 0.44rem;
-  font-size: 0.24rem;
+  line-height: 0.36rem;
+  font-size: 0.2rem;
   position: absolute;
   bottom: 0;
   background: rgba(22, 22, 22, 0.8);
-  height: 0.44rem;
+  height: 0.36rem;
   width: 100%;
 }
 
-.what_life {
+/* .what_life {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-row-gap: 0.2rem;
@@ -294,7 +346,7 @@ img {
 }
 .what_life figure div:nth-child(1) {
   height: 1.6rem;
-}
+} */
 .detail {
   font-size: 0.28rem;
   display: flex;
@@ -310,5 +362,10 @@ footer {
   height: 1rem;
   display: grid;
   place-items: center;
+}
+
+.arrow {
+  height: 0.4rem;
+  line-height: 0.4rem;
 }
 </style>

@@ -1,13 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <van-tabbar v-model="active">
-        <van-tabbar-item to="/">首页</van-tabbar-item>
-        <van-tabbar-item to="/shop" icon="search">购票</van-tabbar-item>
-        <van-tabbar-item to="/movie" icon="setting-o">影院</van-tabbar-item>
-        <van-tabbar-item to="/wode" icon="wode">我的</van-tabbar-item>
-      </van-tabbar>
-    </div>
+    <div id="nav"></div>
 
     <router-view />
   </div>
@@ -19,6 +12,19 @@ export default {
     return {
       active: 0
     };
+  },
+  watch: {
+    $route() {
+      // console.log(this.active);
+      // console.log(this.$route.name);
+      if (this.$route.name == "shop") {
+        this.active = 1;
+      } else if (this.$route.name == "movie") {
+        this.active = 2;
+      } else if (this.$route.name == "wode") {
+        this.active = 3;
+      }
+    }
   }
 };
 </script>
@@ -27,7 +33,14 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+section {
+  background: rgba(204, 202, 202, 0.2);
+  padding: 0.001rem 0.3rem 55px;
+}
+
 header {
+  font-size: 0.34rem;
   z-index: 1;
   position: fixed;
   box-sizing: border-box;
@@ -44,7 +57,7 @@ header {
   max-width: 100%;
   min-width: 100%;
   color: #fff;
-  height: 0.92rem;
+  height: 0.98rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

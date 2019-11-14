@@ -3,10 +3,17 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import Vant from 'vant';
+
 import 'vant/lib/index.css';
 
 
-Vue.use(Vant);
+import {
+  Lazyload,
+  Toast
+} from "vant";
+
+Vue.use(Vant).use(Toast);
+Vue.use(Lazyload);
 Vue.config.productionTip = false;
 
 new Vue({
