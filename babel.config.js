@@ -1,5 +1,5 @@
 module.exports = {
-  presets: [
-    '@vue/app',
-  ],
-};
+  plugins: [
+    'babel-plugin-transform-vite-meta-env'
+  ]
+}
