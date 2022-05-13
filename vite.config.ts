@@ -9,7 +9,7 @@ const htmlPlugin = () => {
     transformIndexHtml (html) {
       return html.replace(
         /<title>(.*?)<\/title>/,
-        '<title>Vite TS Starter</title>'
+        '<title>「 顿学累功 」</title>'
       )
     }
   }

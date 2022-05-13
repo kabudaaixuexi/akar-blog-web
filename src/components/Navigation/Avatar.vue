@@ -33,6 +33,7 @@ import { computed, defineComponent } from 'vue'
 import Store from '@/store'
 import { SwitchButton } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
+import { log } from 'console'
 
 export default defineComponent({
   name: 'NavigationAvatar',
@@ -48,9 +49,11 @@ export default defineComponent({
         icon: 'switch-button',
         click: () => {
           // Cookie.remove('token')
-          // Cookie.remove('name')
+          console.log(Cookie.get('userInfo'));
+
+          Cookie.remove('userInfo')
           Store.setState(null, 'userInfo')
-          window.location.reload()
+          router.push({path: `/user`, replace:true})
         }
       }
     ])

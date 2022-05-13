@@ -2,7 +2,7 @@
   <SearchSelect
     v-model="searchValue"
     :fetch="handleFetchSearch"
-    placeholder="搜索项目"
+    placeholder="搜索文章"
     select-when-unmatched
     highlight-first-item
     v-bind="$attrs"
@@ -14,7 +14,6 @@
 import { defineComponent, ref } from 'vue'
 
 import SearchSelect from '@/components/SearchSelect/index.vue'
-import ProjectModule from '@/modules/Project/store'
 import {
   corporationList
 } from '@/modules/Project/data'

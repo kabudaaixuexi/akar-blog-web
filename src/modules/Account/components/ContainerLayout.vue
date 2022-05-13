@@ -93,7 +93,7 @@ import { isFunction } from '@/utils/type'
 import useCurrentInstance from '@/hooks/useCurrentInstance'
 
 export default defineComponent({
-  name: 'UserAccountContainerLayout',
+  name: 'AccountContainerLayout',
   props: {
     title: {
       type: String,
@@ -268,6 +268,9 @@ export default defineComponent({
     .submit-form-action-button {
       flex: 1;
     }
+  }
+  .submit-form-action-list:last-of-type {
+    margin-top: 20px;
   }
 }
 

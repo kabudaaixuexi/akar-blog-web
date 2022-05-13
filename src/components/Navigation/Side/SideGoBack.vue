@@ -3,7 +3,7 @@
     class="go-back-container"
   >
     <router-link
-      :to="`/${$route.params.locale || ''}`"
+      :to="`/`"
     >
       <IconFont
         icon="iconarrow_left"

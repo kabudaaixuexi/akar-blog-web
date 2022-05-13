@@ -5,7 +5,7 @@
         :fixed="false"
       >
         <NavigationSideGoBack
-          :title="'返回返回返回'"
+          :title="'返回'"
         />
       </NavigationNavBar>
     </template>

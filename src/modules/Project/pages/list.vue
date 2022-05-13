@@ -52,7 +52,6 @@ import {
   onMounted,
   reactive
 } from 'vue'
-import ProjectModule from '@/modules/Project/store'
 
 import NavigationSideLogo from '@/components/Navigation/Side/SideLogo.vue'
 import NavigationNavBar from '@/components/Navigation/NavBar.vue'
@@ -116,7 +115,7 @@ export default defineComponent({
       })
     }
     function handleSelectSearch (name?: string) {
-      console.log('搜索项目名: ', name)
+      console.log('搜索文章名: ', name)
     }
     handleSelectSearch()
 

@@ -31,7 +31,7 @@ const childrenRoutes = [
       {
         path: 'login',
         name: 'UserLogin',
-        component: importModule['../modules/UserAccount/pages/login.vue'],
+        component: importModule['../modules/Account/pages/login.vue'],
         meta: {
           title: '登录'
         }
@@ -47,14 +47,6 @@ const childrenRoutes = [
       name: 'ProjectList'
     },
     children: [
-      {
-        path: '',
-        name: 'ProjectList',
-        meta: {
-          title: '项目列表'
-        },
-        component: importModule['../modules/Project/pages/list.vue']
-      },
       {
         path: 'list',
         name: 'ProjectList',

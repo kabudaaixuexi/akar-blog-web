@@ -12,7 +12,6 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 
-import ResultStore from '@/modules/Result/store'
 import Store from '@/store'
 import { useRoute } from 'vue-router'
 
@@ -21,7 +20,6 @@ export default defineComponent({
   setup () {
     const store = Store.getState()
     // const route = useRoute()
-    const overviewData = computed(() => store.overviewData)
 
     // async function init () {
     //   const { error, data } = await store.dispatch(
@@ -38,7 +36,10 @@ export default defineComponent({
 
     // init()
     return {
-      overviewData
+      overviewData: {
+        title: 'cscacas',
+        content: 'sccccsc9999'
+      }
     }
   }
 })

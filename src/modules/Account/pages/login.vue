@@ -9,11 +9,11 @@
         </div>
       </div>
       <div class="nav-right">
-        
+
       </div>
     </div>
     <div class="user-account-body">
-      <UserAccountContainerLayout
+      <AccountContainerLayout
         v-bind="configLogin"
         :form-data="formData"
         @on-submit="onSubmit"
@@ -22,10 +22,10 @@
           #titleIcon
         >
           <el-icon>
-            <Promotion />
+            <MilkTea />
           </el-icon>
         </template>
-      </UserAccountContainerLayout>
+      </AccountContainerLayout>
     </div>
     <Footer />
   </div>
@@ -43,11 +43,9 @@ import {
   ref
 } from 'vue'
 import { ElMessage } from 'element-plus'
-import { Promotion } from '@element-plus/icons-vue'
+import { MilkTea } from '@element-plus/icons-vue'
 
-import UserAccountContainerLayout from '@/modules/UserAccount/components/ContainerLayout.vue'
-
-import UserAccountModule from '@/modules/UserAccount/store'
+import AccountContainerLayout from '@/modules/Account/components/ContainerLayout.vue'
 
 import Cookie from 'js-cookie'
 import Api from '@/api'
@@ -57,10 +55,10 @@ import useCurrentInstance from '@/hooks/useCurrentInstance'
 import Store from '@/store'
 
 export default defineComponent({
-  name: 'UserAccountLogin',
+  name: 'AccountLogin',
   components: {
-    UserAccountContainerLayout,
-    Promotion,
+    AccountContainerLayout,
+    MilkTea,
   },
   setup () {
     const { proxy } = useCurrentInstance()
@@ -88,6 +86,18 @@ export default defineComponent({
               size: 'large'
             },
             text: '登 录',
+            on: {
+              click (refForm: any) {
+                proxy.onSubmit(refForm)
+              }
+            }
+          },
+          {
+            attrs: {
+              size: 'small',
+              style: "border: none; color: #3c40c6"
+            },
+            text: '先不登录',
             on: {
               click (refForm: any) {
                 proxy.onSubmit(refForm)
@@ -124,6 +134,12 @@ export default defineComponent({
                 })
               }
             },
+            // link: {
+            //   text: '忘记密码',
+            //   click () {
+            //     console.log(proxy, 'login.fgtpwd')
+            //   }
+            // },
             type: 'password',
             label: '密码',
             prefixIcon: 'lock',
@@ -151,7 +167,7 @@ export default defineComponent({
         })
         Store.setState(data, 'userInfo')
         // Cookie.set('token', data.user.token)
-        // Cookie.set('name', data.user.username)
+        Cookie.set('userInfo', JSON.stringify(data))
         ElMessage.success({
           message: '登录成功'
         })

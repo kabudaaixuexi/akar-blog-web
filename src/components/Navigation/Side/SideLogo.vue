@@ -3,7 +3,7 @@
     class="side-logo-container"
   >
     <router-link
-      :to="`/${$route.params.locale || ''}`"
+      :to="`/`"
     >
       <img
         class="side-logo-img"
