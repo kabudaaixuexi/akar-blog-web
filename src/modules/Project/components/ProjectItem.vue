@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/result/${dataset.noteid}/overview`">
+  <router-link :to="`/resultEdit/${dataset.noteid}/overview`">
     <ul class="project-item-container">
       <li style="flex: 1; min-width: 0">
         <div class="project-item__name">
@@ -127,7 +127,7 @@ export default defineComponent({
     async function handlePublish(noteid) {
       if (isLoading.value) return;
       isLoading.value = true;
-      const { subtitle, vNode, lockValue, lock, published, cover } = props.dataset;
+      const { subtitle, vNode, lockValue, lock, published, cover, tags,drawe } = props.dataset;
       await Api.editNote({
         uid: userInfo.userName,
         noteid,
@@ -137,6 +137,8 @@ export default defineComponent({
         lock,
         published: !published,
         cover,
+        tags,
+        drawe
       });
       isLoading.value = false;
       ElMessage.success({

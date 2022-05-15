@@ -31,18 +31,30 @@
 import Cookie from 'js-cookie'
 import { computed, defineComponent } from 'vue'
 import Store from '@/store'
-import { SwitchButton } from '@element-plus/icons-vue'
+import { SwitchButton, User, Switch } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'NavigationAvatar',
   components: {
-    SwitchButton
+    SwitchButton, User, Switch
   },
   setup () {
     const router = useRouter()
     const route = useRoute()
     const commandList = computed(() => [
+      {
+        label: `${JSON.parse(Cookie.get('userInfo') || '{}').userName}`,
+        icon: 'user',
+        click: () => {
+        }
+      },
+      {
+        label: `切换至极简版`,
+        icon: 'switch',
+        click: () => {
+        }
+      },
       {
         label: '退出登录',
         icon: 'switch-button',

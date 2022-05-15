@@ -20,6 +20,10 @@ html {
   -webkit-tap-highlight-color: transparent;
   overflow-y: scroll;
 }
+*::-webkit-scrollbar {
+  // width: calc(1px / 2) !important;
+  width: 0 !important;
+}
 
 :root {
   overflow-y: auto;

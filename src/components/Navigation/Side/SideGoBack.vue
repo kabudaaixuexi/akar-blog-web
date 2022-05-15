@@ -2,8 +2,8 @@
   <div
     class="go-back-container"
   >
-    <router-link
-      :to="`/`"
+    <a
+      @click="router.back(-1)"
     >
       <IconFont
         icon="iconarrow_left"
@@ -12,22 +12,16 @@
       <h1 class="go-back-title">
         {{ title }}
       </h1>
-    </router-link>
+    </a>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
+defineProps<{ title: String }>();
 
-export default defineComponent({
-  name: 'NavigationSideGoBack',
-  props: {
-    title: {
-      type: String,
-      default: ''
-    }
-  }
-})
+const router = useRouter()
 </script>
 <style lang="scss" scoped>
 .go-back-container {

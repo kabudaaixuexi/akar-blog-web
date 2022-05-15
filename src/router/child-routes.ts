@@ -86,26 +86,53 @@ const childrenRoutes = [
     ]
   },
   {
-    path: '/result',
+    path: '/resultEdit',
     redirect: {
       name: 'ProjectList'
     }
   },
+  // 内容中心编辑
   {
-    path: '/result/:noteId',
+    path: '/resultEdit/:noteId',
     component: LayoutView,
-    name: 'result',
+    name: 'resultEdit',
     icon: 'eye',
     redirect: {
-      name: 'ResultOverview'
+      name: 'EditOverview'
     },
     children: [
       {
         path: 'overview',
-        name: 'ResultOverview',
-        component: importModule['../modules/Result/pages/overview.vue'],
+        name: 'EditOverview',
+        component: importModule['../modules/ResultEdit/pages/overview.vue'],
         meta: {
-          title: '总览'
+          title: '内容中心'
+        }
+      }
+    ]
+  },
+  // 社区文章详情
+  {
+    path: '/resultDetail',
+    redirect: {
+      name: 'CommonList'
+    }
+  },
+  {
+    path: '/resultDetail/:noteId',
+    component: Layout,
+    name: 'resultDetail',
+    icon: 'eye',
+    redirect: {
+      name: 'DetailOverview'
+    },
+    children: [
+      {
+        path: 'overview',
+        name: 'DetailOverview',
+        component: importModule['../modules/ResultDetail/pages/overview.vue'],
+        meta: {
+          title: '社区'
         }
       }
     ]

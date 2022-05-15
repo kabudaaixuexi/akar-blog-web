@@ -63,6 +63,10 @@ export default defineComponent({
         return () => {};
       },
     },
+    path: {
+      type: String,
+      default: '/'
+    }
   } as const,
   emits: ["update:modelValue", "change", "select"],
   setup(props) {
@@ -116,7 +120,7 @@ export default defineComponent({
       this.$emit("select", value);
     },
     handleChange(noteid) {
-      this.$router.push(`/result/${noteid}/overview`)
+      this.$router.push(`/${this.$props.path}/${noteid}/overview`)
     },
     async handleSearch(queryString: string, callback: any) {
       this.loading = true;
@@ -172,13 +176,12 @@ export default defineComponent({
 }
 .search_content {
   transition: all 0.2s;
-  width: 320px;
+  width: 460px;
   position: relative;
   border-radius: 3px;
   &:hover {
     border:calc(1px / 2) solid var(--xs-color-primary-light-7);
     padding:0 12px;
-    width: 640px;
     box-sizing: border-box;
   }
   span:nth-of-type(1) {
@@ -190,7 +193,6 @@ export default defineComponent({
   }
   span:nth-of-type(2) {
     white-space: nowrap;
-    overflow: hidden;
     margin-top: -4px;
     height: 33px;
     text-overflow: ellipsis;
@@ -198,7 +200,6 @@ export default defineComponent({
     font-size: 12px;
     border-radius: 0 0 3px 3px;
     span {
-      padding: 5px 0 8px 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

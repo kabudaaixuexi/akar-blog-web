@@ -7,6 +7,7 @@
     highlight-first-item
     v-bind="$attrs"
     @select="handleSelectSearch"
+    :path="path"
   />
 </template>
 
@@ -26,13 +27,18 @@ export default defineComponent({
     list: {
       type: Array,
       default: []
+    },
+    path : {
+      type: String,
+      default: '/'
     }
   },
   emits: [
     'select'
   ],
-  setup () {
+  setup (props) {
     const searchValue = ref('')
+
     return {
       searchValue
     }
@@ -60,7 +66,7 @@ export default defineComponent({
                 return i.indexOf(queryString) !== -1
             }).join(',')
             item.content = temC ? `<span>${temC.replace(queryString,`<spa style="color:red">${queryString}</spa>`)}</span>` : temB
-            if (queryString && item.subtitle.indexOf(queryString) !== -1) {
+            if (queryString && item.subtitle && item.subtitle.indexOf(queryString) !== -1) {
                 item.subtitle = `<spa>${item.subtitle.replace(queryString,`<spa style="color:red">${queryString}</spa>`)}</spa>`
             } else {
                 item.subtitle = item.subtitle || '未设置标题'

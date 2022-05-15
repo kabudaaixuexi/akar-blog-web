@@ -18,8 +18,22 @@
           placeholder="请输入文章标题"
         />
       </el-form-item>
-      <!-- <el-form-item
-        prop="dynamicTags"
+      <el-form-item
+        prop="drawe"
+        label="文章分类"
+      >
+        <el-select v-model="modelValue.drawe" placeholder="给文章选择一个分类">
+          <el-option
+            v-for="item in draweOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+            :disabled="item.disabled"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item
+        prop="tags"
         label="文章标签"
       >
         <el-tag
@@ -45,7 +59,7 @@
         <el-button v-if="modelValue.tags.length < 3 && !inputVisible" class="button-new-tag ml-1" size="small" @click="showInput">
           + 添加标签
         </el-button>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item prop="cover" class="cover" label="上传封面">
         <span v-if="coverUrl" class="delete-img" @click="setCoverUrl()">
           <TooltipCustom :content="'点击重新选择封面'">
@@ -91,6 +105,7 @@ import { defineComponent, reactive, ref, toRefs, nextTick } from "vue";
 import { ElInput } from "element-plus";
 import { UploadFilled } from "@element-plus/icons-vue";
 import { useState } from "@/hooks/base";
+import { draweOptions } from '../data'
 export default defineComponent({
   name: "ProjectForm",
   props: {
@@ -103,7 +118,6 @@ export default defineComponent({
   },
   components: { UploadFilled },
   setup(props: any) {
-    const { proxy } = useCurrentInstance();
     const [coverUrl, setCoverUrl] = useState("");
     const refForm = ref();
     const state: any = reactive({
@@ -155,6 +169,7 @@ export default defineComponent({
       coverUrl,
       setCoverUrl,
       validateRules,
+      draweOptions
     };
   },
 });
@@ -165,6 +180,9 @@ export default defineComponent({
   .footer-button-list {
     display: flex;
     justify-content: flex-end;
+  }
+  .el-select {
+    width: 100%;
   }
 }
 .cover {

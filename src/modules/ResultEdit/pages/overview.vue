@@ -22,7 +22,9 @@ let {
   uid: watermark,
   noteid,
   published,
-  cover
+  cover,
+  tags,
+  drawe
 } = Store.getState("myNoteList").find((el) => el.noteid == route.params.noteId) || {};
 const [title, setTitle] = useState(subtitle);
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
@@ -55,7 +57,9 @@ const editNote = async (ev: any) => {
     lock,
     lockValue,
     published,
-    cover
+    cover,
+    tags,
+    drawe
   });
 };
 // 修改标题
@@ -68,7 +72,9 @@ const changeTitle = async (t) => {
     lockValue,
     lock,
     published,
-    cover
+    cover,
+    tags,
+    drawe
   });
   setTitle(t);
 };

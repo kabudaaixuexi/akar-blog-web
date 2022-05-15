@@ -9,7 +9,9 @@ export interface addNoteReq {
     lock: boolean
     lockValue: string | number,
     published?: boolean,
-    cover: string
+    cover: string,
+    tags?: any,
+    drawe: number
 }
 export interface editNoteReq {
     uid: string
@@ -20,12 +22,24 @@ export interface editNoteReq {
     lockValue: string | number
     published: boolean,
     cover: string
+    tags?: any
+    drawe: number
 }
 export interface removeNoteReq {
     uid: string
     noteid: string
 }
 export default {
+    /** 获取全部笔记列表 */
+      getNoteListAll:async (payload) => {
+        const { data } = await request.post(
+          '/note/getNoteListAll',
+          {
+            ...payload
+          }
+        )
+        return data
+    },
     /** 获取笔记列表 */
     getNoteList:async (payload:getNoteListReq) => {
         const { data } = await request.post(

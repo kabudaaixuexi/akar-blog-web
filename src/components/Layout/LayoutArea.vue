@@ -5,6 +5,7 @@
     </div>
     <div class="layout-area-container__bottom">
       <div class="layout-area-container__bottom__inner">
+        <!-- left aside -->
         <aside
           v-if="$slots.side"
           class="side-layout-area-menu-bar"
@@ -13,6 +14,7 @@
             <slot name="side"></slot>
           </div>
         </aside>
+        <!-- content -->
         <section class="content-section-container">
           <main class="main-content-box">
             <div
@@ -22,9 +24,18 @@
             </div>
           </main>
         </section>
+        <!-- right aside -->
+        <aside
+          v-if="$slots.side2"
+          class="side-layout-area-menu-bar2"
+        >
+          <div class="layout-area-menu-bar__inner">
+            <slot name="side2"></slot>
+          </div>
+        </aside>
       </div>
     </div>
-    <Footer show-border />
+    <Footer v-if="showFooter" show-border />
     <Background mode="meteor" />
   </div>
 </template>
@@ -40,6 +51,12 @@ export default defineComponent({
   name: 'LayoutArea',
   components: {
     Background
+  },
+  props: {
+    showFooter: {
+      type: Boolean,
+      default: true
+    }
   }
 })
 </script>
@@ -71,6 +88,7 @@ $headerHeight: 48px;
       right: 0;
       bottom: 0;
       display: flex;
+      // left
       .side-layout-area-menu-bar {
         position: relative;
         flex-direction: column;
@@ -86,6 +104,26 @@ $headerHeight: 48px;
           overflow-x: hidden;
           overflow-y: auto;
           padding: 24px;
+          scroll-behavior: smooth;
+        }
+      }
+      // right
+      .side-layout-area-menu-bar2 {
+        position: relative;
+        flex-direction: column;
+        min-width: 360px;
+        width: 24%;
+        transition: width .28s;
+        border-right: 1px solid #dcdfe6;
+        .layout-area-menu-bar__inner {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          overflow-x: hidden;
+          overflow-y: auto;
+          padding: 24px 24px 24px 0;
           scroll-behavior: smooth;
         }
       }

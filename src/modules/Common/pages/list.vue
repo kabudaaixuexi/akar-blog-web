@@ -1,29 +1,24 @@
 <template>
-  <LayoutArea>
+  <LayoutArea :showFooter="false">
     <template #top>
       <NavigationNavBar :fixed="false">
         <NavigationSideLogo />
       </NavigationNavBar>
     </template>
 
-    <template #side>
-      <LayoutSection :title="'我的文章'" :showInput="true">
-        <el-button type="primary" class="create-action" @click="handleCreateProject()">
-          <IconFont style="margin-right: 8px" icon="iconestablish" />
-          {{ "创建文章" }}
-        </el-button>
-      </LayoutSection>
-    </template>
-
     <template #content>
       <LayoutSection has-divider flex-content>
         <template #head>
-          <SearchCorporation @select="handleSelectSearch" :list="list" />
+          <CommonDrawes :list="list" :currentDrawe="currentDrawe" :changeDrawe="changeDrawe" />
+          <SearchCorporation @select="handleSelectSearch" :list="list" :path="'resultDetail'" />
         </template>
-
-        <ProjectTableHeader />
-        <ProjectTableBody :list="list" />
+        <!-- <CommonTableHeader /> -->
+        <CommonTableBody :list="list" />
       </LayoutSection>
+    </template>
+
+    <template #side2>
+      todo-test side2
     </template>
   </LayoutArea>
 </template>
@@ -34,71 +29,42 @@ import { defineComponent, ref, reactive, onMounted } from "vue";
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 
-import ProjectForm from "@/modules/Project/components/ProjectForm.vue";
-import ProjectTableHeader from "@/modules/Project/components/TableHeader.vue";
-import ProjectTableBody from "@/modules/Project/components/TableBody.vue";
+import CommonForm from "@/modules/Common/components/CommonForm.vue";
+import CommonTableHeader from "@/modules/Common/components/TableHeader.vue";
+import CommonTableBody from "@/modules/Common/components/TableBody.vue";
+import CommonDrawes from '@/modules/Common/components/CommonDrawes.vue'
 
 import SearchCorporation from "@/components/SearchSelect/SearchCorporation.vue";
 import Api from "@/api";
-import useCurrentInstance from "@/hooks/useCurrentInstance";
 import Cookies from "js-cookie";
 import { useState } from "@/hooks/base";
-import Store from "@/store";
-import { creatEmptyVNode } from '../data'
+import Store from '@/store'
 
-const { proxy } = useCurrentInstance();
 const [list, setList] = useState([]);
+const [currentDrawe, setCurrentDrawe] = useState(0)
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 // 获取文章列表
-const getNoteList = async () => {
-  const { data } = await Api.getNoteList({
-    uid: userInfo.userName,
-  });
-  Store.setState(data, "myNoteList");
-  setList(data);
+const getNoteListAll = async (drawe) => {
+  const { data } = await Api.getNoteListAll({});
+  if (Number(drawe)) {
+    setList(data.filter(item => item.drawe == drawe));
+  }else {
+    setList(data);
+    Store.setState(data, "allNoteList");
+  }
 };
-
-function handleCreateProject() {
-  const formData = reactive({
-    title: "",
-    // tags: [],
-    cover: "",
-  });
-  proxy.$ModalDialog({
-    title: "新文章",
-    top: "10vh",
-    width: "50vw",
-    "show-close": true,
-    "close-on-click-modal": false,
-    "close-on-press-escape": false,
-    renderComponent: {
-      data: formData,
-      component: ProjectForm,
-    },
-    async onConfirm(instance, context) {
-      const isValid = await instance.validateRules();
-      if (!isValid) return Promise.reject(new Error("error"));
-      const { title: subtitle, cover } = formData;
-      // 新增笔记
-      await Api.addNote({
-        uid: userInfo.userName,
-        vNode: creatEmptyVNode(),
-        subtitle,
-        lockValue: "",
-        lock: false,
-        cover,
-      });
-      context.fullLoading = true;
-      getNoteList();
-    },
-  });
+// 选择分类
+const changeDrawe = (e) => {
+  getNoteListAll(e)
+  setCurrentDrawe(e)
 }
+
 function handleSelectSearch(name?: string) {
   console.log("搜索文章名: ", name);
 }
 
 onMounted(() => {
-  getNoteList();
+  getNoteListAll(undefined);
 });
 </script>
 

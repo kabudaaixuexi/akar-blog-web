@@ -5,7 +5,7 @@
         v-for="item in entrances"
         :key="item"
         @click="router.push(item.path)"
-        :class="`action-item ${route.path.indexOf(item.path)  !==  -1 ? 'cur' : ''}`"
+        :class="`action-item ${route.path.includes(item.path) ? 'cur' : ''}`"
       >
        {{ item.explain }}
       </li>

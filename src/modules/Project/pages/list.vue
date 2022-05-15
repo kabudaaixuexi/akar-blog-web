@@ -1,5 +1,5 @@
 <template>
-  <LayoutArea>
+  <LayoutArea :showFooter="false">
     <template #top>
       <NavigationNavBar :fixed="false">
         <NavigationSideLogo />
@@ -18,7 +18,7 @@
     <template #content>
       <LayoutSection has-divider flex-content>
         <template #head>
-          <SearchCorporation @select="handleSelectSearch" :list="list" />
+          <SearchCorporation @select="handleSelectSearch" :list="list" :path="'resultEdit'"/>
         </template>
 
         <ProjectTableHeader />
@@ -61,7 +61,8 @@ const getNoteList = async () => {
 function handleCreateProject() {
   const formData = reactive({
     title: "",
-    // tags: [],
+    tags: [],
+    drawe: 0,
     cover: "",
   });
   proxy.$ModalDialog({
@@ -78,7 +79,7 @@ function handleCreateProject() {
     async onConfirm(instance, context) {
       const isValid = await instance.validateRules();
       if (!isValid) return Promise.reject(new Error("error"));
-      const { title: subtitle, cover } = formData;
+      const { title: subtitle, cover, tags, drawe } = formData;
       // 新增笔记
       await Api.addNote({
         uid: userInfo.userName,
@@ -87,6 +88,8 @@ function handleCreateProject() {
         lockValue: "",
         lock: false,
         cover,
+        tags,
+        drawe
       });
       context.fullLoading = true;
       getNoteList();

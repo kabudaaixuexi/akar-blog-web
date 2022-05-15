@@ -102,8 +102,10 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     min-height: 40px;
+    width: 100%;
     .layout-section-container__header-head {
       color: #303133;
+      width: 100%;
       .layout-section-container__header-title {
         height: 18px;
         font-size: 18px;

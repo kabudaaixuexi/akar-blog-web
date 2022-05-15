@@ -1,7 +1,7 @@
 <template>
   <div class="project-table-body-container">
     <div class="project-table-body-container__inner">
-      <ProjectItem
+      <CommonItem
         v-for="(item, index) in list"
         :key="index"
         :dataset="item"
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import ProjectItem from '@/modules/Project/components/ProjectItem.vue'
+import CommonItem from '@/modules/Common/components/CommonItem.vue'
 defineProps<{ list: any}>();
 
 </script>
