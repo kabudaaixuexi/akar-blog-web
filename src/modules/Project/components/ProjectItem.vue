@@ -127,18 +127,11 @@ export default defineComponent({
     async function handlePublish(noteid) {
       if (isLoading.value) return;
       isLoading.value = true;
-      const { subtitle, vNode, lockValue, lock, published, cover, tags,drawe } = props.dataset;
+      const { published } = props.dataset;
       await Api.editNote({
-        uid: userInfo.userName,
-        noteid,
-        subtitle,
-        vNode,
-        lockValue,
-        lock,
+        ...props.dataset,
         published: !published,
-        cover,
-        tags,
-        drawe
+        uid: userInfo.userName,
       });
       isLoading.value = false;
       ElMessage.success({

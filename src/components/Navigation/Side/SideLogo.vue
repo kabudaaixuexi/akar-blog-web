@@ -3,7 +3,7 @@
     class="side-logo-container"
   >
     <router-link
-      :to="`/`"
+      :to="`/common`"
     >
       <img
         class="side-logo-img"

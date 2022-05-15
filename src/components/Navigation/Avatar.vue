@@ -31,13 +31,13 @@
 import Cookie from 'js-cookie'
 import { computed, defineComponent } from 'vue'
 import Store from '@/store'
-import { SwitchButton, User, Switch } from '@element-plus/icons-vue'
+import { SwitchButton, User, Switch, Right } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'NavigationAvatar',
   components: {
-    SwitchButton, User, Switch
+    SwitchButton, User, Switch, Right
   },
   setup () {
     const router = useRouter()
@@ -50,9 +50,10 @@ export default defineComponent({
         }
       },
       {
-        label: `切换至极简版`,
-        icon: 'switch',
+        label: `前往极简版`,
+        icon: 'right',
         click: () => {
+          window.open('http://124.220.16.124/simplel291dvdg.html#/')
         }
       },
       {

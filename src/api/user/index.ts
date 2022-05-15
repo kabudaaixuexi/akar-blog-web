@@ -15,10 +15,8 @@ export interface postLoginReq {
 export default {
     /** 获取全部用户 */
     getUserList: async () => {
-        const { data } = await request({
-            url: '/user/getUserList',
-            data: {}
-        })
+        const { data } = await request.post(
+          '/user/getUserList',{})
         return data
     },
     /** 注册 */

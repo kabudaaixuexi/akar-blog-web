@@ -1,7 +1,7 @@
 <template>
   <router-link :to="`/resultDetail/${dataset.noteid}/overview`">
     <article class="common-item-container">
-      <h4 style="margin-bottom: 12px">{{dataset.subtitle || '空标题'}}</h4>
+      <h4 style="margin-bottom: 12px">{{dataset.subtitle || '无文章标题'}}</h4>
       <div class="common-item-content">
         <img v-if="dataset.cover" class="common-item-content__img" :src="dataset.cover" alt="">
         <div v-else class="common-item-content__img" />
@@ -42,12 +42,10 @@ export default defineComponent({
     },
   } as const,
   setup(props) {
-    const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
     const isLoading = ref(false);
     const getActionIcon = computed(() => {
       return props.dataset.isPublished ? "iconstop" : "iconplay";
     });
-    console.log(props.dataset);
 
     const getVal = (vNode) => {
       let value = "";
@@ -62,48 +60,10 @@ export default defineComponent({
       forVal(vNode);
       return value;
     };
-    // 修改发布状态
-    async function handlePublish(noteid) {
-      if (isLoading.value) return;
-      isLoading.value = true;
-      const { subtitle, vNode, lockValue, lock, published, cover, tags, drawe } = props.dataset;
-      await Api.editNote({
-        uid: userInfo.userName,
-        noteid,
-        subtitle,
-        vNode,
-        lockValue,
-        lock,
-        published: !published,
-        cover,
-        tags,
-        drawe
-      });
-      isLoading.value = false;
-      ElMessage.success({
-        message: "文章状态更新成功",
-      });
-      props.dataset.published = !props.dataset.published;
-    }
-    // 删除文章
-    async function handleDelete(noteid) {
-      await Api.removeNote({
-        uid: userInfo.userName,
-        noteid,
-      });
-      props.list?.forEach(
-        (el: any, index: number) => el.noteid == noteid && props.list?.splice(index, 1)
-      );
-       ElMessage.success({
-        message: "删除文章成功",
-      });
-    }
     return {
       isLoading,
       getActionIcon,
       getVal,
-      handlePublish,
-      handleDelete
     };
   },
 });
@@ -128,6 +88,12 @@ export default defineComponent({
   &:hover {
     box-shadow: 0 10px 30px -20px rgba(#000, 0.24);
     border: 1px solid #dcdfe6;
+  }
+  h4 {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .common-item-content {
     flex: 1;

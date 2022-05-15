@@ -12,13 +12,13 @@
     <template #side>
       <LayoutSection
         has-divider
-        :title="'result.titleresult.titleresult.title'"
+        :title="'todo//07'"
         :showInput="true"
       >
         <ul>
-          <li>111</li>
-          <li>222</li>
-          <li>333</li>
+          <li>give me some advice</li>
+          <li></li>
+          <li></li>
         </ul>
       </LayoutSection>
     </template>

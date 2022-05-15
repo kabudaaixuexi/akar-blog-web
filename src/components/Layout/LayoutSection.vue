@@ -8,6 +8,7 @@
           v-model="inputValue"
           style="width: 300px;"
           :maxlength="30"
+          placeholder="按下回车保存此次修改"
           @keyup.enter="handleInputConfirm"
         />
         <h1

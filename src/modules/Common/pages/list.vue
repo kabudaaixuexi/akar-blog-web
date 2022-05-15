@@ -18,7 +18,7 @@
     </template>
 
     <template #side2>
-      todo-test side2
+      todo//-09
     </template>
   </LayoutArea>
 </template>
@@ -47,10 +47,10 @@ const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const getNoteListAll = async (drawe) => {
   const { data } = await Api.getNoteListAll({});
   if (Number(drawe)) {
-    setList(data.filter(item => item.drawe == drawe));
+    setList(data.filter(item => (item.drawe == drawe && !!item.published)));
   }else {
-    setList(data);
-    Store.setState(data, "allNoteList");
+    Store.setState(JSON.parse(JSON.stringify(data)), "allNoteList");
+    setList(data.filter(item => !!item.published));
   }
 };
 // 选择分类

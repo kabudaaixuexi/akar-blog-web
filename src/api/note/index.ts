@@ -61,7 +61,7 @@ export default {
         return data
     },
     /** 编辑笔记 */
-    editNote: async (payload:editNoteReq) => {
+    editNote: async (payload:any) => {
         const { data } = await request.post(
           '/note/editNote',
           {
