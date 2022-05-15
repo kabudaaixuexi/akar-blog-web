@@ -44,7 +44,9 @@
     "url": "https://github.com/pdsuwwz/vite-ts-starter/issues"
   },
   "dependencies": {
-    "@akar/proxy-property": "^0.0.1",
+    "@akar/proxy-property": "^0.1.4",
+    "@akar/vue-hooks": "^0.0.6",
+    "@akar/xs-editor": "^0.0.7",
     "@element-plus/icons-vue": "1.1.4",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/free-brands-svg-icons": "6.1.1",

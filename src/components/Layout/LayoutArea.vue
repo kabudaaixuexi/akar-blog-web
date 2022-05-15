@@ -25,25 +25,31 @@
       </div>
     </div>
     <Footer show-border />
+    <Background mode="meteor" />
   </div>
 </template>
 
 <script lang="ts">
-
+import Background from '@/components/Background/index.vue'
 import { defineComponent } from 'vue'
 
 /**
  * 上下左右布局，顶部导航 + (底部左侧侧边栏 + 底部右侧内容区域)
  */
 export default defineComponent({
-  name: 'LayoutArea'
+  name: 'LayoutArea',
+  components: {
+    Background
+  }
 })
 </script>
 
 <style lang="scss" scoped>
 $headerHeight: 48px;
 .layout-area-container {
+  position: relative;
   display: flex;
+  z-index: 1;
   flex-direction: column;
   min-width: 100%;
   height: 100%;

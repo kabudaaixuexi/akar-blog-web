@@ -36,7 +36,6 @@
 import {
   computed,
   defineComponent,
-  getCurrentInstance,
   nextTick,
   onMounted,
   reactive,
@@ -64,9 +63,7 @@ export default defineComponent({
     const { proxy } = useCurrentInstance()
 
     const store = Store.getState()
-    const route = useRoute()
     const router = useRouter()
-
     const isLoading = ref(true)
     const inputErrorEmail = ref('')
     const inputErrorPassword = ref('')
@@ -160,12 +157,10 @@ export default defineComponent({
         inputErrorEmail.value = ''
         inputErrorPassword.value = ''
         setLoading(true)
-        console.log(formData);
         const { data } = await Api.postLogin({
           userName: formData.email,
           passWord: formData.password
         })
-        Store.setState(data, 'userInfo')
         // Cookie.set('token', data.user.token)
         Cookie.set('userInfo', JSON.stringify(data))
         ElMessage.success({

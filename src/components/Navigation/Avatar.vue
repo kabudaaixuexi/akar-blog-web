@@ -33,7 +33,6 @@ import { computed, defineComponent } from 'vue'
 import Store from '@/store'
 import { SwitchButton } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
-import { log } from 'console'
 
 export default defineComponent({
   name: 'NavigationAvatar',

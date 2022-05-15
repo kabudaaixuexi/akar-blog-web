@@ -1,10 +1,8 @@
-import moon from '@akar/proxy-property'
-import user from './modules/user'
-import cont from './modules/cont'
+import createStore from '@akar/proxy-property'
 
-export default moon({
-    ...user(),
-    ...cont
+export default createStore({
+  default: 'akar',
+  myNoteList: []
 }, {
     usePersisted: true
 })

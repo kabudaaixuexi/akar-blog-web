@@ -7,7 +7,7 @@
             <img
               v-if="dataset.cover"
               style="height: auto; width: 100%"
-              :src="`${dataset.cover}?${Date.now}`"
+              :src="dataset.cover"
               alt=""
             />
             <IconFont v-else icon="iconfile" />
@@ -108,7 +108,7 @@ export default defineComponent({
     const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
     const isLoading = ref(false);
     const getActionIcon = computed(() => {
-      return props.dataset.published ? "iconstop" : "iconplay";
+      return props.dataset.isPublished ? "iconstop" : "iconplay";
     });
     const getVal = (vNode) => {
       let value = "";

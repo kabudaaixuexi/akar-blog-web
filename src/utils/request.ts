@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
+import { ElMessage, ElLoading } from 'element-plus'
 // import Cookie from 'js-cookie'
 
 import { camelizeKeys, decamelizeKeys } from '@/utils/camelCase'
@@ -59,9 +60,16 @@ const service: AxiosInstance = axios.create({
   timeout: 15000
 })
 
+let loading: any = null
 // request拦截器
-// service.interceptors.request.use(
-//   request => {
+service.interceptors.request.use(
+  request => {
+    loading = ElLoading.service({
+      lock: true,
+      text: '请求中',
+      background: 'rgba(210, 220, 230, 0.4)',
+    })
+    return request
 //     const token = Cookie.get('token')
 
 //     // Conversion of hump nomenclature
@@ -90,12 +98,19 @@ const service: AxiosInstance = axios.create({
 //   },
 //   error => {
 //     return Promise.reject(error)
-//   }
-// )
+  }
+)
 
 // respone拦截器
-// service.interceptors.response.use(
-//   response => {
+service.interceptors.response.use(
+  response => {
+    loading.close()
+    if (response.data && response.data.statusCode !== 200) {
+      ElMessage.error({
+        message: response.data.message
+      })
+    }
+    return response
 //     /**
 //      * response data
 //      *   {
@@ -159,8 +174,8 @@ const service: AxiosInstance = axios.create({
 //         msg: '服务请求不可用，请重试或检查您的网络。'
 //       }
 //     }
-//   }
-// )
+  }
+)
 
 export function sleep (time = 0) {
   return new Promise((resolve) => {

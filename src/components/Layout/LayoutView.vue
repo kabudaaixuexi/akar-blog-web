@@ -13,6 +13,7 @@
       <LayoutSection
         has-divider
         :title="'result.titleresult.titleresult.title'"
+        :showInput="true"
       >
         <ul>
           <li>111</li>
@@ -29,7 +30,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 import NavigationSideGoBack from '@/components/Navigation/Side/SideGoBack.vue'
 import NavigationNavBar from '@/components/Navigation/NavBar.vue'
 import { useRouter } from 'vue-router'

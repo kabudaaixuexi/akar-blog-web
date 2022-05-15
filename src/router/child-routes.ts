@@ -3,7 +3,6 @@ const importModule = import.meta.glob('../modules/**/*.vue')
 const Layout = () => import('@/components/Layout/index.vue')
 const LayoutView = () => import('@/components/Layout/LayoutView.vue')
 const LayoutArea = () => import('@/components/Layout/LayoutArea.vue')
-console.log(importModule);
 
 const childrenRoutes = [
   {
@@ -15,6 +14,16 @@ const childrenRoutes = [
       title: 'TestLayout'
     },
     component: LayoutArea
+  },
+  {
+    path: '/test',
+    title: 'Test',
+    name: '测试',
+    icon: 'el-icon-s-promotion',
+    meta: {
+      title: 'Test'
+    },
+    component: importModule['../modules/test.vue']
   },
   {
     path: '/user',
@@ -52,7 +61,26 @@ const childrenRoutes = [
         name: 'ProjectList',
         component: importModule['../modules/Project/pages/list.vue'],
         meta: {
-          title: '项目管理'
+          title: '内容中心'
+        }
+      }
+    ]
+  },
+  {
+    path: '/common',
+    component: Layout,
+    name: 'Common',
+    icon: 'eye',
+    redirect: {
+      name: 'CommonList'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'CommonList',
+        component: importModule['../modules/Common/pages/list.vue'],
+        meta: {
+          title: '社区文章'
         }
       }
     ]
@@ -64,7 +92,7 @@ const childrenRoutes = [
     }
   },
   {
-    path: '/result/:projectId',
+    path: '/result/:noteId',
     component: LayoutView,
     name: 'result',
     icon: 'eye',

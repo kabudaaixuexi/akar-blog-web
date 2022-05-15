@@ -2,36 +2,28 @@
   <div class="side-action-container">
     <ul class="action-list">
       <li
-        v-for="item in 3"
+        v-for="item in entrances"
         :key="item"
-        class="action-item"
+        @click="router.push(item.path)"
+        :class="`action-item ${route.path.indexOf(item.path)  !==  -1 ? 'cur' : ''}`"
       >
-        Action {{ item }}
+       {{ item.explain }}
       </li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-import useCurrentInstance from '@/hooks/useCurrentInstance'
+<script setup lang="ts">
+import { useState } from '@/hooks/base'
+import { useRoute, useRouter } from 'vue-router'
+import Cookies from 'js-cookie'
+import { getEntrances } from './Actions.config'
 
-export default defineComponent({
-  name: 'NavigationSideAction',
-  emits: [
-    'click'
-  ],
-  setup () {
-    const { proxy } = useCurrentInstance()
+const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
+const router = useRouter()
+const route = useRoute()
 
-    function handleClick () {
-      proxy.$emit('click')
-    }
-    return {
-      handleClick
-    }
-  }
-})
+const [entrances, setEntrances] = useState(getEntrances( userInfo ? 'user' : 'tourist'))
 </script>
 <style lang="scss" scoped>
 .side-action-container {
@@ -40,14 +32,19 @@ export default defineComponent({
     display: flex;
     white-space: nowrap;
     .action-item {
-      height: 100%;
-      line-height: inherit;
-      background-color: #eee;
+      transition: .3s;
+      color: var(--xs-color-info-dark-2);
       padding: 0 12px;
       margin-right: 5px;
-      &:last-child {
-        // margin-right: 0;
+      cursor: pointer;
+      &:hover{
+        background-color: var(--xs-color-primary-light-9);
+        color: var(--xs-color-primary);
       }
+    }
+    .cur {
+        background-color: var(--xs-color-info-light-9);
+        color: var(--xs-color-warning-dark-2);
     }
   }
 }

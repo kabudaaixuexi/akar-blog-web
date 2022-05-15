@@ -2,6 +2,7 @@
   <el-tooltip
     effect="dark"
     :tabindex="-1"
+    :show-after="300"
     :placement="placement"
     popper-class="custom-tooltip"
     v-bind="$attrs"
@@ -46,7 +47,7 @@ export default defineComponent({
   line-height: 18px;
   overflow-x: hidden;
   overflow-y: auto;
-  font-size: 14px;
+  font-size: 12px;
   &::-webkit-scrollbar-thumb {
     background: rgba(#fff, 0.4);
     border-radius: 3px;

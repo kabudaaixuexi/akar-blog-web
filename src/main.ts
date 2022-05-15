@@ -10,6 +10,8 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 
 import Fonts from '@/assets/fonts'
+import '@akar/xs-editor/lib/style/common.css'
+
 
 import GlobalComponents from '@/components'
 import Mixin from './mixins'
@@ -19,8 +21,6 @@ const app = createApp(App)
 
 app
   .use(router)
-  .use(store)
-
 app
   .use(ElementPlus)
   .use(GlobalComponents)

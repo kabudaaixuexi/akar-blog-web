@@ -2,12 +2,21 @@
   <div class="layout-section-container">
     <div class="layout-section-container__header">
       <div class="layout-section-container__header-head text_nowrap">
+        <el-input
+          v-if="inputVisible && showInput"
+          ref="InputRef"
+          v-model="inputValue"
+          style="width: 300px;"
+          :maxlength="30"
+          @keyup.enter="handleInputConfirm"
+        />
         <h1
-          v-if="title"
+          v-if="!inputVisible && showInput"
           :title="title"
+          @click="showInput && route.path.indexOf('result') !== -1 && heihei ? setInputVisible(true) : () => {}"
           class="layout-section-container__header-title text_nowrap"
         >
-          {{ title }}
+          {{ title || '点击设置文章标题'}}
         </h1>
         <slot name="head"></slot>
       </div>
@@ -34,7 +43,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
+import { useState } from '@/hooks/base'
+import { useRoute } from 'vue-router'
 /**
  * 上下布局，顶部 header 大标题 + 底部内容区域
  */
@@ -52,6 +62,31 @@ export default defineComponent({
     title: {
       type: String,
       default: ''
+    },
+    changeTitle: {
+      type: Function,
+      default: ()=> {}
+    },
+    showInput: {
+      type: Boolean,
+      default: false
+    },
+    heihei: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup(props) {
+    const route = useRoute()
+    const [inputValue] = useState(props.title)
+    const [inputVisible, setInputVisible] = useState(false)
+    const handleInputConfirm = (e) => {
+      setInputVisible(false)
+      props.changeTitle(inputValue.value)
+    }
+    return {
+      inputVisible, setInputVisible, handleInputConfirm,
+      inputValue, route
     }
   }
 })

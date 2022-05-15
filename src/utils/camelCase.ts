@@ -22,7 +22,6 @@ export function camelize (string: string) {
   return string.substr(0, 1).toLowerCase() + string.substr(1)
 }
 
-// pascalize('hello_world') -> 'HelloWorld'
 export function pascalize (string: any) {
   const camelized = camelize(string)
   return camelized.substr(0, 1).toUpperCase() + camelized.substr(1)
