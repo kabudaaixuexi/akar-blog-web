@@ -3,7 +3,7 @@ const routes = [
   {
     path: '/',
     name: 'Root',
-    redirect: '/project'
+    redirect: '/user'
   },
   ...routers,
   {

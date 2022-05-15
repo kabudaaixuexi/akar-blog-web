@@ -57,5 +57,14 @@ export default defineConfig({
         additionalData: `@use '@/styles/element-variables.scss' as *;`
       }
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets-blog/[name].${(new Date).getTime()}.js`,
+        chunkFileNames: `assets-blog/[name].${(new Date).getTime()}.js`,
+        assetFileNames: `assets-blog/[name].${(new Date).getTime()}.[ext]`
+      }
+    }
   }
 })

@@ -60,10 +60,14 @@ export default defineComponent({
     MilkTea,
   },
   setup () {
+
     const { proxy } = useCurrentInstance()
 
     const store = Store.getState()
     const router = useRouter()
+    if(Cookie.get('userInfo')) {
+      router.push('/common')
+    }
     const isLoading = ref(true)
     const inputErrorEmail = ref('')
     const inputErrorPassword = ref('')
@@ -97,7 +101,8 @@ export default defineComponent({
             text: '先不登录',
             on: {
               click (refForm: any) {
-                proxy.onSubmit(refForm)
+                // proxy.onSubmit(refForm)
+                router.push('/common')
               }
             }
           }
