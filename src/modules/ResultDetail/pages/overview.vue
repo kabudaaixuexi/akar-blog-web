@@ -35,7 +35,8 @@
       <article id="xs-editor-note"></article>
       <footer class="result-detail-footer">
           <div class="result-detail-footer__left">
-            <img :src="user.photo" alt="">
+            <img v-if="user.photo" :src="user.photo" />
+            <img v-else src="@/assets/images/navigation-avatar.webp" />
             <b>{{watermark}}</b>
           </div>
           <figure class="result-detail-footer__right">

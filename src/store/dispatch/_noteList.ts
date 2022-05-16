@@ -24,7 +24,7 @@ export default (p) => {
   let result: any = []
   switch (type) {
     case 0:
-      result = list.find((ev) => ev.noteid == payload.noteId) || {};
+      result = pulishList.find((ev) => ev.noteid == payload.noteid) || {};
       break;
     case 1:
       result = pulishList.filter(ev => ev.drawe == payload.drawe)
