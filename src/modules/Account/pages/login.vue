@@ -5,22 +5,14 @@
         <div class="nav-logo"></div>
         <div class="nav-circle"></div>
         <div class="nav-title">
-          {{ '「 好记性不如烂笔头 」' }}
+          {{ "「 好记性不如烂笔头 」" }}
         </div>
       </div>
-      <div class="nav-right">
-
-      </div>
+      <div class="nav-right"></div>
     </div>
     <div class="user-account-body">
-      <AccountContainerLayout
-        v-bind="configLogin"
-        :form-data="formData"
-        @on-submit="onSubmit"
-      >
-        <template
-          #titleIcon
-        >
+      <AccountContainerLayout v-bind="configLogin" :form-data="formData" @on-submit="onSubmit">
+        <template #titleIcon>
           <el-icon>
             <MilkTea />
           </el-icon>
@@ -32,71 +24,62 @@
 </template>
 
 <script lang="ts">
+import { computed, defineComponent, nextTick, onMounted, reactive, ref } from "vue";
+import { ElMessage } from "element-plus";
+import { MilkTea } from "@element-plus/icons-vue";
 
-import {
-  computed,
-  defineComponent,
-  nextTick,
-  onMounted,
-  reactive,
-  ref
-} from 'vue'
-import { ElMessage } from 'element-plus'
-import { MilkTea } from '@element-plus/icons-vue'
+import AccountContainerLayout from "@/modules/Account/components/ContainerLayout.vue";
 
-import AccountContainerLayout from '@/modules/Account/components/ContainerLayout.vue'
+import Cookie from "js-cookie";
+import Api from "@/api";
+import { useRoute, useRouter } from "vue-router";
+import useCurrentInstance from "@/hooks/useCurrentInstance";
 
-import Cookie from 'js-cookie'
-import Api from '@/api'
-import { useRoute, useRouter } from 'vue-router'
-import useCurrentInstance from '@/hooks/useCurrentInstance'
-
-import Store from '@/store'
+import Store from "@/store";
 
 export default defineComponent({
-  name: 'AccountLogin',
+  name: "AccountLogin",
   components: {
     AccountContainerLayout,
     MilkTea,
   },
-  setup () {
+  setup() {
+    const { proxy } = useCurrentInstance();
 
-    const { proxy } = useCurrentInstance()
-
-    const store = Store.getState()
-    const router = useRouter()
-    if(Cookie.get('userInfo')) {
-      router.push('/common')
+    const store = Store.getState();
+    const router = useRouter();
+    if (Cookie.get("userInfo")) {
+      router.push("/common");
     }
-    const isLoading = ref(true)
-    const inputErrorEmail = ref('')
-    const inputErrorPassword = ref('')
+    const isLoading = ref(true);
+    const inputErrorEmail = ref("");
+    const inputErrorPassword = ref("");
     const formData = reactive({
-      email: 'Administrator',
-      password: 'q'
-    })
+      email: "Administrator",
+      password: "q",
+    });
 
     const configLogin = computed(() => {
       return {
-        title: '欢迎登录',
+        title: "欢迎登录",
         actionList: [
           {
             attrs: {
-              type: 'primary',
+              type: "primary",
               loading: isLoading.value,
-              size: 'large'
+              size: "large",
             },
-            text: '登 录',
+            text: "登 录",
             on: {
-              click (refForm: any) {
-                proxy.onSubmit(refForm)
-              }
-            }
+              click(refForm: any) {
+                proxy.onSubmit(refForm);
+              },
+            },
           },
           {
             attrs: {
-              size: 'small',
-              style: "border: none; color: #3c40c6"
+              size: 'large',
+              class: 'unlogin'
             },
             text: '先不登录',
             on: {
@@ -110,31 +93,31 @@ export default defineComponent({
         formConfig: [
           {
             attrs: {
-              prop: 'email',
+              prop: "email",
               error: inputErrorEmail.value,
-              rules () {
+              rules() {
                 return [
                   proxy.getRequiredRules({
-                    trigger: 'change',
-                    message: '请输入账号信息'
-                  })
-                ]
-              }
+                    trigger: "change",
+                    message: "请输入账号信息",
+                  }),
+                ];
+              },
             },
-            label: '账号',
-            prefixIcon: 'user-tie',
-            placeholder: '请输入'
+            label: "账号",
+            prefixIcon: "user-tie",
+            placeholder: "请输入",
           },
           {
             attrs: {
-              prop: 'password',
+              prop: "password",
               error: inputErrorPassword.value,
-              rules () {
+              rules() {
                 return proxy.getRequiredRules({
-                  trigger: 'change',
-                  message: '请输入密码'
-                })
-              }
+                  trigger: "change",
+                  message: "请输入密码",
+                });
+              },
             },
             // link: {
             //   text: '忘记密码',
@@ -142,45 +125,48 @@ export default defineComponent({
             //     console.log(proxy, 'login.fgtpwd')
             //   }
             // },
-            type: 'password',
-            label: '密码',
-            prefixIcon: 'lock',
-            placeholder: '请输入'
-          }
-        ]
-      }
-    })
+            type: "password",
+            label: "密码",
+            prefixIcon: "lock",
+            placeholder: "请输入",
+          },
+        ],
+      };
+    });
 
-    function setLoading (loading = false) {
-      isLoading.value = loading
+    function setLoading(loading = false) {
+      isLoading.value = loading;
     }
 
-    function onSubmit (refForm: any) {
-      if (isLoading.value) return
+    function onSubmit(refForm: any) {
+      if (isLoading.value) return;
       refForm.validate(async (valid: boolean) => {
-        if (!valid) return
-        inputErrorEmail.value = ''
-        inputErrorPassword.value = ''
-        setLoading(true)
+        if (!valid) return;
+        inputErrorEmail.value = "";
+        inputErrorPassword.value = "";
+        setLoading(true);
         const { data } = await Api.postLogin({
           userName: formData.email,
-          passWord: formData.password
-        })
-        // Cookie.set('token', data.user.token)
-        Cookie.set('userInfo', JSON.stringify(data))
-        ElMessage.success({
-          message: '登录成功'
-        })
-        router.push(`/project`)
-      })
+          passWord: formData.password,
+        });
+        setLoading(false);
+        if (data) {
+          // Cookie.set('token', data.user.token)
+          Cookie.set("userInfo", JSON.stringify(data));
+          ElMessage.success({
+            message: "登录成功",
+          });
+          router.push(`/project`);
+        }
+      });
     }
 
-    setLoading(true)
+    setLoading(true);
     onMounted(() => {
       nextTick(() => {
-        setLoading(false)
-      })
-    })
+        setLoading(false);
+      });
+    });
 
     return {
       isLoading,
@@ -190,11 +176,10 @@ export default defineComponent({
       configLogin,
 
       setLoading,
-      onSubmit
-    }
-  }
-})
-
+      onSubmit,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -204,7 +189,7 @@ export default defineComponent({
   flex-direction: column;
   min-height: 100vh;
   background-color: #f0f2f5;
-  background-image: url('@/assets/images/logo-background.jpg');
+  background-image: url("@/assets/images/logo-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -225,7 +210,7 @@ export default defineComponent({
     .nav-logo {
       width: 56px;
       height: 48px;
-      background-image: url('@/assets/images/logo-akar.svg');
+      background-image: url("@/assets/images/logo-akar.svg");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -240,7 +225,7 @@ export default defineComponent({
     .nav-title {
       font-size: 14px;
       font-weight: 600;
-      font-family:serif;
+      font-family: serif;
       line-height: 25px;
     }
   }
@@ -263,4 +248,5 @@ export default defineComponent({
     }
   }
 }
+
 </style>

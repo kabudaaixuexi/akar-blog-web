@@ -23,7 +23,7 @@ const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const router = useRouter()
 const route = useRoute()
 
-const [entrances, setEntrances] = useState(getEntrances( userInfo ? 'user' : 'tourist'))
+const [entrances, setEntrances] = useState(getEntrances( (userInfo && Object.getOwnPropertyNames(userInfo).length) ? 'user' : 'tourist'))
 </script>
 <style lang="scss" scoped>
 .side-action-container {

@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 import { ElMessage, ElLoading } from 'element-plus'
-// import Cookie from 'js-cookie'
+import Cookie from 'js-cookie'
 
 import { camelizeKeys, decamelizeKeys } from '@/utils/camelCase'
 import Router from '@/router'
@@ -64,6 +64,9 @@ let loading: any = null
 // request拦截器
 service.interceptors.request.use(
   request => {
+    if (Object.keys(request.data).includes('uid') && !JSON.parse(Cookie.get("userInfo") || "{}").uid) {
+      Router.push({ path: `/user`, replace: true });
+    }
     loading = ElLoading.service({
       lock: true,
       text: '请求中',
@@ -106,9 +109,15 @@ service.interceptors.response.use(
   response => {
     loading.close()
     if (response.data && response.data.statusCode !== 200) {
-      ElMessage.error({
-        message: response.data.message
-      })
+      if (response.data.message === "uid不能为空") {
+        ElMessage.error({
+          message: '请先登录'
+        })
+      } else {
+        ElMessage.error({
+          message: response.data.message
+        })
+      }
     }
     return response
 //     /**

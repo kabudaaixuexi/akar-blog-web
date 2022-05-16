@@ -2,7 +2,9 @@ import createStore from '@akar/proxy-property'
 
 export default createStore({
   default: 'akar',
-  myNoteList: []
+  myNoteList: [],
+  allNoteList: [],
+  allUserList: []
 }, {
     usePersisted: true
 })

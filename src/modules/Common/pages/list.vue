@@ -39,23 +39,23 @@ import Api from "@/api";
 import Cookies from "js-cookie";
 import { useState } from "@/hooks/base";
 import Store from '@/store'
+import { getNotes, initialStore } from '@/store/dispatch'
 
 const [list, setList] = useState([]);
 const [currentDrawe, setCurrentDrawe] = useState(0)
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 // 获取文章列表
-const getNoteListAll = async (drawe) => {
-  const { data } = await Api.getNoteListAll({});
+const getNoteList = async (drawe) => {
+  await initialStore()
   if (Number(drawe)) {
-    setList(data.filter(item => (item.drawe == drawe && !!item.published)));
+    setList(getNotes({type: 1, payload: { drawe }}));
   }else {
-    Store.setState(JSON.parse(JSON.stringify(data)), "allNoteList");
-    setList(data.filter(item => !!item.published));
+    setList(getNotes({type: 2, payload: {}}))
   }
 };
 // 选择分类
 const changeDrawe = (e) => {
-  getNoteListAll(e)
+  getNoteList(e)
   setCurrentDrawe(e)
 }
 
@@ -63,8 +63,9 @@ function handleSelectSearch(name?: string) {
   console.log("搜索文章名: ", name);
 }
 
-onMounted(() => {
-  getNoteListAll(undefined);
+onMounted(async () => {
+  await initialStore()
+  getNoteList(undefined);
 });
 </script>
 

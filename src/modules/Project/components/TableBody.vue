@@ -8,7 +8,7 @@
         :list="list"
       />
       <div
-        v-if="!list.length"
+        v-if="!list || !list.length"
         class="project-empty-box"
       >
         <img

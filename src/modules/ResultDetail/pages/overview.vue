@@ -21,12 +21,12 @@
             </span>
             <span></span>
           </p>
-          <p style="color: var(--xs-color-info)">
+          <!-- <p style="color: var(--xs-color-info)">
             <span style="padding-right: 12px">文章分类：
               <span class="my-tag">{{draweOptions.find(i => i.value == drawe)?.label || '全部'}}</span>
             </span>
             <span>文章标签： <el-tag v-for="(item, index) in (drawe || [])" :key="index">{{item}}</el-tag></span>
-          </p>
+          </p> -->
         </div>
         <div class="result-detail-header__options">
 
@@ -71,6 +71,7 @@ import { useRoute } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted } from "vue";
 import Store from "@/store";
+import { getNotes } from '@/store/dispatch'
 import Api from "@/api";
 import foundEdit from "@akar/xs-editor";
 import { useState } from "@/hooks/base";
@@ -78,7 +79,7 @@ import { draweOptions } from '@/modules/Project/data'
 import { Star, ChatLineSquare, Present, Clock } from "@element-plus/icons-vue";
 const route = useRoute();
 // 生成富文本
-const noteInfo = Store.getState("allNoteList").find((el) => el.noteid == route.params.noteId) || {};
+const noteInfo = getNotes({type: 0, payload: { noteid: route.params.noteId}})
 let {
   vNode: value,
   lock,
@@ -189,7 +190,7 @@ onMounted(() => {
     transform: scale(.96);
   }
   &__detail {
-    height: 66px;
+    height: 44px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

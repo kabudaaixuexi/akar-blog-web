@@ -104,8 +104,8 @@ export default defineComponent({
     &__img {
       display: block;
       max-width: 300px;
-      height: 100px;
-      width: 20%;
+      height: 120px;
+      width: 214px;
       border-radius: 3px;
       background-color: var(--xs-color-info-light-9) ;
     }
@@ -115,8 +115,8 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100px;
-      padding: 6px 16px;
+      height: 120px;
+      padding: 8px 16px;
       font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       .common-item-content-text {
         font-size: 12px;

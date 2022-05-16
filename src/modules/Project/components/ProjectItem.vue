@@ -121,7 +121,7 @@ export default defineComponent({
         v.xs_value && (value += v.xs_value);
       };
       forVal(vNode);
-      return value;
+      return value.trim();
     };
     // 修改发布状态
     async function handlePublish(noteid) {

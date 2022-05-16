@@ -111,8 +111,7 @@ $headerHeight: 48px;
       .side-layout-area-menu-bar2 {
         position: relative;
         flex-direction: column;
-        min-width: 360px;
-        width: 24%;
+        width: 326px;
         transition: width .28s;
         border-right: 1px solid #dcdfe6;
         .layout-area-menu-bar__inner {
