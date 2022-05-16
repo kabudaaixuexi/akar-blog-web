@@ -78,6 +78,7 @@ import foundEdit from "@akar/xs-editor";
 import { useState } from "@/hooks/base";
 import { draweOptions } from '@/modules/Project/data'
 import { Star, ChatLineSquare, Present, Clock } from "@element-plus/icons-vue";
+import { ElMessage } from 'element-plus';
 const route = useRoute();
 // 生成富文本
 const noteInfo = getNotes({type: 0, payload: { noteid: route.params.noteId}})
@@ -100,7 +101,10 @@ const [user, setUser] = useState({})
 // 点赞评论
 const [stars, setStars] = useState(extData.star || [])
 const changeStar = async () => {
-  console.log(stars.value.includes(userInfo.userName));
+  if(!Object.getOwnPropertyNames(userInfo).length) {
+    ElMessage.error('登录后才能进行点赞')
+    return
+  }
   let temExtData
   if (!stars.value.includes(userInfo.userName)) {
     temExtData = {
@@ -121,6 +125,10 @@ const changeStar = async () => {
   setStars(temExtData.star)
 }
 const changeEval = async (val) => {
+    if(!Object.getOwnPropertyNames(userInfo).length) {
+      ElMessage.error('登录后才能评论')
+      return
+    }
     await Api.editNote({
       ...noteInfo,
       extData: {
