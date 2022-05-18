@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useState } from '@/hooks/base'
+import { useState } from '@akar/vue-hooks'
 import { useRoute, useRouter } from 'vue-router'
 import Cookies from 'js-cookie'
 import { getEntrances } from './Actions.config'

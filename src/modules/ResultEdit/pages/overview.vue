@@ -11,7 +11,7 @@ import { onMounted } from "vue";
 import Store from "@/store";
 import Api from "@/api";
 import foundEdit from "@akar/xs-editor";
-import { useState } from "@/hooks/base";
+import { useState } from "@akar/vue-hooks";
 const route = useRoute();
 // 生成富文本
 let {

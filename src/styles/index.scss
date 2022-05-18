@@ -20,10 +20,6 @@ html {
   -webkit-tap-highlight-color: transparent;
   overflow-y: scroll;
 }
-*::-webkit-scrollbar {
-  // width: calc(1px / 2) !important;
-  width: 0 !important;
-}
 
 :root {
   overflow-y: auto;
@@ -98,11 +94,11 @@ svg {
 
 // 滚动条样式
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 0px;
+  height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(#000, 0.2);
+  background: rgba(rgb(110, 105, 105), 0.2);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-track {

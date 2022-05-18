@@ -2,6 +2,7 @@
   <el-autocomplete
     v-model.trim="searchValue"
     v-bind="$attrs"
+    size="small"
     class="search-input-container"
     popper-class="search-select-container"
     :trigger-on-focus="false"
@@ -153,13 +154,13 @@ export default defineComponent({
   .search-icon {
     color: #606266;
     height: 100%;
-    line-height: 40px;
+    line-height: 30px;
     font-size: 16px;
     padding-right: 4px;
   }
   .el-input__inner {
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
   }
 }
 .search-select-container {

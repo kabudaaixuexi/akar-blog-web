@@ -19,11 +19,18 @@ export default {
           '/user/getUserList',{})
         return data
     },
+    /** 获取某个用户信息 */
+    getUser: async (payload) => {
+      const { data } = await request.post(
+        '/user/getUser',{ ...payload })
+      return data
+  },
     /** 注册 */
     postRegister: async (payload: postRegisterReq) => {
-        const { data } = await request({
-            url: '/user/register',
-            data: { ...payload }
+        const { data } = await request.post(
+          '/user/register',
+        {
+          ...payload
         })
         return data
     },

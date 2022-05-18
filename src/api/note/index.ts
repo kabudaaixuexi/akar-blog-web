@@ -31,7 +31,7 @@ export interface removeNoteReq {
 }
 export default {
     /** 获取全部笔记列表 */
-      getNoteListAll:async (payload) => {
+    getNoteListAll:async (payload) => {
         const { data } = await request.post(
           '/note/getNoteListAll',
           {
@@ -39,6 +39,16 @@ export default {
           }
         )
         return data
+    },
+    /** 获取发布的文章 */
+    getNoteListPublished:async (payload) => {
+      const { data } = await request.post(
+        '/note/getNoteListPublished',
+        {
+          ...payload
+        }
+      )
+      return data
     },
     /** 获取笔记列表 */
     getNoteList:async (payload:getNoteListReq) => {

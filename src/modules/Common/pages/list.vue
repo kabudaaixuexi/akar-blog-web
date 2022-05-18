@@ -5,7 +5,20 @@
         <NavigationSideLogo />
       </NavigationNavBar>
     </template>
-
+    <template #side>
+      <div class="card">
+        <p>todo//-01</p>
+      </div>
+      <div class="card">
+        <p>todo//-02</p>
+      </div>
+      <div class="card">
+        <p>todo//-03</p>
+      </div>
+      <div class="card">
+        <p>todo//-04</p>
+      </div>
+    </template>
     <template #content>
       <LayoutSection has-divider flex-content>
         <template #head>
@@ -18,7 +31,9 @@
     </template>
 
     <template #side2>
-      todo//-09
+      <div class="card">
+        <p>todo//-09</p>
+      </div>
     </template>
   </LayoutArea>
 </template>
@@ -37,20 +52,20 @@ import CommonDrawes from '@/modules/Common/components/CommonDrawes.vue'
 import SearchCorporation from "@/components/SearchSelect/SearchCorporation.vue";
 import Api from "@/api";
 import Cookies from "js-cookie";
-import { useState } from "@/hooks/base";
+import { useState } from "@akar/vue-hooks";
 import Store from '@/store'
-import { getNotes, initialStore } from '@/store/dispatch'
 
 const [list, setList] = useState([]);
 const [currentDrawe, setCurrentDrawe] = useState(0)
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 // 获取文章列表
 const getNoteList = async (drawe) => {
-  await initialStore()
   if (Number(drawe)) {
-    setList(getNotes({type: 1, payload: { drawe }}));
+    const { data } = await Api.getNoteListPublished({type: 1, drawe })
+    setList(data);
   }else {
-    setList(getNotes({type: 2, payload: {}}))
+    const { data } = await Api.getNoteListPublished({})
+    setList(data)
   }
 };
 // 选择分类
@@ -64,7 +79,6 @@ function handleSelectSearch(name?: string) {
 }
 
 onMounted(async () => {
-  await initialStore()
   getNoteList(undefined);
 });
 </script>
@@ -74,5 +88,15 @@ onMounted(async () => {
   padding: 10px 20px;
   width: 100%;
   font-weight: 600;
+}
+.card {
+  background: #fff;
+  width: 100%;
+  height: max-content;
+  min-height: 200px;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 </style>

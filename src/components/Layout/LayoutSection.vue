@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useState } from '@/hooks/base'
+import { useState } from '@akar/vue-hooks'
 import { useRoute } from 'vue-router'
 /**
  * 上下布局，顶部 header 大标题 + 底部内容区域

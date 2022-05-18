@@ -55,7 +55,9 @@ export const codeMessage: any = {
 
 // Instance for axios
 const service: AxiosInstance = axios.create({
-  // API from the environment variable
+  headers: {
+		'Authorization': 'Bearer ' + Cookie.get('token')
+	},
   baseURL: import.meta.env.VITE_BASE_API,
   timeout: 15000
 })
@@ -64,9 +66,6 @@ let loading: any = null
 // request拦截器
 service.interceptors.request.use(
   request => {
-    if (Object.keys(request.data).includes('uid') && !JSON.parse(Cookie.get("userInfo") || "{}").uid) {
-      Router.push({ path: `/user`, replace: true });
-    }
     loading = ElLoading.service({
       lock: true,
       text: '请求中',
@@ -109,16 +108,11 @@ service.interceptors.response.use(
   response => {
     loading.close()
     if (response.data && response.data.statusCode !== 200) {
-      if (response.data.message === "uid不能为空") {
-        ElMessage.error({
-          message: '请先登录'
-        })
-      } else {
         ElMessage.error({
           message: response.data.message
         })
-      }
     }
+
     return response
 //     /**
 //      * response data
@@ -183,6 +177,17 @@ service.interceptors.response.use(
 //         msg: '服务请求不可用，请重试或检查您的网络。'
 //       }
 //     }
+  },
+  function ({ response }) {
+    loading.close()
+    if (response.status === 401) {
+      ElMessage.error('token校验失败，请重新登录')
+      Router.push({ path: `/user`, replace: true });
+      return { data: {} }
+    } else {
+      ElMessage.error(response.statusText)
+      return { data: {} }
+    }
   }
 )
 

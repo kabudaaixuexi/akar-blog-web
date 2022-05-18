@@ -15,7 +15,7 @@
           </div>
         </aside>
         <!-- content -->
-        <section class="content-section-container">
+        <section class="content-section-container" :style="">
           <main class="main-content-box">
             <div
               class="inner-content"
@@ -92,9 +92,9 @@ $headerHeight: 48px;
       .side-layout-area-menu-bar {
         position: relative;
         flex-direction: column;
-        width: 256px;
+        max-width: 288px;
+        width: 20%;
         transition: width .28s;
-        border-right: 1px solid #dcdfe6;
         .layout-area-menu-bar__inner {
           position: absolute;
           top: 0;
@@ -103,7 +103,7 @@ $headerHeight: 48px;
           bottom: 0;
           overflow-x: hidden;
           overflow-y: auto;
-          padding: 24px;
+          padding: 24px 0 24px 24px;
           scroll-behavior: smooth;
         }
       }
@@ -111,7 +111,8 @@ $headerHeight: 48px;
       .side-layout-area-menu-bar2 {
         position: relative;
         flex-direction: column;
-        width: 326px;
+        max-width: 316px;
+        width: 30%;
         transition: width .28s;
         border-right: 1px solid #dcdfe6;
         .layout-area-menu-bar__inner {
