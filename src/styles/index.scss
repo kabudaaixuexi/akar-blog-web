@@ -130,3 +130,10 @@ input:-webkit-autofill {
   border: none !important; color: #3c40c6;
   font-size: 12px;
 }
+// default
+:root {
+  --bgContentColor : #f5f8fa;
+  --bgCommomColor : #f0f1f3;
+  --bgPlateColor : #fff;
+  --bgHeaderColor : #fff;
+}

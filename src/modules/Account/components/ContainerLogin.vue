@@ -113,6 +113,8 @@ const configLogin = {
       text: "先不登录",
       on: {
         click(refForm: any) {
+          Cookie.remove('token')
+          Cookie.remove("userInfo");
           router.push("/common");
         },
       },

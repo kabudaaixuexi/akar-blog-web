@@ -40,6 +40,20 @@ export default {
         )
         return data
     },
+    /**
+     * 筛选发布的文章
+     * type -- explain -- params -- resultType
+     * 0 -- 某人发布的文章 -- {uid} -- []
+     * 1 -- 某个分类的文章 -- {drawe} -- []
+     * 2 -- 某一篇文章 -- {noteid} -- {}
+     * 3 -- 某人点赞的文章 -- {uid} -- []
+     * 4 -- 某人收藏的文章 -- {uid} -- []
+     * 5 -- 某人浏览的文章 -- {uid} -- []
+     * 6 -- 点赞量前二十 -- {} -- []
+     * 7 -- 收藏量前二十 -- {} -- []
+     * 8 -- 浏览量前二十 -- {} -- []
+     * 9 -- 随机抽取二十篇文章 -- {} -- []
+     */
     /** 获取发布的文章 */
     getNoteListPublished:async (payload) => {
       const { data } = await request.post(
@@ -80,6 +94,16 @@ export default {
         )
         return data
     },
+    /** 笔记添加状态 */
+    adornNote: async (payload:any) => {
+      const { data } = await request.post(
+        '/note/adornNote',
+        {
+          ...payload
+        }
+      )
+      return data
+  },
     /** 删除笔记 */
     removeNote: async (payload:removeNoteReq) => {
         const { data } = await request.post(

@@ -27,7 +27,7 @@
         <AccountContainerRegister />
       </figure>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 

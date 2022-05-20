@@ -3,44 +3,33 @@
     <template #top>
       <NavigationNavBar :fixed="false">
         <NavigationSideLogo />
+        <div style="margin-left: 18px">
+          <SearchCorporation @select="handleSelectSearch" :list="list" :path="'resultDetail'" />
+        </div>
       </NavigationNavBar>
-    </template>
-    <template #side>
-      <div class="card">
-        <p>todo//-01</p>
-      </div>
-      <div class="card">
-        <p>todo//-02</p>
-      </div>
-      <div class="card">
-        <p>todo//-03</p>
-      </div>
-      <div class="card">
-        <p>todo//-04</p>
-      </div>
     </template>
     <template #content>
       <LayoutSection has-divider flex-content>
         <template #head>
           <CommonDrawes :list="list" :currentDrawe="currentDrawe" :changeDrawe="changeDrawe" />
-          <SearchCorporation @select="handleSelectSearch" :list="list" :path="'resultDetail'" />
         </template>
         <!-- <CommonTableHeader /> -->
         <CommonTableBody :list="list" />
       </LayoutSection>
     </template>
 
-    <template #side2>
-      <div class="card">
-        <p>todo//-09</p>
-      </div>
+    <template #sideRight>
+      <BlogRanking :type="6"/>
+      <BlogRanking :type="7"/>
+      <BlogRanking :type="9"/>
+      <BlogRanking :type="8"/>
     </template>
   </LayoutArea>
 </template>
 
 <script lang="ts" setup>
 import { defineComponent, ref, reactive, onMounted } from "vue";
-
+import BlogRanking from '@/components/Plates/BlogRanking.vue'
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 
@@ -88,15 +77,5 @@ onMounted(async () => {
   padding: 10px 20px;
   width: 100%;
   font-weight: 600;
-}
-.card {
-  background: #fff;
-  width: 100%;
-  height: max-content;
-  min-height: 200px;
-  margin-bottom: 12px;
-  padding: 12px;
-  border-radius: 6px;
-  box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 </style>

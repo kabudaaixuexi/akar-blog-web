@@ -23,11 +23,11 @@
                 </TooltipCustom>
               </span>
             </div>
-            <p class="project-item__name-desc__fullname text_nowrap">
-              <span style="transform: scale(0.89); display: inline-block; margin-top: 2px">{{
+            <div class="project-item__name-desc__fullname text_nowrap">
+              <span style="transform: scale(0.89);">{{
                 getVal(dataset.vNode) || "空"
               }}</span>
-            </p>
+            </div>
           </div>
         </div>
       </li>
@@ -121,13 +121,17 @@ export default defineComponent({
         v.xs_value && (value += v.xs_value);
       };
       forVal(vNode);
-      return value.trim();
+      return value;
     };
     // 修改发布状态
     async function handlePublish(noteid) {
       if (isLoading.value) return;
-      isLoading.value = true;
       const { published } = props.dataset;
+      if (!published && !getVal(props.dataset.vNode)) {
+        ElMessage.error('好歹也写点东西吧～')
+        return
+      }
+      isLoading.value = true;
       await Api.editNote({
         ...props.dataset,
         published: !published,
@@ -175,13 +179,13 @@ export default defineComponent({
   border-radius: 8px;
   background: #fff;
   margin-bottom: 16px;
-  transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+  transition: all 0.3s;
   color: #303133;
   user-select: none;
   border: 1px solid transparent;
   &:hover {
     box-shadow: 0 10px 30px -20px rgba(#000, 0.24);
-    border: 1px solid #dcdfe6;
+    background: linear-gradient(to right,#f3f8f1,#fff);
   }
   .project-item__name {
     display: flex;
@@ -223,6 +227,9 @@ export default defineComponent({
       .project-item__name-desc__fullname {
         font-size: 12px;
         color: $color-info;
+        margin-top: 3px;
+        transform: scale(0.86);
+        margin-left: -7%;
       }
     }
   }

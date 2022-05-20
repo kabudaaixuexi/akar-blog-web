@@ -1,5 +1,5 @@
 <template>
-  <LayoutSection flex-content :title="title" :showInput="true" :heihei="true" :changeTitle="changeTitle">
+  <LayoutSection flex-content :title="title" :getTitle="getTitle" :showInput="true" :heihei="true" :changeTitle="changeTitle">
     <article id="xs-editor-note"></article>
   </LayoutSection>
 </template>
@@ -12,28 +12,17 @@ import Store from "@/store";
 import Api from "@/api";
 import foundEdit from "@akar/xs-editor";
 import { useState } from "@akar/vue-hooks";
+import { ElMessage } from "element-plus";
 const route = useRoute();
-// 生成富文本
-let {
-  vNode: value,
-  lock,
-  lockValue,
-  subtitle,
-  uid: watermark,
-  noteid,
-  published,
-  cover,
-  tags,
-  drawe
-} = Store.getState("myNoteList").find((el) => el.noteid == route.params.noteId) || {};
-const [title, setTitle] = useState(subtitle);
+const [noteInfo, setNoteInfo] = useState({})
+const [title, setTitle] = useState('');
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
-const foundXsEditor = () => {
+const foundXsEditor = (value, watermark) => {
   foundEdit(
     document.querySelector("#xs-editor-note"),
     {
       value,
-      operable: !lock,
+      operable: true,
       watermark,
       pattern: "classic", // silent | classic
       upFileUrl: "http://124.220.16.124:8099/upload/setFilesNote",
@@ -41,45 +30,36 @@ const foundXsEditor = () => {
         editNote(vn);
       },
     },
-    () => {
-      // 额外要做的事
-      // listenerDrag()
-    }
+    () => {}
   );
 };
 // 修改笔记实时保存
 const editNote = async (ev: any) => {
   await Api.editNote({
-    uid: userInfo.userName,
-    noteid,
-    subtitle: title.value,
+    ...noteInfo.value,
     vNode: ev,
-    lock,
-    lockValue,
-    published,
-    cover,
-    tags,
-    drawe
+    published: false
   });
 };
 // 修改标题
 const changeTitle = async (t) => {
   await Api.editNote({
-    uid: userInfo.userName,
-    noteid,
+    ...noteInfo.value,
     subtitle: t,
-    vNode: value,
-    lockValue,
-    lock,
-    published,
-    cover,
-    tags,
-    drawe
+    published: false
   });
   setTitle(t);
 };
-onMounted(() => {
-  foundXsEditor();
+// props传递proxy数据需要以实例的形式去传
+const getTitle = () => {
+  return title
+}
+onMounted(async () => {
+  ElMessage.warning('编辑文章会自动保存，编辑完可重新发布')
+  const { data } = await Api.getNoteListPublished({ type: 2, noteid: route.params.noteId });
+  setTitle(data.subtitle)
+  setNoteInfo(data)
+  foundXsEditor(data.vNode, data.uid);
 });
 </script>
 
@@ -105,6 +85,6 @@ onMounted(() => {
   z-index: 1;
   height: 100%;
   width: 100%;
-  background: #000;
+  background: #fff;
 }
 </style>

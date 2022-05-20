@@ -1,5 +1,5 @@
 <template>
-  <LayoutArea>
+  <LayoutArea :showFooter="false">
     <template #top>
       <NavigationNavBar
         :fixed="false"
@@ -9,19 +9,9 @@
         />
       </NavigationNavBar>
     </template>
-    <template #side>
-      <LayoutSection
-        has-divider
-        :title="'todo//07'"
-        :showInput="true"
-      >
-        <ul>
-          <li>give me some advice</li>
-          <li></li>
-          <li></li>
-        </ul>
-      </LayoutSection>
-    </template>
+    <!-- <template #sideLeft>
+      <BlogRanking :type="7" />
+    </template> -->
     <template #content>
       <router-view />
     </template>
@@ -30,6 +20,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import BlogRanking from '@/components/Plates/BlogRanking.vue'
 import NavigationSideGoBack from '@/components/Navigation/Side/SideGoBack.vue'
 import NavigationNavBar from '@/components/Navigation/NavBar.vue'
 import { useRouter } from 'vue-router'

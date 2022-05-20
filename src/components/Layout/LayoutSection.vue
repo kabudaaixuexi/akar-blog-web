@@ -4,6 +4,7 @@
       <div class="layout-section-container__header-head text_nowrap">
         <el-input
           v-if="inputVisible && showInput"
+          size="default"
           ref="InputRef"
           v-model="inputValue"
           style="width: 300px;"
@@ -46,6 +47,7 @@
 import { defineComponent } from 'vue'
 import { useState } from '@akar/vue-hooks'
 import { useRoute } from 'vue-router'
+import { title } from 'process'
 /**
  * 上下布局，顶部 header 大标题 + 底部内容区域
  */
@@ -59,6 +61,10 @@ export default defineComponent({
     flexContent: {
       type: Boolean,
       default: false
+    },
+    getTitle: {
+      type: Function,
+      default: ()=>{}
     },
     title: {
       type: String,
@@ -79,7 +85,8 @@ export default defineComponent({
   },
   setup(props) {
     const route = useRoute()
-    const [inputValue] = useState(props.title)
+    // props传递proxy数据需要以实例的形式去传 getTitle返回proxy title
+    const [inputValue] = useState(props.getTitle() || props.title)
     const [inputVisible, setInputVisible] = useState(false)
     const handleInputConfirm = (e) => {
       setInputVisible(false)
@@ -102,7 +109,7 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 40px;
+    border-radius: 4px;
     width: 100%;
     .layout-section-container__header-head {
       color: #303133;
@@ -125,8 +132,10 @@ export default defineComponent({
     margin-top: 16px;
     flex: auto;
     .content-divider {
-      height: 1px;
+      height: calc(1px / 2);
       background: #dcdfe6;
+      width: 99%;
+      margin-left: .5%;
       margin-bottom: 6px;
     }
     .layout-section-container__content-inner {

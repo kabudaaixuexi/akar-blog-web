@@ -6,9 +6,12 @@
       </NavigationNavBar>
     </template>
 
+    <template #sideLeft>
+      <BloggerCard />
+    </template>
     <template #content>
       <header class="result-detail-header">
-        <div class="result-detail-header__title">{{ noteInfo.subtitle || "作者未设置文章标题" }}</div>
+        <div class="result-detail-header__title">{{ noteInfo.subtitle || "--" }}</div>
         <div class="result-detail-header__detail">
           <p>
             <span style="padding-right: 24px"
@@ -47,19 +50,37 @@
         <figure class="result-detail-footer__right">
           <TooltipCustom
             :content="
-              noteInfo.extData?.stars && !!noteInfo.extData.stars.length
-                ? `${stars[0]} 在内的 ${noteInfo.extData.stars.length} 位用户觉得很赞！`
+              stars.length
+                ? `${stars[0]} 在内的 ${stars.length} 位用户觉得很赞！`
                 : '为文章点上第一个赞吧～'
             "
           >
             <div @click="changeStar">
-              <el-icon :size="16" :color="noteInfo.extData?.stars.includes(userInfo.userName) ? '#FA5555' : ''"
-                ><Star /></el-icon
+              <el-icon :size="16" :color="stars.includes(userInfo.userName) ? '#FA5555' : ''"
+                ><Sugar /></el-icon
               ><span
                 :style="`padding-left: 6px;color: ${
                   stars.includes(userInfo.userName) ? '#FA5555' : ''
                 }`"
-                >{{ noteInfo.extData?.stars?.length || 0 }}</span
+                >{{ stars.length }}</span
+              >
+            </div>
+          </TooltipCustom>
+          <TooltipCustom
+            :content="
+              takes.length
+                ? `${takes[0]} 在内的 ${takes.length} 位用户收藏了该文章`
+                : '成为第一名收藏的用户～'
+            "
+          >
+            <div @click="changeTake">
+              <el-icon :size="16" :color="takes.includes(userInfo.userName) ? '#FA5555' : ''"
+                ><Star /></el-icon
+              ><span
+                :style="`padding-left: 6px;color: ${
+                  takes.includes(userInfo.userName) ? '#FA5555' : ''
+                }`"
+                >{{ takes.length }}</span
               >
             </div>
           </TooltipCustom>
@@ -70,22 +91,10 @@
             </div>
           </TooltipCustom>
           <div class="my-tag">
-            {{ draweOptions.find((i) => i.value == noteInfo.drawe)?.label || "专栏目录" }}
+            {{ draweOptions.find((i) => i.value == noteInfo.drawe)?.label || "全部" }}
           </div>
         </figure>
       </footer>
-    </template>
-
-    <template #side2>
-      <div class="card result-detail-card-author">
-        <p>todo//-017</p>
-      </div>
-      <div class="card result-detail-card-recommend">
-        <p>todo//-018</p>
-      </div>
-      <div class="card result-detail-card-more">
-        <p>todo//-019</p>
-      </div>
     </template>
   </LayoutArea>
 </template>
@@ -93,15 +102,16 @@
 <script lang="ts" setup>
 import NavigationSideGoBack from "@/components/Navigation/Side/SideGoBack.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
+import BloggerCard from '@/components/Plates/BloggerCard.vue'
 import { useRoute } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted } from "vue";
 import Store from "@/store";
 import Api from "@/api";
 import foundEdit from "@akar/xs-editor";
-import { useState } from "@akar/vue-hooks";
+import { useState } from '@akar/vue-hooks'
 import { draweOptions } from "@/modules/Project/data";
-import { Star, ChatLineSquare, Present, Clock } from "@element-plus/icons-vue";
+import { Star, ChatLineSquare, Present, Clock, Sugar } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const route = useRoute();
@@ -109,51 +119,66 @@ const route = useRoute();
 const [noteInfo, setNoteInfo] = useState({})
 // 作者信息
 const [user, setUser] = useState({});
-// 点赞评论
+// 点赞评论收藏
 const [stars, setStars] = useState([]);
-// let {
-//   vNode: value,
-//   lock,
-//   lockValue,
-//   subtitle,
-//   uid: watermark,
-//   noteid,
-//   published,
-//   cover,
-//   tags,
-//   latestTime,
-//   drawe,
-//   extData = {},
-// } = noteInfo;
-const changeStar = async () => {
+const [takes, setTakes] = useState([]);
+
+const checkLogin = () => {
   if (!Object.getOwnPropertyNames(userInfo).length) {
     ElMessage.error("登录后才能进行点赞");
+  }
+  return Object.getOwnPropertyNames(userInfo).length
+}
+const changeStar = async () => {
+  if (!checkLogin()) {
     return;
   }
   let temExtData;
   if (!stars.value.includes(userInfo.userName)) {
     temExtData = {
-      ...noteInfo.extData,
+      ...noteInfo.value.extData,
       star: [...stars.value, userInfo.userName],
     };
   } else {
     temExtData = {
-      ...noteInfo.extData,
+      ...noteInfo.value.extData,
       star: stars.value.filter((i) => i != userInfo.userName),
     };
   }
-  await Api.editNote({
-    ...noteInfo,
+  await Api.adornNote({
+    ...noteInfo.value,
     extData: temExtData,
   });
   setStars(temExtData.star);
+};
+const changeTake = async () => {
+  if (!checkLogin()) {
+    return;
+  }
+  let temExtData;
+  if (!takes.value.includes(userInfo.userName)) {
+    temExtData = {
+      ...noteInfo.value.extData,
+      take: [...takes.value, userInfo.userName],
+    };
+  } else {
+    temExtData = {
+      ...noteInfo.value.extData,
+      take: takes.value.filter((i) => i != userInfo.userName),
+    };
+  }
+  await Api.adornNote({
+    ...noteInfo.value,
+    extData: temExtData,
+  });
+  setTakes(temExtData.take);
 };
 // const changeEval = async (val) => {
 //   if (!Object.getOwnPropertyNames(userInfo).length) {
 //     ElMessage.error("登录后才能评论");
 //     return;
 //   }
-//   await Api.editNote({
+//   await Api.adornNote({
 //     ...noteInfo,
 //     extData: {
 //       ...extData,
@@ -184,6 +209,7 @@ const foundXsEditor = (value, watermark) => {
 onMounted(async () => {
   const { data } = await Api.getNoteListPublished({ type: 2, noteid: route.params.noteId });
   setStars(data.extData?.star || [])
+  setTakes(data.extData?.take || [])
   setNoteInfo(data)
   foundXsEditor(data.vNode, data.uid);
   const { data: user } = await Api.getUser({ uid:data.uid });
@@ -211,9 +237,8 @@ onMounted(async () => {
   outline: none;
   flex: 1;
   z-index: 1;
-  height: 100%;
   width: 100%;
-  background: #000;
+  min-height: calc(100% - 236px);
 }
 
 .result-detail-header {
@@ -224,7 +249,6 @@ onMounted(async () => {
     font-size: 22px;
     padding: 12px 0;
     font-weight: 600;
-    transform: scale(0.96);
   }
   &__detail {
     height: 44px;
@@ -235,16 +259,15 @@ onMounted(async () => {
     background: var(--xs-color-info-light-9);
     padding: 12px 12px 8px 12px;
     margin: 6px 0;
-    border-radius: 2px;
+    border-radius: 4px;
     font-size: 12px;
-    transform: scale(0.96);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
   &__options {
     border: calc(1px / 2) solid var(--xs-color-info-light-9);
     margin-top: 12px;
     height: 36px;
     width: 100%;
-    transform: scale(0.96);
   }
 }
 .result-detail-footer {
@@ -273,8 +296,9 @@ onMounted(async () => {
   &__right {
     display: flex;
     align-items: center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     div {
-      margin-right: 12px;
+      margin-right: 18px;
       display: flex;
       align-items: center;
       font-size: 14px;
@@ -289,17 +313,5 @@ onMounted(async () => {
   transform: scale(0.9);
   border: calc(1px / 2) solid var(--xs-color-primary);
   color: var(--xs-color-primary);
-}
-.card {
-  background: #fff;
-  width: 100%;
-  height: max-content;
-  min-height: 200px;
-  margin-bottom: 12px;
-  padding: 12px;
-  border-radius: 6px;
-  box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-.result-detail-card-author {
 }
 </style>

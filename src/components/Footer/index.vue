@@ -50,6 +50,7 @@ export default defineComponent({
 .footer {
   margin: 0 auto;
   width: 100%;
+  background: #fff;
   &.border {
     border-top: 1px solid rgba(#3c3c43, .12);
   }

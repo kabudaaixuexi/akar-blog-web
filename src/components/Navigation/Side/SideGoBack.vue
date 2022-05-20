@@ -28,6 +28,7 @@ const router = useRouter()
   position: relative;
   height: 100%;
   white-space: nowrap;
+  cursor: pointer;
   & > a {
     display: flex;
     align-items: center;

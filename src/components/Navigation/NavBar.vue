@@ -53,7 +53,7 @@ $headerHeight: 48px;
     display: flex;
     height: 100%;
     padding: 0 16px;
-    background-color: #fff;
+    background-color: var(--bgHeaderColor);
   }
 }
 </style>

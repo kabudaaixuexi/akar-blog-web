@@ -22,10 +22,12 @@
       </i>
     </template>
     <template #default="{ item }">
-      <div class="search_content" @click="handleChange(item.noteid)">
-        <span v-html="item.subtitle" />
-        <span v-html="item.content" />
-      </div>
+      <TooltipCustom placement="right" :content="`作者：${item.uid}`">
+          <div class="search_content" @click="handleChange(item.noteid)">
+            <span v-html="item.subtitle" />
+            <span v-html="item.content" />
+          </div>
+      </TooltipCustom>
     </template>
   </el-autocomplete>
 </template>
@@ -166,9 +168,9 @@ export default defineComponent({
 .search-select-container {
   .el-autocomplete-suggestion__list {
     li {
-      &:active {
-        background-color: #ecf3ff;
-      }
+      background-color: #fff;
+      padding-top: 2px;
+      padding-bottom: 2px;
     }
   }
 }
@@ -177,12 +179,13 @@ export default defineComponent({
 }
 .search_content {
   transition: all 0.2s;
-  width: 460px;
+  width: 260px;
   position: relative;
   border-radius: 3px;
   &:hover {
     border:calc(1px / 2) solid var(--xs-color-primary-light-7);
     padding:0 12px;
+    background-color: var(--el-fill-color-light);
     box-sizing: border-box;
   }
   span:nth-of-type(1) {

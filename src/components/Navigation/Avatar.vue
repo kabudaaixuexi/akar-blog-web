@@ -73,11 +73,8 @@ export default defineComponent({
         label: "退出登录",
         icon: "switch-button",
         click: () => {
-          // Cookie.remove('token')
-          console.log(Cookie.get("userInfo"));
-
+          Cookie.remove('token')
           Cookie.remove("userInfo");
-          Store.setState(null, "userInfo");
           router.push({ path: `/user`, replace: true });
         },
       },

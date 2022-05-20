@@ -7,15 +7,16 @@
       <div class="layout-area-container__bottom__inner">
         <!-- left aside -->
         <aside
-          v-if="$slots.side"
-          class="side-layout-area-menu-bar"
+          v-if="$slots.sideLeft"
+          :style="`width: ${sideLeftWidth}px`"
+          class="side-layout-area-menu-bar-left"
         >
           <div class="layout-area-menu-bar__inner">
-            <slot name="side"></slot>
+            <slot name="sideLeft"></slot>
           </div>
         </aside>
         <!-- content -->
-        <section class="content-section-container" :style="">
+        <section class="content-section-container">
           <main class="main-content-box">
             <div
               class="inner-content"
@@ -26,11 +27,12 @@
         </section>
         <!-- right aside -->
         <aside
-          v-if="$slots.side2"
-          class="side-layout-area-menu-bar2"
+          v-if="$slots.sideRight"
+          :style="`width: ${sideRightWidth}px`"
+          class="side-layout-area-menu-bar-right"
         >
           <div class="layout-area-menu-bar__inner">
-            <slot name="side2"></slot>
+            <slot name="sideRight"></slot>
           </div>
         </aside>
       </div>
@@ -56,6 +58,14 @@ export default defineComponent({
     showFooter: {
       type: Boolean,
       default: true
+    },
+    sideLeftWidth: {
+      type: Number,
+      default: 336
+    },
+    sideRightWidth: {
+      type: Number,
+      default: 336
     }
   }
 })
@@ -72,7 +82,8 @@ $headerHeight: 48px;
   height: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background: #f0f2f5;
+  background-color: var(--bgCommomColor);
+  background-image: url('../../assets/images/logo-background.jpg');
   .layout-area-container__top {
 
   }
@@ -88,12 +99,12 @@ $headerHeight: 48px;
       right: 0;
       bottom: 0;
       display: flex;
+      justify-content: center;
+      padding: 12px 12px 0 12px;
       // left
-      .side-layout-area-menu-bar {
+      .side-layout-area-menu-bar-left {
         position: relative;
         flex-direction: column;
-        max-width: 288px;
-        width: 20%;
         transition: width .28s;
         .layout-area-menu-bar__inner {
           position: absolute;
@@ -103,18 +114,15 @@ $headerHeight: 48px;
           bottom: 0;
           overflow-x: hidden;
           overflow-y: auto;
-          padding: 24px 0 24px 24px;
+          padding: 0 12px;
           scroll-behavior: smooth;
         }
       }
       // right
-      .side-layout-area-menu-bar2 {
+      .side-layout-area-menu-bar-right {
         position: relative;
         flex-direction: column;
-        max-width: 316px;
-        width: 30%;
         transition: width .28s;
-        border-right: 1px solid #dcdfe6;
         .layout-area-menu-bar__inner {
           position: absolute;
           top: 0;
@@ -123,21 +131,24 @@ $headerHeight: 48px;
           bottom: 0;
           overflow-x: hidden;
           overflow-y: auto;
-          padding: 24px 24px 24px 0;
+          padding: 0 12px;
           scroll-behavior: smooth;
         }
       }
+      // content
       .content-section-container {
         display: flex;
+        max-width: 1010px;
+        min-width: 760px;
         flex: auto;
         flex-direction: column;
-        min-width: 0;
-        background-color: #f0f2f5;
+        background-color: var(--bgPlateColor);
+        border-radius: 6px 6px 2px 2px;
         .main-content-box {
           flex: auto;
           position: relative;
           .inner-content {
-            padding: 24px;
+            padding: 24px 18px;
             position: absolute;
             top: 0;
             left: 0;

@@ -68,7 +68,7 @@ service.interceptors.request.use(
   request => {
     loading = ElLoading.service({
       lock: true,
-      text: '请求中',
+      text: '',
       background: 'rgba(210, 220, 230, 0.4)',
     })
     return request
