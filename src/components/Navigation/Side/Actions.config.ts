@@ -12,7 +12,7 @@ const getEntrances = (ident: string) => {
       owners: ['user', 'tourist']
     },
     {
-      path: '/cascas',
+      path: '/notice/0',
       explain: '消息',
       owners: ['user']
     },

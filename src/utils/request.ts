@@ -66,11 +66,13 @@ let loading: any = null
 // request拦截器
 service.interceptors.request.use(
   request => {
-    loading = ElLoading.service({
-      lock: true,
-      text: '',
-      background: 'rgba(210, 220, 230, 0.4)',
-    })
+    if (!["/note/getNoteListPublished", '/note/editNote', '/user/decorate'].includes((request as any).url)) {
+      loading = ElLoading.service({
+        lock: true,
+        text: '',
+        background: 'rgba(210, 220, 230, 0.4)',
+      })
+    }
     return request
 //     const token = Cookie.get('token')
 
@@ -106,7 +108,7 @@ service.interceptors.request.use(
 // respone拦截器
 service.interceptors.response.use(
   response => {
-    loading.close()
+    loading && loading.close()
     if (response.data && response.data.statusCode !== 200) {
         ElMessage.error({
           message: response.data.message

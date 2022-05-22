@@ -7,7 +7,8 @@
     </template>
 
     <template #sideLeft>
-      <BloggerCard />
+      <BloggerCard :getNoteInfo="getNoteInfo" />
+      <!-- <BlogRanking :type="6"/> -->
     </template>
     <template #content>
       <header class="result-detail-header">
@@ -103,6 +104,7 @@
 import NavigationSideGoBack from "@/components/Navigation/Side/SideGoBack.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 import BloggerCard from '@/components/Plates/BloggerCard.vue'
+import BlogRanking from '@/components/Plates/BlogRanking.vue'
 import { useRoute } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted } from "vue";
@@ -117,6 +119,7 @@ const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const route = useRoute();
 // 文章信息
 const [noteInfo, setNoteInfo] = useState({})
+const getNoteInfo = () => { return noteInfo }
 // 作者信息
 const [user, setUser] = useState({});
 // 点赞评论收藏

@@ -8,7 +8,7 @@
         <!-- left aside -->
         <aside
           v-if="$slots.sideLeft"
-          :style="`width: ${sideLeftWidth}px`"
+          :style="`width: ${sideLeftWidth}px;min-width: ${sideLeftWidth}px`"
           class="side-layout-area-menu-bar-left"
         >
           <div class="layout-area-menu-bar__inner">
@@ -16,7 +16,7 @@
           </div>
         </aside>
         <!-- content -->
-        <section class="content-section-container">
+        <section :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''}; background-color: ${contentColor}`" class="content-section-container">
           <main class="main-content-box">
             <div
               class="inner-content"
@@ -28,7 +28,7 @@
         <!-- right aside -->
         <aside
           v-if="$slots.sideRight"
-          :style="`width: ${sideRightWidth}px`"
+          :style="`width: ${sideRightWidth}px;min-width: ${sideRightWidth}px`"
           class="side-layout-area-menu-bar-right"
         >
           <div class="layout-area-menu-bar__inner">
@@ -66,6 +66,16 @@ export default defineComponent({
     sideRightWidth: {
       type: Number,
       default: 336
+    },
+    contentWidth: {
+      type: Number
+    },
+    contentBottom: {
+      type: Number
+    },
+    contentColor: {
+      type: String,
+      default: 'var(--bgPlateColor)'
     }
   }
 })
@@ -140,10 +150,8 @@ $headerHeight: 48px;
         display: flex;
         max-width: 1010px;
         min-width: 760px;
-        flex: auto;
         flex-direction: column;
-        background-color: var(--bgPlateColor);
-        border-radius: 6px 6px 2px 2px;
+        border-radius: 6px;
         .main-content-box {
           flex: auto;
           position: relative;

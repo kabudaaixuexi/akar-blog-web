@@ -86,6 +86,25 @@ const childrenRoutes = [
     ]
   },
   {
+    path: '/notice/:uid',
+    component: Layout,
+    name: 'Notice',
+    icon: 'eye',
+    redirect: {
+      name: 'NoticeIndex'
+    },
+    children: [
+      {
+        path: 'index',
+        name: 'NoticeIndex',
+        component: importModule['../modules/Notice/pages/index.vue'],
+        meta: {
+          title: '消息中心'
+        }
+      }
+    ]
+  },
+  {
     path: '/resultEdit',
     redirect: {
       name: 'ProjectList'

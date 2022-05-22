@@ -3,12 +3,12 @@ import { createApp } from 'vue'
 import router from '@/router'
 import '@/router/permission'
 
-import store from '@/store'
+import SocketIo from '@/utils/socket.io'
 
 import App from './App.vue'
 
 import ElementPlus from 'element-plus'
-
+import './utils/socket.io'
 import Fonts from '@/assets/fonts'
 import '@akar/xs-editor/lib/style/common.css'
 
@@ -25,6 +25,13 @@ app
   .use(ElementPlus)
   .use(GlobalComponents)
   .use(Widgets)
+  .use(SocketIo, {
+    connection: import.meta.env.VITE_SOCTKET_API,
+    options: {
+      autoConnect: true, //关闭自动连接
+      // ...其它选项
+    },
+  })
   .use(Fonts)
   .mixin(Mixin)
   .mount('#app')

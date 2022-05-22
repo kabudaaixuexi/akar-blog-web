@@ -30,7 +30,8 @@ export default {
         const { data } = await request.post(
           '/user/register',
         {
-          ...payload
+          ...payload,
+          extData: payload.extData ? payload.extData : JSON.stringify({})
         })
         return data
     },
@@ -46,10 +47,22 @@ export default {
     },
     /** 修改账户信息 */
     postModify: async (payload: any) => {
-        const { data } = await request({
-            url: '/user/modify',
-            data: { ...payload }
-        })
+        const { data } = await request.post(
+          '/user/modify',
+          {
+            ...payload
+          }
+        )
         return data
-    }
+    },
+    /** 装饰账户信息 */
+    postDecorate: async (payload: any) => {
+      const { data } = await request.post(
+        '/user/decorate',
+        {
+          ...payload
+        }
+      )
+      return data
+  }
 }

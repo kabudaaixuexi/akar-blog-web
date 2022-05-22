@@ -6,25 +6,26 @@
   </el-config-provider>
 </template>
 
-<script lang="ts">
-import { ElConfigProvider } from 'element-plus'
-import { useRoute, useRouter } from 'vue-router'
-import { reactive, toRefs } from 'vue'
-import Store from './store'
+<script lang="ts" setup>
+import { inject, onMounted } from 'vue'
+import { Socket } from 'socket.io-client';
 
-export default {
-  name: 'App',
-  components: {
-    ElConfigProvider
-  },
-  setup () {
-    const state: any = reactive({
-    });
-    return {
-      ...toRefs(state)
-    }
-  }
+const socket = inject('socket') as Socket;
+
+/**
+ * 初始化 - 房间/模块
+ * 加入文章消息通知模块 // essay
+ * 加入聊天消息通知模块 // letter
+ */
+const initSocketIo = () => {
+  socket.onAny((eventName, payload) => console.dir(eventName, payload));
+  socket.on('joinRoomSuccess', (payload) => console.log(payload));
+  socket.emit('joinRoom', 'essay');
+  socket.emit('joinRoom', 'letter');
 }
+onMounted(() => {
+  initSocketIo()
+});
 </script>
 
 <style lang="scss">
