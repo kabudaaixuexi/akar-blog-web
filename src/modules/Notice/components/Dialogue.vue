@@ -49,10 +49,10 @@
       </figure>
       <div v-if="curKey" header class="dialogue-con__footer">
         <div class="options">
-          <span>1</span>
-          <span>2</span>
+          <!-- <span></span> -->
+          <!-- <span>2</span>
           <span>3</span>
-          <span>4</span>
+          <span>4</span> -->
         </div>
         <el-input
           v-model="textarea"
@@ -139,12 +139,14 @@ const saveData = (el) => {
 const initSocketIo = async () => {
   // 加入通信
   socket.on("letter", (payload) => {
-    ElMessage.success(
-      `${payload.formUserId}发了一条消息给${payload.sid}：【${payload.message}】 -- ${payload.sendTime}`
-    );
+    // ElMessage.success(
+    //   `${payload.formUserId}发了一条消息给${payload.sid}：【${payload.message}】 -- ${payload.sendTime}`
+    // );
     saveData(payload)
   });
   // 初始化消息列表å
+  console.log(userInfo,'userInfo');
+
   const { data } = await Api.getNewsUserList();
   setNavData(data);
   if(route.params.uid && route.params.uid != 0) {
@@ -209,6 +211,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.18);
+  max-height: 777px;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
