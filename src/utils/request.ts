@@ -73,6 +73,9 @@ service.interceptors.request.use(
         background: 'rgba(210, 220, 230, 0.4)',
       })
     }
+    if ((request.headers?.Authorization as string).split(' ')[1] !== Cookie.get('token')) { // 主动更新token
+      (request.headers as any).Authorization = ['Bearer', Cookie.get('token')].join(' ')
+    }
     return request
 //     const token = Cookie.get('token')
 
