@@ -3,8 +3,8 @@
     <article class="dialogue-nav">
       <header class="dialogue-nav__header nav-cur">
         <div class="left">
-          <img v-if="userInfo.phone" :src="userInfo.phone" alt="" />
-          <img src="@/assets/images/navigation-avatar.webp" alt="" />
+          <img v-if="userInfo.photo" :src="userInfo.photo" alt="" />
+          <img v-else src="@/assets/images/navigation-avatar.webp" alt="" />
           <span class="nowrap">{{ userInfo.userName }}</span>
         </div>
         <div class="right"></div>
@@ -212,11 +212,11 @@ onMounted(() => {
   height: 100%;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.18);
   max-height: 777px;
-  border-radius: 12px;
+  border-radius: 18px;
   overflow: hidden;
   display: flex;
   .dialogue-nav {
-    width: 200px;
+    width: 210px;
     background-color: var(--xs-color-info-dark-2);
     height: 100%;
     display: flex;
@@ -232,7 +232,7 @@ onMounted(() => {
         display: flex;
         height: 100%;
         width: 100%;
-        padding: 6px 12px;
+        padding: 12px;
         align-items: center;
         img {
           width: 36px;

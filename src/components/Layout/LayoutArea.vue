@@ -149,7 +149,7 @@ $headerHeight: 48px;
       .content-section-container {
         display: flex;
         max-width: 1010px;
-        min-width: 760px;
+        min-width: 800px;
         flex-direction: column;
         border-radius: 6px;
         .main-content-box {

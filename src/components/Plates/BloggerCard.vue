@@ -37,11 +37,11 @@
         <span class="c666">粉丝</span>
       </div>
       <div>
-        <span class="b500">{{ 0 }}</span>
+        <span class="b500">{{ follow.length || 0 }}</span>
         <span class="c666">关注</span>
       </div>
       <div>
-        <span class="b500">{{ star.length || 0 }}</span>
+        <span class="b500">{{ integral }}</span>
         <span class="c666">积分</span>
       </div>
     </article>
@@ -72,6 +72,7 @@ const [pulish, setPulish] = useState([]);
 const [skim, setSkim] = useState([]); // 浏览
 const [take, setTake] = useState([]); // 收藏
 const [star, setStar] = useState([]); // 点赞
+const [integral, setIntegral] = useState(0); // 积分
 
 const [fans, setFans] = useState([]); // 粉丝
 const [follow, setFollow] = useState([]); // 关注
@@ -85,17 +86,22 @@ const getList = async () => {
   setFollow(JSON.parse(user.extData || '{}').follow || []);
   const { data: pulish } = await Api.getNoteListPublished({ type: 0, uid });
   setPulish(pulish);
-  const { data: star } = await Api.getNoteListPublished({ type: 3, uid });
-  setStar(star);
-  const { data: take } = await Api.getNoteListPublished({ type: 4, uid });
-  setTake(take);
-  const { data: skim } = await Api.getNoteListPublished({ type: 5, uid });
-  setSkim(skim);
+  // 计算浏览 获赞 被收藏
+  let temStar:any[] = [], temTake:any[] = [], temSkim:any[] = []
+  pulish.forEach(et => {
+    const extData = et.extData || {}
+    temStar = [...temStar, ...(extData.star || [])]
+    temTake = [...temTake, ...(extData.take || [])]
+    temSkim = [...temSkim, ...(extData.skim || [])]
+  });
+  setStar(temStar);setSkim(temSkim);setTake(temTake);
+  setIntegral(pulish.length * 100 + fans.value.length * 100 + temSkim.length * 1 + temStar.length * 20 + temTake.length * 50) // 积分计算规则：原创 = 100; 粉丝 = 100; 浏览 = 1; 获赞 = 20; 被收藏 = 50;
 };
 // 关注 follow // fans
 const handleFollow = async () => {
   if (!Object.getOwnPropertyNames(userInfo).length) {
     ElMessage.error("登录后才能进行关注");
+    return
   }
   const { uid } = props.getNoteInfo().value;
   const rd = fans.value.find(ev => ev.userName == userInfo.userName)
@@ -168,13 +174,17 @@ const handleFollow = async () => {
 
 // 私信
 const handleDialogue = () => {
+  if (!Object.getOwnPropertyNames(userInfo).length) {
+    ElMessage.error("登录后才能私信该文章作者");
+    return
+  }
   router.push(`/notice/${user.value.userName}`)
 }
 onMounted(() => {
   setTimeout(() => {
     setLoading(false);
     getList();
-  }, 1800);
+  }, 1200);
 });
 </script>
 
