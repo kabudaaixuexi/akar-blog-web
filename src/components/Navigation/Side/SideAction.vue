@@ -43,7 +43,6 @@ const [entrances, setEntrances] = useState(getEntrances( (userInfo && Object.get
       }
     }
     .cur {
-        background-color: var(--xs-color-info-light-9);
         color: var(--xs-color-warning-dark-2);
     }
   }

@@ -85,6 +85,27 @@ const childrenRoutes = [
       }
     ]
   },
+  // 文件存储
+  {
+    path: '/storage',
+    component: Layout,
+    name: 'Storage',
+    icon: 'eye',
+    redirect: {
+      name: 'StorageIndex'
+    },
+    children: [
+      {
+        path: 'index',
+        name: 'StorageIndex',
+        component: importModule['../modules/Storage/pages/index.vue'],
+        meta: {
+          title: '文件系统'
+        }
+      }
+    ]
+  },
+  // 消息中心
   {
     path: '/notice/:uid',
     component: Layout,
@@ -104,13 +125,13 @@ const childrenRoutes = [
       }
     ]
   },
+  // 内容中心编辑
   {
     path: '/resultEdit',
     redirect: {
       name: 'ProjectList'
     }
   },
-  // 内容中心编辑
   {
     path: '/resultEdit/:noteId',
     component: LayoutView,

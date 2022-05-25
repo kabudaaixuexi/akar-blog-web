@@ -2,6 +2,11 @@
 const getEntrances = (ident: string) => {
   const list = [
     {
+      path: '/storage',
+      explain: '文件中心',
+      owners: ['user']
+    },
+    {
       path: '/project',
       explain: '创作中心',
       owners: ['user']
