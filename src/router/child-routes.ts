@@ -172,7 +172,7 @@ const childrenRoutes = [
         name: 'DetailOverview',
         component: importModule['../modules/ResultDetail/pages/overview.vue'],
         meta: {
-          title: '社区'
+          title: '加载中...'
         }
       }
     ]

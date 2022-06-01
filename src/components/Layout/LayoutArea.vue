@@ -170,4 +170,9 @@ $headerHeight: 48px;
     }
   }
 }
+@media screen and (max-width: 600px) {
+  .content-section-container {
+    transform: scale(.5);
+  }
+}
 </style>

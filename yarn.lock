@@ -16,10 +16,10 @@
   dependencies:
     vue "^3.2.33"
 
-"@akar/xs-editor@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@akar/xs-editor/-/xs-editor-0.0.7.tgz#9c6632beaba1291247aa6c84d7b03cc0fc7a9e7a"
-  integrity sha512-mtBeLfUVe3UIyGaKlnUH8gjt3KvWlChaav1cskJI4vo0TE1qhLritBNH7zIsKxp+Wa9f/Y8P9NBOeQhFDliXtg==
+"@akar/xs-editor@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/@akar/xs-editor/-/xs-editor-0.1.5.tgz#ccbc561e7b4a8ebdf0864deb987b40f61faa31a0"
+  integrity sha512-GwWM2ehxnHbe1XPgxFVa0QPty6ntEPdQp22uF0d6FyylR9B6Aihjv7i+lM+e7AN1fsERaPTex3J29CA+T4E/Ug==
   dependencies:
     copyfiles "^2.4.1"
     reflect-metadata "^0.1.13"

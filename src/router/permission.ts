@@ -10,6 +10,11 @@ NProgress.configure({
 })
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
+  if(to.meta.title){
+    (document as any).title = to.meta.title
+  }else{
+      document.title ='「 顿学累功 」'
+  }
   console.log('😄😄😄 ', to, from)
   next()
 })

@@ -1,11 +1,11 @@
 import soc from './soc'
-import common from './common'
+import file from './file'
 import noteApi from './note'
 import userApi from './user'
 import touchApi from './touch'
 export default Object.assign(
     soc,
-    common,
+    file,
     noteApi,
     userApi,
     touchApi

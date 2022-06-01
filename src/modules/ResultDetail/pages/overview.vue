@@ -214,6 +214,7 @@ onMounted(async () => {
   setStars(data.extData?.star || [])
   setTakes(data.extData?.take || [])
   setNoteInfo(data)
+  document.title = data.subtitle
   foundXsEditor(data.vNode, data.uid);
   const { data: user } = await Api.getUser({ uid:data.uid });
   setUser(user);

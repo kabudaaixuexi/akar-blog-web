@@ -25,12 +25,12 @@ const foundXsEditor = (value, watermark) => {
       operable: true,
       watermark,
       pattern: "classic", // silent | classic
-      upFileUrl: "http://124.220.16.124:8099/upload/setFilesNote",
+      upFileUrl: `${import.meta.env.VITE_BASE_API}/upload/setPackages?superior=_article`,
       onChange: (vm: Element, vn: any) => {
         editNote(vn);
       },
     },
-    () => {}
+    () => document.querySelector(".xs-editor-container").focus()
   );
 };
 // 修改笔记实时保存
