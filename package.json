@@ -1,8 +1,8 @@
 {
   "name": "vite-ts-starter",
-  "description": "🐬  A Starter template built on Vite 2.x + Vue 3.x + Typescript",
+  "description": "🐬 Akar personal blog on Vite 2.x + Vue 3.x + Typescript",
   "version": "0.0.2",
-  "author": "Wisdom <pdsu.wwz@foxmail.com>",
+  "author": "Akar <kaburda@163.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
