@@ -36,8 +36,8 @@ job
       - name: copy file via ssh key
         uses: appleboy/scp-action@master
         with:
-	#需要部署的文件地址
-            source: '../../dist/*'
+	  #需要部署的文件地址
+            source: '/dist/*'
     # SSH address  服务器地址
             host: ${{ secrets.USER_HOST }}
     # Remote dir path  服务器下部署文件存放路径
