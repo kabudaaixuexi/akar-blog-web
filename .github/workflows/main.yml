@@ -1,39 +1,52 @@
-# deploy.yml
-name: deploy to tencent
+# This is a basic workflow to help you get started with Actions
+ 
+name: browser-home-page
+ 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches:
-      - master
+    branches: [ master ]
+ 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+ 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+ 
+    # Steps represent a sequence of tasks that will be executed as part of the 
+ 
+#关键配置
+job
     steps:
-      # 切换分支
-      - name: Checkout
-        uses: actions/checkout@master
-      # 下载 git submodule
-      - uses: srt32/git-actions@v0.0.3
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: install node.js
+        uses: actions/setup-node@v3.0.0 
+        with: 
+              node-version: "14.X"
+      - name: install deps
+        run: npm install
+      - name: build app
+        run: npm run build
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
         with:
-          args: git submodule update --init --recursive
-      # 使用 node:10
-      - name: use Node.js 10
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10
-      # npm install
-      - name: npm install and build
-        run: |
-          npm install
-          npm run build
-        env:
-          CI: true
-      # Deploy
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.0.7
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-avz --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.USER_HOST }}
-          REMOTE_USER: ${{ secrets.USER_NAME }}
-          TARGET: ${{ secrets.REMOTE_PATH }}
+	#需要部署的文件地址
+            source: 'dist/*'
+    # SSH address  服务器地址
+            host: ${{ secrets.USER_HOST }}
+    # Remote dir path  服务器下部署文件存放路径
+            target: ${{ secrets.REMOTE_PATH }}
+    # SSH Port  服务器端口
+            port: 80
+    # SSH User name   用户名
+            username: ${{ secrets.USER_NAME }}
+    # SSH User password  用户密码
+          #  password: ${{ secrets.PASSWORD }}
+    # key  密匙
+            key: ${{ secrets.SERVER_SSH_KEY }}
