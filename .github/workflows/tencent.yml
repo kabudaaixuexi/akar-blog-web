@@ -25,17 +25,12 @@ jobs:
       # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
       uses: cross-the-world/scp-pipeline@master
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-        ARGS: "-rltgoDzvO"
-        SOURCE: "dist/"
-        REMOTE_HOST: ${{ secrets.USER_HOST }}
-        REMOTE_USER: ${{ secrets.USER_NAME }}
-        # TARGET: ${{ secrets.REMOTE_TARGET }}
-        EXCLUDE: "/dist/, /node_modules/"
-      # with:
-      #   host: ${{ secrets.USER_HOST }}
-      #   user: ${{ secrets.USER_NAME }}
-      #   pass: ${{ secrets.USER_PASS }}
-      #   connect_timeout: 10s
-      #   local: './dist/*'
-      #   remote: /home9999999999999/ubuntu/public/
+        WELCOME: "ssh scp ssh pipelines"
+        LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.USER_HOST }}
+        user: ${{ secrets.USER_NAME }}
+        pass: ${{ secrets.USER_PASS }}
+        connect_timeout: 10s
+        local: 'dist/*'
+        remote: /
