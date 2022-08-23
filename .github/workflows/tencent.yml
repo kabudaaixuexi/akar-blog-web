@@ -32,8 +32,8 @@ jobs:
       - name: clean
         run: git submodule update --init --recursive     
           
-      - name: Build
-        run: hugo -D
+      # - name: Build
+      #   run: hugo -D
 
       - name: Deploy to Staging server
         uses: easingthemes/ssh-deploy@v2.1.6
