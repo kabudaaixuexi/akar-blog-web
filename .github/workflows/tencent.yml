@@ -1,0 +1,60 @@
+name: Deploy site files
+
+on:
+  push:
+    branches:
+      - master # 只在master上push触发部署
+    paths-ignore: # 下列文件的变更不触发部署，可以自行添加
+      - README.md
+      - LICENSE
+  workflow_dispatch:
+          inputs:
+              name:
+                  description: 'Person to greet'
+                  required: true
+                  default: 'Mona the Octocat'
+              home:
+                  description: 'location'
+                  required: false
+                  default: 'The Octoverse'     
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚本
+
+    steps: # 自动化步骤
+      - uses: actions/checkout@v1 # 第一步，下载代码仓库
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: latest
+          # extended: true
+      - name: clean
+        run: git submodule update --init --recursive     
+          
+      - name: Build
+        run: hugo -D
+
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@v2.1.6
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: './public/'
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          TARGET: '/www/wwwroot/blog.gojw.xyz/'
+          EXCLUDE: "/dist/, /node_modules/"
+#       - name: SSH Server Deploy
+#         uses: kostya-ten/ssh-server-deploy@v4
+#         with:
+#           host: ${{ secrets.SSH_HOST }}
+#           port: 22
+#           username: ${{ secrets.SSH_USERNAME }}
+#           private_key: ${{ secrets.DEPLOY_KEY }}
+#           scp_source: ./public/
+#           scp_target: /www/wwwroot/blog.gojw.xyz/
+
+
+
+
