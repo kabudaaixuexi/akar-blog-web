@@ -30,8 +30,8 @@ jobs:
               node-version: "14.X"
       # - name: install deps
       #   run: npm install
-      # - name: build app
-      #   run: npm run build
+      - name: build app
+        run: npm run build
       - name: copy file via ssh key
         uses: appleboy/scp-action@master
         with:
