@@ -49,8 +49,11 @@ set -e
   else
     echo "👏 build edition $NEWVERSION"
     git commit -m "👏 build: build edition $NEWVERSION"
-    npm version "$NEWVERSION" --message "build: release $NEWVERSION"
   fi
+
+  # update packages
+  npm version "$NEWVERSION" --message "build: release $NEWVERSION"
+  
   # publish
   echo "开始上传代码到远程库"
   git push
