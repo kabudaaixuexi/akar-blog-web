@@ -1,7 +1,7 @@
 {
   "name": "vite-ts-starter",
   "description": "🐬 Akar personal blog on Vite 2.x + Vue 3.x + Typescript",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "author": "Akar <kaburda@163.com>",
   "license": "MIT",
   "scripts": {
