@@ -53,7 +53,7 @@ jobs:
           # port: ${{ secrets.USER_PORT }}
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.USER_PASS }}
-          scp_source: 'dist/*'
+          scp_source: 'dist/'
           scp_target: /www/wwwroot/blog.gojw.xyz/mybolg/
 
 
