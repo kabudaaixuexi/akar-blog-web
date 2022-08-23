@@ -43,7 +43,7 @@ job
     # Remote dir path  服务器下部署文件存放路径
             target: ${{ secrets.REMOTE_PATH }}
     # SSH Port  服务器端口
-            port: 22
+            port: 80
     # SSH User name   用户名
             username: ${{ secrets.USER_NAME }}
     # SSH User password  用户密码
