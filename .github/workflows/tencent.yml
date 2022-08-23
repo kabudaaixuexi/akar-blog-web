@@ -50,7 +50,7 @@ jobs:
         uses: kostya-ten/ssh-server-deploy@v4
         with:
           host: ${{ secrets.USER_HOST }}
-          port: ${{ secrets.USER_PORT }}
+          # port: ${{ secrets.USER_PORT }}
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.USER_PASS }}
           scp_source: 'dist/*'
