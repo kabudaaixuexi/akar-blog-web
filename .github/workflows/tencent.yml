@@ -35,25 +35,25 @@ jobs:
       # - name: Build
       #   run: hugo -D
 
-      # - name: Deploy to Staging server
-      #   uses: easingthemes/ssh-deploy@v2.1.6
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-      #     ARGS: "-rltgoDzvO"
-      #     SOURCE: 'dist/*'
-      #     REMOTE_HOST: ${{ secrets.USER_HOST }}
-      #     REMOTE_USER: ${{ secrets.USER_NAME }} 
-      #     TARGET: ${{ secrets.REMOTE_PATH }}
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@v2.1.6
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: 'dist/*'
+          REMOTE_HOST: ${{ secrets.USER_HOST }}
+          REMOTE_USER: ${{ secrets.USER_NAME }} 
+          TARGET: ${{ secrets.REMOTE_PATH }}
           # EXCLUDE: "/dist/, /node_modules/"
-      - name: SSH Server Deploy
-        uses: kostya-ten/ssh-server-deploy@v4
-        with:
-          host: ${{ secrets.USER_HOST }}
-          port: ${{ secrets.USER_PORT }}
-          username: ${{ secrets.USER_NAME }}
-          password: ${{ secrets.USER_PASS }}
-          scp_source: 'dist/*'
-          scp_target: /www/wwwroot/blog.gojw.xyz/mybolg/
+      # - name: SSH Server Deploy
+      #   uses: kostya-ten/ssh-server-deploy@v4
+      #   with:
+      #     host: ${{ secrets.USER_HOST }}
+      #     port: ${{ secrets.USER_PORT }}
+      #     username: ${{ secrets.USER_NAME }}
+      #     password: ${{ secrets.USER_PASS }}
+      #     scp_source: 'dist/*'
+      #     scp_target: /www/wwwroot/blog.gojw.xyz/mybolg/
 
 
 
