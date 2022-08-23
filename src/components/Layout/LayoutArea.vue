@@ -16,7 +16,7 @@
           </div>
         </aside>
         <!-- content -->
-        <section :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''}; background-color: ${contentColor}`" class="content-section-container">
+        <section :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''}; background-color: ${contentColor}`" id="content-section-container" class="content-section-container">
           <main class="main-content-box">
             <div
               class="inner-content"
@@ -28,6 +28,7 @@
         <!-- right aside -->
         <aside
           v-if="$slots.sideRight"
+          id="side-layout-area-menu-bar-left"
           :style="`width: ${sideRightWidth}px;min-width: ${sideRightWidth}px`"
           class="side-layout-area-menu-bar-right"
         >

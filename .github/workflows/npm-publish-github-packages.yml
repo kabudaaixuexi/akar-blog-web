@@ -1,27 +1,36 @@
+name: Build app and deploy to Tencent
 on:
+  #监听push操作
   push:
-    # Sequence of patterns matched against refs/tags
-    tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-name: Create Release
+    branches:
+      # mian分支，你也可以改成其他分支
+      - master
 jobs:
+  # 任务ID
   build:
-    name: Create Release
+    # 运行环境
     runs-on: ubuntu-latest
+    # 步骤
     steps:
-      - name: Checkout code
-        uses: actions/checkout@master
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+    # 使用别人的action
+    - uses: actions/checkout@v2
+    # 步骤名称
+    - name: npm install
+      # 步骤执行指令
+      run: npm install
+    - name: npm run build
+      run: npm run build
+    # 命名这个任务为发布Deploy
+    - name: Deploy
+      # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
+      uses: cross-the-world/scp-pipeline@master
+      env:
+        WELCOME: "ssh scp ssh pipelines"
+        LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.USER_HOST }}
+        user: ${{ secrets.USER_NAME }}
+        pass: ${{ secrets.USER_PASS }}
+        connect_timeout: 10s
+        local: './dist/*'
+        remote: /home/www/dist

@@ -1,5 +1,5 @@
 <template>
-  <div class="common-select-tag-container">
+  <div  class="common-select-tag-container">
     <figcaption @click="handleChange(item.value)" :class="`${(currentDrawe || 0) == item.value ? 'current': ''}`" v-for="(item, i) in draweOptions" :key="i">
       {{item.value == 0 ? '全部' : item.label}}
     </figcaption>

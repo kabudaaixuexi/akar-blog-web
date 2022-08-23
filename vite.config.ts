@@ -2,6 +2,8 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { terser } from 'rollup-plugin-terser'
+import requireTransform from 'vite-plugin-require-transform';
+
 
 const htmlPlugin = () => {
   return {
@@ -28,7 +30,11 @@ export default defineConfig({
           drop_console: true
         }
       }
-    )
+    ),
+    requireTransform({
+      fileRegex:/.ts$|.tsx$|.vue$/
+	//   fileRegex:/.js$|.jsx$|.vue$/
+    }),
   ],
   // According to the need to open proxy
   // server: {

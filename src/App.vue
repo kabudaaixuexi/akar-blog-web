@@ -9,7 +9,6 @@
 <script lang="ts" setup>
 import { inject, onMounted } from 'vue'
 import { Socket } from 'socket.io-client';
-
 const socket = inject('socket') as Socket;
 
 /**
@@ -30,4 +29,5 @@ onMounted(() => {
 
 <style lang="scss">
 @use '@/styles/index.scss';
+@use '@/libs/driver.min.css'
 </style>
