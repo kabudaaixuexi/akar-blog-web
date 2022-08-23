@@ -30,8 +30,8 @@ jobs:
               node-version: "14.X"
       # - name: install deps
       #   run: npm install
-      - name: build app
-        run: npm run build
+      # - name: build app
+      #   run: npm run build
       - name: copy file via ssh key
         uses: appleboy/scp-action@master
         with:
@@ -39,9 +39,9 @@ jobs:
     # SSH address  服务器地址
             host: ${{ secrets.USER_HOST }}
     # Remote dir path  服务器下部署文件存放路径
-            target: ${{ secrets.REMOTE_PATH }}
+            # target: ${{ secrets.REMOTE_PATH }}
     # SSH Port  服务器端口
-            port: 80
+            port: 22
     # SSH User name   用户名
             username: ${{ secrets.USER_NAME }}
     # SSH User password  用户密码
