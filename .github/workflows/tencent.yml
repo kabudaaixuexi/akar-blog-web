@@ -42,7 +42,7 @@ jobs:
           ARGS: "-rltgoDzvO"
           SOURCE: 'dist/*'
           REMOTE_HOST: ${{ secrets.USER_HOST }}
-          REMOTE_PORT: 80
+          REMOTE_PORT: '80'
           REMOTE_USER: ${{ secrets.USER_NAME }} 
           TARGET: ${{ secrets.REMOTE_PATH }}
           # EXCLUDE: "/dist/, /node_modules/"
