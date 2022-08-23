@@ -25,12 +25,15 @@ set -e
       V3=`expr ${V3} + 1`
   fi
 
-  # NEWVERSION=`${V1}.${V2}.${V3}`
+  NEWVERSION="$V1.$V2.$V3"
 
   read -p "发布新版本 $NEWVERSION (原版本$VERSION) - 确定? (y/n) " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "开始发布"
+  else
+    echo "取消发布"
+    exit
   fi
 
   # commit
