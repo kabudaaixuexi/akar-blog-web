@@ -38,13 +38,13 @@ jobs:
       - name: Deploy to Staging server
         uses: easingthemes/ssh-deploy@v2.1.6
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO"
-          SOURCE: './public/'
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-          TARGET: '/www/wwwroot/blog.gojw.xyz/'
-          EXCLUDE: "/dist/, /node_modules/"
+          SOURCE: 'dist/*'
+          REMOTE_HOST: ${{ secrets.USER_HOST }}
+          REMOTE_USER: ${{ secrets.USER_NAME }} 
+          TARGET: ${{ secrets.REMOTE_PATH }}
+          # EXCLUDE: "/dist/, /node_modules/"
 #       - name: SSH Server Deploy
 #         uses: kostya-ten/ssh-server-deploy@v4
 #         with:
