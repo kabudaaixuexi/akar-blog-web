@@ -43,17 +43,20 @@ set -e
   if [ -n "$1" -a -n "$2" ]; then
     echo "🔨 $1: $2"
     git commit -m "🔨 $1: $2"
+    # update packages
+    npm version "$NEWVERSION" --message "$1: $2 $NEWVERSION"
   elif [ -n "$1" ]; then
     echo "🚀 $1: Unspecified iteration"
     git commit -m "🚀 $1: Unspecified iteration"
+    # update packages
+    npm version "$NEWVERSION" --message "build: $1 $NEWVERSION"
   else
     echo "👏 build edition $NEWVERSION"
     git commit -m "👏 build: build edition $NEWVERSION"
+    # update packages
+    npm version "$NEWVERSION" --message "build: release $NEWVERSION"
   fi
 
-  # update packages
-  npm version "$NEWVERSION" --message "build: release $NEWVERSION"
-  
   # publish
   echo "开始上传代码到远程库"
   git push
