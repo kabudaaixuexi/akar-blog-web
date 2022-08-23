@@ -1,62 +1,41 @@
-name: Deploy site files
-
+name: Build app and deploy to Tencent
 on:
+  #监听push操作
   push:
     branches:
-      - master # 只在master上push触发部署
-    paths-ignore: # 下列文件的变更不触发部署，可以自行添加
-      - README.md
-      - LICENSE
-  workflow_dispatch:
-          inputs:
-              name:
-                  description: 'Person to greet'
-                  required: true
-                  default: 'Mona the Octocat'
-              home:
-                  description: 'location'
-                  required: false
-                  default: 'The Octoverse'     
+      # mian分支，你也可以改成其他分支
+      - master
 jobs:
-  deploy:
-    runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚本
-
-    steps: # 自动化步骤
-      - uses: actions/checkout@v1 # 第一步，下载代码仓库
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: latest
-          # extended: true
-      - name: clean
-        run: git submodule update --init --recursive     
-          
-      # - name: Build
-      #   run: hugo -D
-
-      # - name: Deploy to Staging server
-      #   uses: easingthemes/ssh-deploy@v2.1.6
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-      #     ARGS: "-rltgoDzvO"
-      #     SOURCE: 'dist/*'
-      #     REMOTE_HOST: ${{ secrets.USER_HOST }}
-      #     REMOTE_PORT: ${{ secrets.USER_PORT }}
-      #     REMOTE_USER: ${{ secrets.USER_NAME }} 
-      #     TARGET: ${{ secrets.REMOTE_PATH }}
-          # EXCLUDE: "/dist/, /node_modules/"
-      - name: SSH Server Deploy
-        uses: kostya-ten/ssh-server-deploy@v4
-        with:
-          host: ${{ secrets.USER_HOST }}
-          # port: ${{ secrets.USER_PORT }}
-          username: ${{ secrets.USER_NAME }}
-          password: ${{ secrets.USER_PASS }}
-          scp_source: 'dist/'
-          scp_target: /www/wwwroot/blog.gojw.xyz/mybolg/
-
-
-
-
-
+  # 任务ID
+  build:
+    # 运行环境
+    runs-on: ubuntu-latest
+    # 步骤
+    steps:
+    # 使用别人的action
+    - uses: actions/checkout@v2
+    # 步骤名称
+    - name: npm install
+      # 步骤执行指令
+      run: npm install
+    - name: npm run build
+      run: npm run build
+    # 命名这个任务为发布Deploy
+    - name: Deploy
+      # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
+      uses: cross-the-world/scp-pipeline@master
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        ARGS: "-rltgoDzvO"
+        SOURCE: "dist/"
+        REMOTE_HOST: ${{ secrets.USER_HOST }}
+        REMOTE_USER: ${{ secrets.USER_NAME }}
+        # TARGET: ${{ secrets.REMOTE_TARGET }}
+        EXCLUDE: "/dist/, /node_modules/"
+      # with:
+      #   host: ${{ secrets.USER_HOST }}
+      #   user: ${{ secrets.USER_NAME }}
+      #   pass: ${{ secrets.USER_PASS }}
+      #   connect_timeout: 10s
+      #   local: './dist/*'
+      #   remote: /home9999999999999/ubuntu/public/
