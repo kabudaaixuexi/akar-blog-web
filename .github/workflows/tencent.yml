@@ -38,12 +38,11 @@ jobs:
       - name: Deploy to Staging server
         uses: easingthemes/ssh-deploy@v2.1.6
         env:
-          # SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO"
           SOURCE: 'dist/*'
           REMOTE_HOST: ${{ secrets.USER_HOST }}
           REMOTE_USER: ${{ secrets.USER_NAME }} 
-          REMOTE_PASS: ${{ secrets.USER_PASS }} 
           TARGET: ${{ secrets.REMOTE_PATH }}
           # EXCLUDE: "/dist/, /node_modules/"
 #       - name: SSH Server Deploy
