@@ -1,4 +1,4 @@
-name: Build app and deploy to Tencent
+name: Build and deploy to Tencent
 on:
   #监听push操作
   push:
