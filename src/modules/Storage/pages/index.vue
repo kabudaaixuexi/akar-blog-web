@@ -108,7 +108,7 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import Api from "@/api";
 import Cookies from "js-cookie";
 import { useState } from "@akar/vue-hooks";
-import Store from "@/store";
+
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const [superior, setSuperior] = useState("");
 const getSuperior = () => { return superior.value }

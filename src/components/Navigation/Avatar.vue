@@ -52,14 +52,14 @@ export default defineComponent({
         icon: "user",
         click: () => {},
       },
-      {
-        visible: true,
-        label: `前往极简版`,
-        icon: "right",
-        click: () => {
-          window.open("http://124.220.16.124/simplel291dvdg.html#/");
-        },
-      },
+      // {
+      //   visible: true,
+      //   label: `前往极简版`,
+      //   icon: "right",
+      //   click: () => {
+      //     window.open("http://124.220.16.124/simplel291dvdg.html#/");
+      //   },
+      // },
       {
         visible: !logined,
         label: "前往登录",
