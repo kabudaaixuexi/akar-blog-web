@@ -9,6 +9,7 @@
     <div class="intorduce-container-link" v-for="(item, key) in state" :key="key">
         <a target="_blank" :href="item.value">{{item.label}}</a>
     </div>
+    <div class="c666 ml12 mt20 mb12" v-if="!state.length"> ta还没有设置任何外部链接</div>
   </section>
 </template>
 
