@@ -46,17 +46,17 @@
           </p>
         </div>
       </header>
-      <p class="userinfo-brief mt20 f12 b500">{{user.userIntro}}</p>
+      <p class="userinfo-brief mt20 f12 b500">{{user.userIntro || '这个人没有任何简介'}}</p>
       <el-card class="userinfo-card mt20">
          <el-row :gutter="24">
           <el-col :span="8">
-            邮箱： <span class="b500">{{user.userEmail}}</span>
+            邮箱： <span class="b500">{{user.userEmail || '未填写'}}</span>
           </el-col>
           <el-col :span="8">
-            生日： <span class="b500">{{user.userBirth}}</span>
+            生日： <span class="b500">{{user.userBirth || '未填写'}}</span>
           </el-col>
           <el-col :span="8">
-            职位： <span class="b500">{{user.userOffice}}</span>
+            职位： <span class="b500">{{user.userOffice || '未填写'}}</span>
           </el-col>
         </el-row>
       </el-card>
@@ -81,6 +81,7 @@
         <img @click="() => router.push('/project')" src="@/assets/images/rg.png" alt="">
         <Introduce v-if="user.showExtend" :state="JSON.parse(user.userExtend || '{}')" />
         <OtherChain v-if="user.showLinks" :state="JSON.parse(user.userLinks || '[]')" />
+        <Dialogue :state="getState()" />
       </article>
     </template>
   </LayoutArea>
@@ -92,6 +93,7 @@ import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 import CommonItem from "@/modules/Common/components/CommonItem.vue";
 import Introduce from "@/modules/UserInfo/components/Introduce.vue"
 import OtherChain from "@/modules/UserInfo/components/OtherChain.vue"
+import Dialogue from "@/modules/UserInfo/components/Dialogue.vue"
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted, computed } from "vue";
@@ -122,6 +124,7 @@ const tabs = [
 ];
 // 作者信息
 const [user, setUser] = useState({});
+const getState = () => user
 // 标签页
 const [activeTab, setActiveTab] = useState(0);
 // 文章列表

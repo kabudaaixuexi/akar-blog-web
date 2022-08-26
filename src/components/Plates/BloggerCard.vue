@@ -6,7 +6,7 @@
     class="blogger-card-container"
   >
     <header class="blogger-card-container__header">
-      <img v-if="user.photo" :src="user.photo" alt="" />
+      <img class="cp" @click="() => router.push(`/uf/${user.userName}/hp`)" v-if="user.photo" :src="user.photo" alt="" />
       <img v-else src="../../assets/images/navigation-avatar.webp" alt="" />
       <figure>
         <span style="font-weight: 500">{{ user.userName || "--" }}</span>
@@ -229,7 +229,6 @@ onMounted(() => {
       height: 36px;
       display: flex;
       flex-direction: column;
-      cursor: pointer;
       align-items: center;
       justify-content: space-between;
     }

@@ -1,21 +1,21 @@
 <template>
   <section
-    v-loading="loading"
+    v-loading="false"
     :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50"
     class="intorduce-container"
   >
     <el-card class="intorduce-container-card">
       <span>所学专业：</span>
-      <span>{{state.major}}</span>
+      <span>{{state.major || '未设置'}}</span>
     </el-card>
     <el-card class="intorduce-container-card mt20">
       <span>出生地：</span>
-      <span>{{state.residence}}</span>
+      <span>{{state.residence  || '未设置'}}</span>
     </el-card>
     <el-card class="intorduce-container-card mt20">
       <span>工作年限：</span>
-      <span>{{state.workyears}}</span>
+      <span>{{state.workyears  || '未设置'}}</span>
     </el-card>
 
   </section>
