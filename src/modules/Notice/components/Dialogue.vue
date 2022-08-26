@@ -123,7 +123,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, inject, nextTick, computed } from "vue";
+import { onMounted, onUnmounted, inject, nextTick, computed } from "vue";
 import { useState } from "@akar/vue-hooks";
 import Cookies from "js-cookie";
 import { Socket } from "socket.io-client";
@@ -215,6 +215,8 @@ const saveData = (el) => {
 };
 const initSocketIo = async () => {
   // 加入通信
+  console.log(socket);
+
   socket.on("letter", (payload) => {
     // ElMessage.success(
     //   `${payload.formUserId}发了一条消息给${payload.sid}：【${payload.message}】 -- ${payload.sendTime}`
@@ -303,6 +305,9 @@ const foundTextarea = (value) => {
 onMounted(() => {
   initSocketIo();
 });
+onUnmounted(() => {
+  socket.removeAllListeners('letter')
+})
 </script>
 
 <style lang="scss" scoped>
@@ -348,7 +353,7 @@ onMounted(() => {
           height: 36px;
           margin-right: 12px;
           display: block;
-          border-radius: 50%;
+          border-radius: 10%;
         }
         span {
           flex: 1;
@@ -373,9 +378,9 @@ onMounted(() => {
             width: 34px;
             height: 34px;
             display: block;
-            border-radius: 10%;
+            border-radius: 50%;
             margin-right: 12px;
-            background-color: #bad2d8;
+            background-color: #c0c3b7;
             color: rgb(68, 39, 66);
             font-size: 16px;
             display: grid;

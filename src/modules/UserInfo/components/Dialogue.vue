@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, inject } from "vue";
+import { onMounted, onUnmounted, inject } from "vue";
 import { Socket } from "socket.io-client";
 import Cookie from "js-cookie";
 import Api from "@/api";
@@ -37,12 +37,13 @@ const [message, setMessage] = useState("");
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const { state } = defineProps<{ state: any }>();
 
-socket.on("letter", (payload) => {
-  ElMessage.success("留言成功，可在私信处查看留言内容");
-});
 const handleSubmit = () => {
   if (!userInfo.userName) {
     ElMessage.error("请先登录才能给ta留言哦～");
+    return;
+  }
+  if (userInfo.userName === state.value.userName) {
+    ElMessage.error("不能给自己留言哦");
     return;
   }
   if (message.value) {
@@ -64,10 +65,16 @@ const handleSubmit = () => {
 };
 
 onMounted(() => {
+  socket.on("letter", (payload) => {
+    ElMessage.success("留言成功，可在私信处查看留言内容");
+  });
   setTimeout(() => {
     setLoading(false);
   }, 1200);
 });
+onUnmounted(() => {
+  socket.removeAllListeners('letter')
+})
 </script>
 
 <style lang="scss" scoped>
