@@ -22,7 +22,7 @@
             <span
               @click="
                 () => {
-                  ElMessage.error('暂未开发查看粉丝');
+                  ElMessage.error('暂未开放查看粉丝');
                 }
               "
               class="f12 mr12"
@@ -34,7 +34,7 @@
             <span
               @click="
                 () => {
-                  ElMessage.error('暂未开发查看关注');
+                  ElMessage.error('暂未开放查看关注');
                 }
               "
               class="f12"
