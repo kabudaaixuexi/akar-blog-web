@@ -37,7 +37,7 @@ set -e
   fi
 
   # commit
-  echo "开始提交代码"
+  echo "提交代码"
   git add .
 
   if [ -n "$1" -a -n "$2" ]; then
