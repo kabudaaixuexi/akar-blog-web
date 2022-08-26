@@ -142,7 +142,7 @@ console.log(userInfo.value);
 // 扩展信息
 const [userExtend, setUserExtend] = useState(JSON.parse(Cookies.get("userInfo") || "{}").userExtend || {})
 // 外链
-const [userLinks, setUserLinks] = useState(JSON.parse(Cookies.get("userInfo") || "{}").userLinks || { value: [] })
+const [userLinks, setUserLinks] = useState(JSON.parse(Cookies.get("userInfo") || "{}").userLinks || [])
 
 const route = useRoute();
 const router = useRouter();
