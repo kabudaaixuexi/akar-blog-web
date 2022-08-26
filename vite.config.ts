@@ -37,15 +37,15 @@ export default defineConfig({
     }),
   ],
   // According to the need to open proxy
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: 'http://172.xx.xxx.xx/xxxxxxx/api',
-  //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, '')
-  //     }
-  //   }
-  // },
+  server: {
+    proxy: {
+      '/apiSohu': {
+        target: 'http://pv.sohu.com/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/apiSohu/, '')
+      }
+    }
+  },
   resolve: {
     alias: [
       {

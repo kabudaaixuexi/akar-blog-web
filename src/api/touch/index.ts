@@ -10,5 +10,19 @@ export default {
         return {
             data: res.data?.data
         }
-    }
+    },
+    /** 获取属地信息 */
+    getRegion:async (payload: any) => {
+          const res = await axios.get(`/apiSohu/cityjson?ie=utf-8`, {
+              params: {
+              }
+          })
+          const info = res.data.substring(19, res.data.length - 1)
+          return {
+              data: {
+                ip:  JSON.parse(info).cip,
+                address: JSON.parse(info).cname
+              }
+          }
+      }
 }

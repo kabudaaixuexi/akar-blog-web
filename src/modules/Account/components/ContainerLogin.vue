@@ -239,9 +239,8 @@ onMounted(() => {
 <style lang="scss" scoped>
 .user-account-container-layout {
   width: 438px;
-  // margin-right: 80px;
   padding: 50px 34px 60px 34px;
-  background: #fff;
+  background-color: #fff;
   border-radius: 6px;
   user-select: none;
   :deep() .el-input .el-input__inner {

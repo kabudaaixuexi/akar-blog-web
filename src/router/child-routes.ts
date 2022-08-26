@@ -176,6 +176,40 @@ const childrenRoutes = [
         }
       }
     ]
+  },
+  // 个人主页
+  {
+    path: '/uf',
+    redirect: {
+      name: 'ProjectList'
+    }
+  },
+  {
+    path: '/uf/:uid',
+    component: Layout,
+    name: 'userinfo',
+    icon: 'eye',
+    redirect: {
+      name: 'HomePage'
+    },
+    children: [
+      {
+        path: 'hp',
+        name: 'HomePage',
+        component: importModule['../modules/UserInfo/pages/index.vue'],
+        meta: {
+          title: '加载中...'
+        }
+      },
+      {
+        path: 'up',
+        name: 'Update',
+        component: importModule['../modules/UserInfo/pages/update.vue'],
+        meta: {
+          title: '加载中...'
+        }
+      }
+    ]
   }
 ]
 

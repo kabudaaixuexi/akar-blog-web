@@ -76,10 +76,12 @@ const [integral, setIntegral] = useState(0); // 积分
 
 const [fans, setFans] = useState([]); // 粉丝
 const [follow, setFollow] = useState([]); // 关注
-const props = defineProps<{ getNoteInfo: any; getUser: any }>();
+const props = defineProps<{ getState: any }>();
 
 const getList = async () => {
-  const { uid } = props.getNoteInfo().value;
+  console.log(props.getState().value,'props.getState().value');
+
+  const { uid } = props.getState().value;
   const { data: user } = await Api.getUser({ uid });
   setUser(user);
   setFans(JSON.parse(user.extData || '{}').fans || []);
@@ -103,7 +105,7 @@ const handleFollow = async () => {
     ElMessage.error("登录后才能进行关注");
     return
   }
-  const { uid } = props.getNoteInfo().value;
+  const { uid } = props.getState().value;
   const rd = fans.value.find(ev => ev.userName == userInfo.userName)
   if (rd) {
     // 减粉丝

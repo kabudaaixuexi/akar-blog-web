@@ -6,6 +6,7 @@ import Tooltip from '@/components/Tooltip.vue'
 import LayoutArea from '@/components/Layout/LayoutArea.vue'
 import LayoutSection from '@/components/Layout/LayoutSection.vue'
 import Footer from '@/components/Footer/index.vue'
+import Background from '@/components/Background/index.vue'
 
 const Components = {
   install (app: App<any>) {
@@ -20,7 +21,8 @@ const componentList = [
   Tooltip,
   LayoutArea,
   LayoutSection,
-  Footer
+  Footer,
+  Background
 ]
 
 export default Components

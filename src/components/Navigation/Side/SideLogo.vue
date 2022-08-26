@@ -22,9 +22,14 @@ import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'NavigationSideLogo',
+  props: {
+    title: {
+      type: String,
+      default: '勤能补拙'
+    }
+  },
   setup () {
     return {
-      title: '勤能补拙'
     }
   }
 })

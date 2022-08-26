@@ -50,7 +50,9 @@ export default defineComponent({
         visible: true,
         label: `${userInfo.userName || `游客${getUuiD()}`}`,
         icon: "user",
-        click: () => {},
+        click: () => {
+          userInfo.userName && router.push(`/uf/${userInfo.userName}/hp`)
+        },
       },
       // {
       //   visible: true,

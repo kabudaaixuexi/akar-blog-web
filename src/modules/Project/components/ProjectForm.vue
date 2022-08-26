@@ -105,7 +105,8 @@ import { defineComponent, reactive, ref, toRefs, nextTick } from "vue";
 import { ElInput } from "element-plus";
 import { UploadFilled } from "@element-plus/icons-vue";
 import { useState } from "@akar/vue-hooks";
-import { draweOptions } from '../data'
+import Api from "@/api"
+import Store from "@/store"
 export default defineComponent({
   name: "ProjectForm",
   props: {
@@ -123,6 +124,7 @@ export default defineComponent({
     const state: any = reactive({
       inputValue: "",
       inputVisible: false,
+      draweOptions: Store.getState('noteClassify')
     });
     const InputRef = ref<InstanceType<typeof ElInput>>();
     const showInput = () => {
@@ -169,7 +171,6 @@ export default defineComponent({
       coverUrl,
       setCoverUrl,
       validateRules,
-      draweOptions
     };
   },
 });

@@ -4,9 +4,7 @@ import request from '@/utils/request'
 export interface postRegisterReq {
     userName: string
     passWord: string
-    nickName?: string
     photo: string
-    extData?: object
 }
 export interface postLoginReq {
     userName: any
@@ -31,7 +29,7 @@ export default {
           '/user/register',
         {
           ...payload,
-          extData: payload.extData ? payload.extData : JSON.stringify({})
+          extData: JSON.stringify({})
         })
         return data
     },

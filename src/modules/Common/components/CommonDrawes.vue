@@ -7,12 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import { draweOptions } from '@/modules/Project/data'
+import Store from "@/store"
 const props = defineProps<{
   currentDrawe: 0,
   changeDrawe: (e) => {}
 }>()
-
+const draweOptions = Store.getState('noteClassify')
 const handleChange = (e) => {
   props.changeDrawe(e)
 }

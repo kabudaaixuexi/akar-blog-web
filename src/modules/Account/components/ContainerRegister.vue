@@ -18,13 +18,9 @@
       :rules="rules"
       label-width="88px"
       class="demo-ruleForm"
-      :size="formSize"
     >
       <el-form-item label="昵称：" prop="userName">
         <el-input v-model="ruleForm.userName" placeholder="请输入"/>
-      </el-form-item>
-      <el-form-item label="手机号：" prop="phone">
-        <el-input v-model="ruleForm.phone" placeholder="请输入"/>
       </el-form-item>
       <el-form-item label="密码：" prop="passWord">
         <el-input v-model="ruleForm.passWord" placeholder="请输入"/>
@@ -75,7 +71,7 @@
     </el-form>
     <div class="submit-form-action-list">
       <el-button class="submit-form-action-button" size="large" type="primary" @click="chatRegister"
-        >确认并登录</el-button
+        >注册并登录</el-button
       >
     </div>
   </div>
@@ -114,7 +110,6 @@ const [rules, setRules] = useState({
       trigger: "blur",
     },
   ],
-  phone: [{ required: true, message: "手机号不能为空", trigger: "blur" }],
 });
 const ruleFormRef: any = ref();
 
@@ -153,7 +148,7 @@ onMounted(() => {});
 .user-account-container-layout {
   width: 438px;
   // margin-right: 80px;
-  padding: 50px 34px 43px 34px;
+  padding: 50px 34px 90px 34px;
   background: #fff;
   border-radius:6px;
   user-select: none;

@@ -7,7 +7,7 @@
     </template>
 
     <template #sideLeft>
-      <BloggerCard :getNoteInfo="getNoteInfo" />
+      <BloggerCard :getState="getNoteInfo" />
       <!-- <BlogRanking :type="6"/> -->
     </template>
     <template #content>
@@ -112,10 +112,10 @@ import Store from "@/store";
 import Api from "@/api";
 import foundEdit from "@akar/xs-editor";
 import { useState } from '@akar/vue-hooks'
-import { draweOptions } from "@/modules/Project/data";
 import { Star, ChatLineSquare, Present, Clock, Sugar } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
+const draweOptions = Store.getState('noteClassify')
 const route = useRoute();
 // 文章信息
 const [noteInfo, setNoteInfo] = useState({})

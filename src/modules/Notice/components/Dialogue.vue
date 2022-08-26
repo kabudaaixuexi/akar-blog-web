@@ -17,7 +17,7 @@
           @click="handleChange(key, ev)"
         >
           <div class="left">
-            <img src="@/assets/images/navigation-avatar.webp" alt="" />
+              <p class="img">{{ key.slice(0,1) }}</p>
           </div>
           <div class="right">
             <figcaption>
@@ -309,7 +309,7 @@ onMounted(() => {
 .nowrap {
   white-space: nowrap;
   overflow: hidden;
-  width: 100%;
+  width: 88%;
   text-overflow: ellipsis;
   &:deep() img {
     max-width: 12px !important;
@@ -369,12 +369,18 @@ onMounted(() => {
         padding: 2px 12px;
         cursor: pointer;
         .left {
-          img {
-            width: 32px;
-            height: 32px;
+          .img {
+            width: 34px;
+            height: 34px;
             display: block;
-            border-radius: 50%;
+            border-radius: 10%;
             margin-right: 12px;
+            background-color: #bad2d8;
+            color: rgb(68, 39, 66);
+            font-size: 16px;
+            display: grid;
+            place-content: center;
+            font-weight: 600;
           }
         }
         .right {

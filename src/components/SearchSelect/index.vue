@@ -22,7 +22,7 @@
       </i>
     </template>
     <template #default="{ item }">
-      <TooltipCustom placement="right" :content="`作者：${item.uid}`">
+      <TooltipCustom placement="right" :content="`作者：${item.uid} / ${item.latestTime}`">
           <div class="search_content" @click="handleChange(item.noteid)">
             <span v-html="item.subtitle" />
             <span v-html="item.content" />
@@ -189,6 +189,9 @@ export default defineComponent({
     box-sizing: border-box;
   }
   span:nth-of-type(1) {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     display: block;
     color: var(--el-text-color-regular);
     font-size: 14px;
