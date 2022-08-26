@@ -13,7 +13,7 @@ export default {
     },
     /** 获取属地信息 */
     getRegion:async (payload: any) => {
-          const res = await axios.get(`/apiSohu/cityjson?ie=utf-8`, {
+          const res = await axios.get(`http://pv.sohu.com/cityjson?ie=utf-8`, {
               params: {
               }
           })
