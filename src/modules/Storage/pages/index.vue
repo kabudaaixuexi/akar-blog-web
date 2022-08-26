@@ -173,6 +173,10 @@ const renamePortfolio = (v) => {
       ElMessage.error(`文件夹名称中不能含有 "/" 字符`)
       return
     }
+    if (value.length > 20) {
+      ElMessage.error('重命名失败，名称最多20个字符')
+      return
+    }
     const { data } = await Api.renamePortfolio({
       superior: `${
         superior.value

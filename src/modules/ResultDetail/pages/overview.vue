@@ -16,7 +16,7 @@
         <div class="result-detail-header__detail">
           <p>
             <span style="padding-right: 24px"
-              ><span style="color: #000; padding-right: 12px">{{ noteInfo.uid }}</span>
+              ><span class="cp" @click="() => router.push(`/uf/${noteInfo.uid}/hp`)" style="color: #000; padding-right: 12px">{{ noteInfo.uid }}</span>
               <span
                 ><el-icon color="var(--xs-color-primary)" :size="16"><Clock /></el-icon
               ></span>
@@ -105,7 +105,7 @@ import NavigationSideGoBack from "@/components/Navigation/Side/SideGoBack.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 import BloggerCard from '@/components/Plates/BloggerCard.vue'
 import BlogRanking from '@/components/Plates/BlogRanking.vue'
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted } from "vue";
 import Store from "@/store";
@@ -117,6 +117,7 @@ import { ElMessage } from "element-plus";
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const draweOptions = Store.getState('noteClassify')
 const route = useRoute();
+const router = useRouter()
 // 文章信息
 const [noteInfo, setNoteInfo] = useState({})
 const getNoteInfo = () => { return noteInfo }

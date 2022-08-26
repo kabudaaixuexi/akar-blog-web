@@ -1,6 +1,6 @@
 <template>
   <section
-    v-loading="loading"
+    v-loading="false"
     :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50"
     class="intorduce-container"
