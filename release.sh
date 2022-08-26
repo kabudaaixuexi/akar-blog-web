@@ -59,7 +59,7 @@ set -e
 
   # publish
   echo "开始上传代码到远程库"
-  git push
+  git push origin master
   
   # echo "开始上传npm包"
   # if [[ -z $RELEASE_TAG ]]; then
