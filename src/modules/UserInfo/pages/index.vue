@@ -160,6 +160,7 @@ onMounted(async () => {
 .userinfo-header {
   width: 100%;
   display: flex;
+
   &__detail {
     padding: 2px 0;
     display: flex;
