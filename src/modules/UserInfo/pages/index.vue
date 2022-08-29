@@ -149,7 +149,7 @@ const skim = computed(() => {
 });
 
 onMounted(async () => {
-  document.title = `${route.params.uid} 的个人主页`;
+  document.title = `${route.params.uid} 的主页`;
   const { data: user } = await Api.getUser({ uid: route.params.uid });
   setUser(user);
   getList(0);
