@@ -97,7 +97,7 @@
             </el-select>
           </el-col>
           <el-col :span="8">
-            <el-input :maxlength="20" v-model="userExtend.residence" placeholder="户籍归属" />
+            <el-input :maxlength="20" v-model="userExtend.residence" placeholder="户籍属地" />
           </el-col>
         </el-row>
       </el-card>
