@@ -51,7 +51,8 @@ export default defineComponent({
         label: `${userInfo.userName || `游客${getUuiD()}`}`,
         icon: "user",
         click: () => {
-          userInfo.userName && router.push(`/uf/${userInfo.userName}/hp`)
+          userInfo.userName && router.replace(`/uf/${userInfo.userName}/hp`)
+          setTimeout(() => router.go(0))
         },
       },
       // {

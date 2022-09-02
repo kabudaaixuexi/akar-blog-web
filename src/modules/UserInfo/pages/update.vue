@@ -171,8 +171,8 @@ const handleSubmit = async () => {
 onMounted(async () => {
   document.title = `更新个人信息`;
   const { data: user } = await Api.getUser({ uid: route.params.uid });
-  const { data: res } = await Api.getRegion()
-  user.userRegion = res.address
+  // const { data: res } = await Api.getRegion()
+  // user.userRegion = res.address
   setUserInfo(user);
   setUserLinks(JSON.parse(user.userLinks || '[]'))
   setUserExtend(JSON.parse(user.userExtend || '{}'))

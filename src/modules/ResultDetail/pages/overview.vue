@@ -17,15 +17,15 @@
           <p>
             <span style="padding-right: 24px"
               ><span class="cp" @click="() => router.push(`/uf/${noteInfo.uid}/hp`)" style="color: #000; padding-right: 12px">{{ noteInfo.uid }}</span>
-              <span
+              <!-- <span
                 ><el-icon color="var(--xs-color-primary)" :size="16"><Clock /></el-icon
-              ></span>
+              ></span> -->
               <span style="padding-left: 6px; color: var(--xs-color-info)"
                 >于 {{ noteInfo.latestTime }} 发布</span
               >
-              <span style="padding-left: 12px"
+              <!-- <span style="padding-left: 12px"
                 ><el-icon color="var(--xs-color-primary)" :size="16"><ChatLineSquare /></el-icon
-              ></span>
+              ></span> -->
               <span style="padding-left: 6px; color: var(--xs-color-info)"
                 >已有 {{ noteInfo.extData?.eval?.length || 0 }} 条评论</span
               >

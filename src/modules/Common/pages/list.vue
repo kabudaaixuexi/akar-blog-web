@@ -9,6 +9,9 @@
       </NavigationNavBar>
     </template>
     <template #content>
+
+    <Rotation pop="16-9" />
+
       <LayoutSection has-divider flex-content>
         <template #head>
           <CommonDrawes :list="list" :currentDrawe="currentDrawe" :changeDrawe="changeDrawe" />
@@ -29,6 +32,7 @@
 
 <script lang="ts" setup>
 import { defineComponent, ref, reactive, onMounted } from "vue";
+import Rotation from '@/components/Rotation/index.vue'
 import BlogRanking from '@/components/Plates/BlogRanking.vue'
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";

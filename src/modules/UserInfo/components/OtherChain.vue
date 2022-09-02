@@ -26,7 +26,8 @@ const svg = `
 const router = useRouter()
 const [loading, setLoading] = useState(true);
 
-const { state } = defineProps<{ state: any }>();
+const props = defineProps<{ state: any }>();
+const state = JSON.parse(props.state || '[]')
 
 
 onMounted(() => {

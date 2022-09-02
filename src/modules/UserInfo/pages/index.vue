@@ -79,8 +79,8 @@
 
       <article class="extra">
         <img @click="() => router.push('/project')" src="@/assets/images/rg.png" alt="">
-        <Introduce v-if="user.showExtend" :state="JSON.parse(user.userExtend || '{}')" />
-        <OtherChain v-if="user.showLinks" :state="JSON.parse(user.userLinks || '[]')" />
+        <Introduce v-if="user.showExtend" :state="user.userExtend" />
+        <OtherChain v-if="user.showLinks" :state="user.userLinks" />
         <Dialogue :state="getState()" />
       </article>
     </template>
