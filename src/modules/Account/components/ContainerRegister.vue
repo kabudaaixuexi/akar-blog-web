@@ -133,7 +133,7 @@ const chatRegister = async () => {
           });
           Cookie.set("token", res.data.token);
           Cookie.set("userInfo", JSON.stringify(res.data));
-          router.push(`/common`);
+          router.push(`/k2rp`);
         }
       });
     } else {

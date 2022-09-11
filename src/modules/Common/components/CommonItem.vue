@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/resultDetail/${dataset.noteid}/overview`">
+  <router-link :to="`/e98f/${dataset.noteid}/ov`">
     <article @click="changeSkim" class="common-item-container">
       <h4 style="margin-bottom: 12px">{{dataset.subtitle || '无文章标题'}}</h4>
       <div class="common-item-content">

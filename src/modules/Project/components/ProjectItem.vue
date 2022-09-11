@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/resultEdit/${dataset.noteid}/overview`">
+  <router-link :to="`/lett/${dataset.noteid}/ov`">
     <ul class="project-item-container">
       <li style="flex: 1; min-width: 0">
         <div class="project-item__name">

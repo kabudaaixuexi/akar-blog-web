@@ -3,7 +3,7 @@
     class="side-logo-container"
   >
     <router-link
-      :to="`/common`"
+      :to="`/k2rp`"
     >
       <img
         class="side-logo-img"

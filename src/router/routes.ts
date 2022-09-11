@@ -3,7 +3,7 @@ const routes = [
   {
     path: '/',
     name: 'Root',
-    redirect: '/common'
+    redirect: '/k2rp'
   },
   ...routers,
   {

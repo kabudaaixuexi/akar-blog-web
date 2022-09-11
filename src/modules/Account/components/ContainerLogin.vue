@@ -115,7 +115,7 @@ const configLogin = {
         click(refForm: any) {
           Cookie.remove('token')
           Cookie.remove("userInfo");
-          router.push("/common");
+          router.push("/k2rp");
         },
       },
     },
@@ -180,7 +180,7 @@ function onSubmit(refForm: any) {
       ElMessage.success({
         message: "登录成功",
       });
-      router.push(`/common`);
+      router.push(`/k2rp`);
     }
   });
 }

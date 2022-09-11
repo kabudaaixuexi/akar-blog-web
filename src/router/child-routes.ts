@@ -26,7 +26,7 @@ const childrenRoutes = [
     component: importModule['../modules/test.vue']
   },
   {
-    path: '/user',
+    path: '/u',
     component: Layout,
     name: 'User',
     icon: 'eye',
@@ -48,7 +48,7 @@ const childrenRoutes = [
     ]
   },
   {
-    path: '/project',
+    path: '/kv5i',
     component: Layout,
     name: 'Project',
     icon: 'eye',
@@ -57,7 +57,7 @@ const childrenRoutes = [
     },
     children: [
       {
-        path: 'list',
+        path: 'l',
         name: 'ProjectList',
         component: importModule['../modules/Project/pages/list.vue'],
         meta: {
@@ -67,7 +67,7 @@ const childrenRoutes = [
     ]
   },
   {
-    path: '/common',
+    path: '/k2rp',
     component: Layout,
     name: 'Common',
     icon: 'eye',
@@ -76,7 +76,7 @@ const childrenRoutes = [
     },
     children: [
       {
-        path: 'list',
+        path: 'l',
         name: 'CommonList',
         component: importModule['../modules/Common/pages/list.vue'],
         meta: {
@@ -87,7 +87,7 @@ const childrenRoutes = [
   },
   // 文件存储
   {
-    path: '/storage',
+    path: '/ef6u',
     component: Layout,
     name: 'Storage',
     icon: 'eye',
@@ -96,7 +96,7 @@ const childrenRoutes = [
     },
     children: [
       {
-        path: 'index',
+        path: 'i',
         name: 'StorageIndex',
         component: importModule['../modules/Storage/pages/index.vue'],
         meta: {
@@ -107,7 +107,7 @@ const childrenRoutes = [
   },
   // 消息中心
   {
-    path: '/notice/:uid',
+    path: '/bu4g/:uid',
     component: Layout,
     name: 'Notice',
     icon: 'eye',
@@ -116,7 +116,7 @@ const childrenRoutes = [
     },
     children: [
       {
-        path: 'index',
+        path: 'i',
         name: 'NoticeIndex',
         component: importModule['../modules/Notice/pages/index.vue'],
         meta: {
@@ -127,13 +127,13 @@ const childrenRoutes = [
   },
   // 内容中心编辑
   {
-    path: '/resultEdit',
+    path: '/lett',
     redirect: {
       name: 'ProjectList'
     }
   },
   {
-    path: '/resultEdit/:noteId',
+    path: '/lett/:noteId',
     component: LayoutView,
     name: 'resultEdit',
     icon: 'eye',
@@ -142,7 +142,7 @@ const childrenRoutes = [
     },
     children: [
       {
-        path: 'overview',
+        path: 'ov',
         name: 'EditOverview',
         component: importModule['../modules/ResultEdit/pages/overview.vue'],
         meta: {
@@ -153,13 +153,13 @@ const childrenRoutes = [
   },
   // 社区文章详情
   {
-    path: '/resultDetail',
+    path: '/e98f',
     redirect: {
       name: 'CommonList'
     }
   },
   {
-    path: '/resultDetail/:noteId',
+    path: '/e98f/:noteId',
     component: Layout,
     name: 'resultDetail',
     icon: 'eye',
@@ -168,7 +168,7 @@ const childrenRoutes = [
     },
     children: [
       {
-        path: 'overview',
+        path: 'ov',
         name: 'DetailOverview',
         component: importModule['../modules/ResultDetail/pages/overview.vue'],
         meta: {

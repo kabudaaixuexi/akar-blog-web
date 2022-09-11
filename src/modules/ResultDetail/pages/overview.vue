@@ -120,7 +120,7 @@ const route = useRoute();
 const router = useRouter()
 // 文章信息
 const [noteInfo, setNoteInfo] = useState({})
-const getNoteInfo = () => { return noteInfo }
+const getNoteInfo = () => { return noteInfo.value }
 // 作者信息
 const [user, setUser] = useState({});
 // 点赞评论收藏

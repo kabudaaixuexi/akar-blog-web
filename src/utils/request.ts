@@ -187,7 +187,7 @@ service.interceptors.response.use(
     loading.close()
     if (response.status === 401) {
       ElMessage.error('token校验失败，请重新登录')
-      Router.push({ path: `/user`, replace: true });
+      Router.push({ path: `/u`, replace: true });
       return { data: {} }
     } else {
       ElMessage.error(response.statusText)

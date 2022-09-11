@@ -79,9 +79,9 @@ const [follow, setFollow] = useState([]); // 关注
 const props = defineProps<{ getState: any }>();
 
 const getList = async () => {
-  console.log(props.getState().value,'props.getState().value');
+  console.log(props.getState(),'props.getState().value');
 
-  const { uid } = props.getState().value;
+  const { uid } = props.getState();
   const { data: user } = await Api.getUser({ uid });
   setUser(user);
   setFans(JSON.parse(user.extData || '{}').fans || []);
@@ -180,7 +180,7 @@ const handleDialogue = () => {
     ElMessage.error("登录后才能私信该文章作者");
     return
   }
-  router.push(`/notice/${user.value.userName}`)
+  router.push(`/jjc1/${user.value.userName}`)
 }
 onMounted(() => {
   setTimeout(() => {

@@ -51,8 +51,8 @@ export default defineComponent({
         label: `${userInfo.userName || `游客${getUuiD()}`}`,
         icon: "user",
         click: () => {
-          userInfo.userName && router.replace(`/uf/${userInfo.userName}/hp`)
-          setTimeout(() => router.go(0))
+          userInfo.userName && router.push({ path: `/uf/${userInfo.userName}/hp`, replace: true });
+          setTimeout(() => router.go(0), 600)
         },
       },
       // {
@@ -68,7 +68,7 @@ export default defineComponent({
         label: "前往登录",
         icon: "right",
         click: () => {
-          router.push({ path: `/user`, replace: true });
+          router.push({ path: `/u`, replace: true });
         },
       },
       {
@@ -78,7 +78,7 @@ export default defineComponent({
         click: () => {
           Cookie.remove('token')
           Cookie.remove("userInfo");
-          router.push({ path: `/user`, replace: true });
+          router.push({ path: `/u`, replace: true });
         },
       },
     ]);
