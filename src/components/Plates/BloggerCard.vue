@@ -80,7 +80,6 @@ const props = defineProps<{ getState: any }>();
 
 const getList = async () => {
   console.log(props.getState(),'props.getState().value');
-
   const { uid } = props.getState();
   const { data: user } = await Api.getUser({ uid });
   setUser(user);
