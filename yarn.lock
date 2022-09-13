@@ -9,10 +9,10 @@
   dependencies:
     reflect-metadata "^0.1.13"
 
-"@akar/vue-hooks@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/@akar/vue-hooks/-/vue-hooks-0.1.2.tgz"
-  integrity sha512-CUmR1osriT11Er0uWpYe3ggnTqi1r8MsDvBVHVKPnS8ulY/fHQkKMM3PeRPSsjWC8NJPAnBmBM2KUEaY6tEDRA==
+"@akar/vue-hooks@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/@akar/vue-hooks/-/vue-hooks-0.1.5.tgz#32f091c528a1ffb27990ab9e2f9d1930428869cf"
+  integrity sha512-IQAGu7Co6K5lxCQRyW2a35Q5Me3VMotme1JO4c+fUdtzE+Pl3+aXafwRTSdyMsg9Od7d5PKuCv4K7uIcbnoPPg==
   dependencies:
     vue "^3.2.33"
 

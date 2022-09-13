@@ -52,7 +52,6 @@ export default defineComponent({
         icon: "user",
         click: () => {
           userInfo.userName && router.push({ path: `/uf/${userInfo.userName}/hp`, replace: true });
-          setTimeout(() => router.go(0), 600)
         },
       },
       // {

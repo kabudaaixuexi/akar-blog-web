@@ -16,8 +16,8 @@
 <script lang="ts" setup>
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 // import { useState, useReducer } from "../../../PackagesOfAkar/@akar:vue-hooks/core";
-import { useState, useReducer } from "@akar/vue-hooks";
-// import { useState, useReducer } from '@/hooks/base'
+// import { useState, useReducer, useEffect } from "@akar/vue-hooks";
+import { useState, useReducer, useEffect } from '@/hooks/base'
 const [count, setCount] = useState(0);
 const [count2, countDispatch] = useReducer((count, { type, payload }) => {
   switch (type) {
@@ -31,6 +31,9 @@ const [count2, countDispatch] = useReducer((count, { type, payload }) => {
       break;
   }
 }, 100);
+useEffect(() => {
+console.log('csacsacscs,111')
+}, [])
 </script>
 <style lang="scss" scoped>
 //@use url(); 引入公共css类

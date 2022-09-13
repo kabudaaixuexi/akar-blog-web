@@ -96,7 +96,7 @@ import OtherChain from "@/modules/UserInfo/components/OtherChain.vue"
 import Dialogue from "@/modules/UserInfo/components/Dialogue.vue"
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
-import { onMounted, computed } from "vue";
+import { onMounted, computed, watch } from "vue";
 import Store from "@/store";
 import Api from "@/api";
 import { useState } from "@akar/vue-hooks";
@@ -147,12 +147,19 @@ const skim = computed(() => {
   });
   return count;
 });
-
-onMounted(async () => {
-  document.title = `${route.params.uid} 的主页`;
-  const { data: user } = await Api.getUser({ uid: route.params.uid });
+const createdInit = async (uid) => {
+  if (!uid) return
+  document.title = `${uid} 的主页`;
+  const { data: user } = await Api.getUser({ uid });
   setUser(user);
   getList(0);
+}
+watch(
+    () => route.params,
+    (val) => createdInit(val.uid),
+);
+onMounted(() => {
+  createdInit(route.params.uid)
 });
 </script>
 

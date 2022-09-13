@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@akar/proxy-property": "^0.1.4",
-    "@akar/vue-hooks": "^0.1.2",
+    "@akar/vue-hooks": "^0.1.5",
     "@akar/xs-editor": "^0.1.5",
     "@element-plus/icons-vue": "1.1.4",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
