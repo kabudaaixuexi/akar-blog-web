@@ -1,5 +1,5 @@
 <template>
-  <el-carousel :class="`pop${pop} mb20`" height="150px" ref="myRef" :interval="10000" width="100%" >
+  <el-carousel :class="`pop${pop} mb20`" height="137px" ref="myRef" :interval="10000" width="100%" >
     <el-carousel-item v-for="item in list" :key="item">
       <a target="_blank" :href="item.link">
         <img style="border-radius: 4px" :class="`pop${pop}`" :src="item.uri" :alt="item.expl">
