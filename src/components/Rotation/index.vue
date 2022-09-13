@@ -1,8 +1,8 @@
 <template>
-  <el-carousel :class="`pop${pop} mb20`" height="100px" ref="myRef" :interval="4000" width="100%" >
+  <el-carousel :class="`pop${pop} mb20`" height="150px" ref="myRef" :interval="10000" width="100%" >
     <el-carousel-item v-for="item in list" :key="item">
-      <a :href="item.link">
-        <img :class="`pop${pop}`" :src="item.url" :alt="item.alt">
+      <a target="_blank" :href="item.link">
+        <img style="border-radius: 4px" :class="`pop${pop}`" :src="item.uri" :alt="item.expl">
       </a>
     </el-carousel-item>
   </el-carousel>
@@ -16,19 +16,14 @@ import { useState } from '@akar/vue-hooks';
 const { pop } = defineProps<{
   pop: string
  }>();
- const myRef = ref<HTMLElement>();
 const router = useRouter()
-
-const [list, setList] = useState([
-  {
-    url: 'https://www.w3cplus.com/sites/default/files/blogs/2017/1707/Aspect_Ratios_and_Resolutions.svg',
-    link: '',
-    alt: ''
-  }
-])
-
+const [list, setList] = useState([])
+const getWalkCharts = async () => {
+  const { data: list } = await Api.getWalkCharts({})
+  setList(list)
+}
 onMounted(() => {
-  console.log('列表的高度是：', myRef.value?.clientHeight)
+  getWalkCharts()
 });
 </script>
 
