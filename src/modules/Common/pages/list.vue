@@ -4,7 +4,7 @@
       <NavigationNavBar :fixed="false">
         <NavigationSideLogo />
         <div style="margin-left: 18px">
-          <SearchCorporation @select="handleSelectSearch" :list="list" :path="'resultDetail'" />
+          <SearchCorporation @select="handleSelectSearch" :list="list" :path="'e98f'" />
         </div>
       </NavigationNavBar>
     </template>

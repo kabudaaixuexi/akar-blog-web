@@ -123,7 +123,7 @@ export default defineComponent({
       this.$emit("select", value);
     },
     handleChange(noteid) {
-      this.$router.push(`/${this.$props.path}/${noteid}/overview`)
+      this.$router.push(`/${this.$props.path}/${noteid}/ov`)
     },
     async handleSearch(queryString: string, callback: any) {
       this.loading = true;
