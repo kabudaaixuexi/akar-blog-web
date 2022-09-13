@@ -6,8 +6,8 @@ import {
 import routes from './routes'
 
 const history = process.env.VITE_ROUTER_MODE === 'hash'
-  ? createWebHistory()
-  : createWebHistory()
+  ? createWebHashHistory()
+  : createWebHashHistory()
 
 export default createRouter({
   history,
