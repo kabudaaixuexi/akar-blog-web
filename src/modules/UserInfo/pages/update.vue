@@ -171,6 +171,7 @@ const handleSubmit = async () => {
 onMounted(async () => {
   document.title = `更新个人信息`;
   const { data: user } = await Api.getUser({ uid: route.params.uid });
+  user.uid !== userInfo.value.uid && router.push('/kv5i')
   // const { data: res } = await Api.getRegion()
   // user.userRegion = res.address
   setUserInfo(user);
