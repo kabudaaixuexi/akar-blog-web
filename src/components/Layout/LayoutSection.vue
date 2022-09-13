@@ -15,7 +15,7 @@
         <h1
           v-if="!inputVisible && showInput"
           :title="title"
-          @click="showInput && route.path.indexOf('result') !== -1 && heihei ? setInputVisible(true) : () => {}"
+          @click="(showInput && heihei) ? setInputVisible(true) : () => {}"
           class="layout-section-container__header-title text_nowrap"
         >
           {{ title || '点击设置文章标题'}}
