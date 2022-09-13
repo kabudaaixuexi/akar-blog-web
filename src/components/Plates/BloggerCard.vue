@@ -179,7 +179,7 @@ const handleDialogue = () => {
     ElMessage.error("登录后才能私信该文章作者");
     return
   }
-  router.push(`/jjc1/${user.value.userName}`)
+  router.push(`/bu4g/${user.value.userName}`)
 }
 onMounted(() => {
   setTimeout(() => {
