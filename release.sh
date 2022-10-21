@@ -37,6 +37,7 @@ set -e
   fi
 
   # commit
+  # yarn co ** **
   echo "提交代码"
   git add .
 
