@@ -214,3 +214,15 @@ const childrenRoutes = [
 ]
 
 export default childrenRoutes
+
+
+// 社区精选 — k2rp
+// 写文章 — kv5i
+// 我的文件 — ef6u
+// 消息通知 — bu4g
+// 社区文章详情 — e98f
+// 编辑文章 — lett
+
+
+// list — l
+// index — I

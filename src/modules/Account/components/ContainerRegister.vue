@@ -71,9 +71,12 @@
     </el-form>
     <div class="submit-form-action-list">
       <el-button class="submit-form-action-button" size="large" type="primary" @click="chatRegister"
-        >注册并登录</el-button
+        >
+        注册并登录
+        </el-button
       >
     </div>
+    <p style="font-size: 12px; text-align: center;margin-top: 6px;">其他个人信息可注册后补充</p>
   </div>
 </template>
 
@@ -192,7 +195,7 @@ onMounted(() => {});
 
   .submit-form-action-list {
     display: flex;
-    margin-top: 40px;
+    margin-top: 20px;
     .submit-form-action-button {
       flex: 1;
     }

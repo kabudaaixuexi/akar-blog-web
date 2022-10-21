@@ -104,7 +104,7 @@ const handleFollow = async () => {
     ElMessage.error("登录后才能进行关注");
     return
   }
-  const { uid } = props.getState().value;
+  const { uid } = props.getState();
   const rd = fans.value.find(ev => ev.userName == userInfo.userName)
   if (rd) {
     // 减粉丝

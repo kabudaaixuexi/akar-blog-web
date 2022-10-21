@@ -86,8 +86,8 @@ const router = useRouter();
 const inputErrorEmail = ref("");
 const inputErrorPassword = ref("");
 const formData = reactive({
-  email: "Administrator",
-  password: "q",
+  email: "",
+  password: "",
 });
 const configLogin = {
   title: "欢迎登录",

@@ -48,7 +48,7 @@ export default defineComponent({
     const commandList = computed(() => [
       {
         visible: true,
-        label: `${userInfo.userName || `游客${getUuiD()}`}`,
+        label: `${userInfo.userName ? '个人主页' : `游客${getUuiD()}`}`,
         icon: "user",
         click: () => {
           userInfo.userName && router.push({ path: `/uf/${userInfo.userName}/hp`, replace: true });

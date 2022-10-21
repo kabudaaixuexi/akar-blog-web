@@ -31,6 +31,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .pop16-9 {
   width: 100%;
+  overflow: hidden;
 }
 .empty_this {
   position: absolute;
