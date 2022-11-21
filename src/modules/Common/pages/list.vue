@@ -16,7 +16,6 @@
         <template #head>
           <CommonDrawes :list="list" :currentDrawe="currentDrawe" :changeDrawe="changeDrawe" />
         </template>
-        <!-- <CommonTableHeader /> -->
         <CommonTableBody :list="list" />
       </LayoutSection>
     </template>
@@ -38,7 +37,6 @@ import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 
 import CommonForm from "@/modules/Common/components/CommonForm.vue";
-import CommonTableHeader from "@/modules/Common/components/TableHeader.vue";
 import CommonTableBody from "@/modules/Common/components/TableBody.vue";
 import CommonDrawes from '@/modules/Common/components/CommonDrawes.vue'
 

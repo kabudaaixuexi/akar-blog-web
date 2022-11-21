@@ -38,8 +38,8 @@ defineProps<{ list: any}>();
     right: 0;
     bottom: 0;
     overflow-x: hidden;
-    overflow-y: scroll;
-    padding: 10px 6px 0;
+    height: max-content;
+    padding: 10px 6px;
     scroll-behavior: smooth;
     &::-webkit-scrollbar-track {
       background: transparent;

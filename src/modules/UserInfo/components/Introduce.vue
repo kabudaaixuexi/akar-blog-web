@@ -5,17 +5,17 @@
     element-loading-svg-view-box="-10, -10, 50, 50"
     class="intorduce-container"
   >
-    <el-card class="intorduce-container-card">
+    <el-card v-if="state.major" class="intorduce-container-card">
       <span>所学专业：</span>
-      <span>{{state.major || '未设置'}}</span>
+      <span>{{state.major}}</span>
     </el-card>
-    <el-card class="intorduce-container-card mt20">
+    <el-card v-if="state.residence" class="intorduce-container-card mt20">
       <span>出生地：</span>
-      <span>{{state.residence  || '未设置'}}</span>
+      <span>{{state.residence}}</span>
     </el-card>
-    <el-card class="intorduce-container-card mt20">
+    <el-card v-if="state.workyears" class="intorduce-container-card mt20">
       <span>工作年限：</span>
-      <span>{{state.workyears  || '未设置'}}</span>
+      <span>{{state.workyears}}</span>
     </el-card>
 
   </section>

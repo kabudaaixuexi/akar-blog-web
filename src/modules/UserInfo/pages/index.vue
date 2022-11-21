@@ -49,14 +49,10 @@
       <p class="userinfo-brief mt20 f12 b500">{{user.userIntro || '这个人没有任何简介'}}</p>
       <el-card class="userinfo-card mt20">
          <el-row :gutter="24">
-          <el-col :span="8">
-            邮箱： <span class="b500">{{user.userEmail || '未填写'}}</span>
-          </el-col>
-          <el-col :span="8">
-            生日： <span class="b500">{{user.userBirth || '未填写'}}</span>
-          </el-col>
-          <el-col :span="8">
-            职位： <span class="b500">{{user.userOffice || '未填写'}}</span>
+          <el-col :key="key" v-for="(item, key) in introduceMap" :span="8">
+            <div v-if="user[item[1]]">
+              {{item[0]}} <span class="b500">{{user[item[1]]}}</span>
+            </div>
           </el-col>
         </el-row>
       </el-card>
@@ -102,6 +98,7 @@ import Api from "@/api";
 import { useState } from "@akar/vue-hooks";
 import { Edit } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
+import { introduceMap } from '../data'
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const route = useRoute();
 const router = useRouter();
@@ -136,14 +133,14 @@ const getList = async (type) => {
 const star = computed(() => {
   let count = 0;
   list.value.map((i) => {
-    count += i.extData.star?.length || 0;
+    count += i.extData?.star?.length || 0;
   });
   return count;
 });
 const skim = computed(() => {
   let count = 0;
   list.value.map((i) => {
-    count += i.extData.skim?.length || 0;
+    count += i.extData?.skim?.length || 0;
   });
   return count;
 });
