@@ -27,7 +27,7 @@
       </li>
     </ul>
     <footer class="blog-ranking-container__footer" v-if="[9].includes(type)">
-      <span></span>
+      <span @click="getList">换一换&nbsp;</span>
       <el-icon @click="getList"><Refresh /></el-icon>
     </footer>
   </section>
@@ -137,7 +137,14 @@ onMounted(() => {
     height: 36px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    font-size: 12px;
+    span{
+      cursor: pointer;
+    }
+    span:hover {
+      color: var(--xs-color-primary-dark-2)
+    }
     i:hover {
       cursor: pointer;
       color: var(--xs-color-primary-dark-2)

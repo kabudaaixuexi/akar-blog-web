@@ -90,7 +90,7 @@ const formData = reactive({
   password: "",
 });
 const configLogin = {
-  title: "欢迎登录",
+  title: "欢迎登录「Akar」",
   actionList: [
     {
       attrs: {
@@ -239,7 +239,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .user-account-container-layout {
   width: 438px;
-  padding: 50px 34px 60px 34px;
+  padding: 68px 34px 60px 34px;
   background-color: #fff;
   border-radius: 6px;
   user-select: none;

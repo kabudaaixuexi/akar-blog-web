@@ -38,7 +38,7 @@
         </aside>
       </div>
     </div>
-    <Footer v-if="showFooter" show-border />
+    <Footer v-if="showFooter" />
     <Background mode="meteor" />
   </div>
 </template>
@@ -90,6 +90,7 @@ $headerHeight: 48px;
   z-index: 1;
   flex-direction: column;
   min-width: 100%;
+  margin-bottom: 52px;
   height: 100%;
   min-height: 100vh;
   overflow: hidden;

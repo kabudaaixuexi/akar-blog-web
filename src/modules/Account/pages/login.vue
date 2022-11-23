@@ -1,16 +1,5 @@
 <template>
   <div class="user-account-login">
-    <!-- <div class="user-account-nav">
-      <div class="nav-left">
-        <div class="nav-logo"></div>
-        <div class="nav-circle"></div>
-        <div class="nav-title">
-          {{ "「 好记性不如烂笔头 」" }}
-        </div>
-      </div>
-      <div class="nav-right"></div>
-      {{preLogin}}
-    </div> -->
     <div class="user-account-body">
       <figure :class="`${['just', 'back'][preLogin]} account-card`">
         <div @click="setPreLogin(0)" class="account-card-starter">
@@ -27,7 +16,6 @@
         <AccountContainerLogin />
       </figure>
     </div>
-    <Footer />
     <Background mode="meteor" />
   </div>
 </template>
@@ -61,42 +49,6 @@ const [preLogin, setPreLogin] = useState(2)
   background-size: cover;
   background-position: center;
   z-index: 1;
-  .user-account-nav {
-    display: flex;
-    justify-content: space-between;
-    color: #484848;
-    padding: 0px 16px;
-    box-shadow: 0px -3px 8px 3px #c6c6c6;
-    // box-shadow: 0 1px 4px 3px rgb(0 21 41 / 8%);
-    background-color: rgba(#fff, 10%);
-    .nav-left,
-    .nav-right {
-      display: flex;
-      height: 48px;
-      align-items: center;
-    }
-    .nav-logo {
-      width: 56px;
-      height: 48px;
-      background-image: url("@/assets/images/logo-akar.svg");
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-    }
-    .nav-circle {
-      width: 6px;
-      height: 6px;
-      margin: 0 10px 0 0;
-      border-radius: 50%;
-      background: #484848;
-    }
-    .nav-title {
-      font-size: 14px;
-      font-weight: 600;
-      font-family: serif;
-      line-height: 25px;
-    }
-  }
   .user-account-body {
     flex: 1;
     display: flex;

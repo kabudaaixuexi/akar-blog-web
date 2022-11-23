@@ -75,7 +75,6 @@ export default defineComponent({
 }
 .link {
   color: #555;
-  // border-bottom: 1px solid rgba(#7d7d7d, .3);
   transition: border .3s ease-in-out;
   margin-left: 6px;
   &:hover {

@@ -25,7 +25,7 @@
       <el-form-item label="密码：" prop="passWord">
         <el-input v-model="ruleForm.passWord" placeholder="请输入"/>
       </el-form-item>
-      <el-form-item label="上传头像：" prop="photo">
+      <el-form-item label="设置头像：" prop="photo">
         <el-upload
           action="http://124.220.16.124:8099/upload/setFilesNote"
           :show-file-list="false"
@@ -76,7 +76,7 @@
         </el-button
       >
     </div>
-    <p style="font-size: 12px; text-align: center;margin-top: 6px;">其他个人信息可注册后补充</p>
+    <p style="font-size: 12px; text-align: center;margin-top: 24px;">手机号绑定及其它个人信息可登录后进入个人主页补充</p>
   </div>
 </template>
 
