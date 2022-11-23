@@ -37,7 +37,7 @@ import Api from "@/api";
 import { useRouter } from 'vue-router'
 import { useState } from "@akar/vue-hooks";
 import { ElMessage } from "element-plus";
-import Octocat from '@/components/Footer/Octocat.vue'
+import Octocat from '@/components/Footer/octocat.vue'
 
 const router = useRouter()
 const userInfo = JSON.parse(Cookie.get("userInfo") || "{}");
