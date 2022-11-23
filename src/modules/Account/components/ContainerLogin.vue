@@ -3,8 +3,8 @@
     <div class="form-title">
       <div class="form-title-icon">
         <el-icon>
-            <MilkTea />
-          </el-icon>
+          <MilkTea />
+        </el-icon>
       </div>
       <p class="form-title-text">
         {{ configLogin.title }}
@@ -30,7 +30,7 @@
               :underline="false"
               @click="handleClickLink(formItem.link)"
             >
-              {{ formItem.link.text }}
+              <!-- <span style="font-size: 12px">{{ formItem.link.text }}</span> -->
             </el-link>
           </div>
           <el-input v-model="formData[formItem.attrs.prop]" v-bind="getInputItemAttrs(formItem)">
@@ -76,6 +76,7 @@ import Store from "@/store";
 import { isFunction } from "@/utils/type";
 import useCurrentInstance from "@/hooks/useCurrentInstance";
 import { useState } from "@akar/vue-hooks";
+import ContainerRetrieve from './ContainerRetrieve.vue'
 
 const [loding, setLoding] = useState(false);
 const { proxy } = useCurrentInstance();
@@ -113,7 +114,7 @@ const configLogin = {
       text: "先不登录",
       on: {
         click(refForm: any) {
-          Cookie.remove('token')
+          Cookie.remove("token");
           Cookie.remove("userInfo");
           router.push("/k2rp");
         },
@@ -136,7 +137,7 @@ const configLogin = {
       },
       label: "账号",
       prefixIcon: "user-tie",
-      placeholder: "请输入",
+      placeholder: "请输入手机号或昵称",
     },
     {
       attrs: {
@@ -149,12 +150,32 @@ const configLogin = {
           });
         },
       },
-      // link: {
-      //   text: '忘记密码',
-      //   click () {
-      //     console.log(proxy, 'login.fgtpwd')
-      //   }
-      // },
+      link: {
+        text: "忘记密码",
+        click() {
+          proxy.$ModalDialog({
+            title: "找回密码",
+            top: "20vh",
+            width: "50vw",
+            "show-close": true,
+            "close-on-click-modal": false,
+            "close-on-press-escape": false,
+            renderComponent: {
+              data: reactive({
+                email: "",
+                password: "",
+              }),
+              component: ContainerRetrieve,
+            },
+            async onConfirm(instance, context) {
+              const isValid = await instance.validateRules();
+              if (!isValid) return Promise.reject(new Error("error"));
+              const {  } = formData;
+
+            },
+          });
+        },
+      },
       type: "password",
       label: "密码",
       prefixIcon: "lock",

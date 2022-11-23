@@ -185,7 +185,7 @@ onMounted(() => {
   setTimeout(() => {
     setLoading(false);
     getList();
-  }, 1200);
+  }, 1600);
 });
 </script>
 
