@@ -27,7 +27,7 @@
         <AccountContainerLogin />
       </figure>
     </div>
-    <!-- <Footer /> -->
+    <Footer />
     <Background mode="meteor" />
   </div>
 </template>

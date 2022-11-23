@@ -47,7 +47,7 @@
         </div>
       </header>
       <p class="userinfo-brief mt20 f12 b500">{{user.userIntro || '这个人没有任何简介'}}</p>
-      <el-card class="userinfo-card mt20">
+      <el-card v-if="user.userEmail || user.userOffice || user.userBirth" class="userinfo-card mt20">
          <el-row :gutter="24">
           <el-col :key="key" v-for="(item, key) in introduceMap" :span="8">
             <div v-if="user[item[1]]">

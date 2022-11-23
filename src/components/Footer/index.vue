@@ -5,22 +5,25 @@
       'border': showBorder
     }"
   >
-    <div
+    <article
       class="container"
     >
-      <p
-        class="text"
+      <div
+        class="copyright"
       >
         <Octocat />
-        MIT Licensed | Copyright © 2020-PRESENT <a
+        Copyright © 2020-PRESENT <a
           target="_blank"
           :href="link"
-          class="github-link"
+          class="link"
         >
-          Akar
+          「 kaburda@163.com 」
         </a>
-      </p>
-    </div>
+      </div>
+      <div class="filings">
+        <a class="link" href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2022021650号-1</a>
+      </div>
+    </article>
   </footer>
 </template>
 <script lang="ts">
@@ -56,12 +59,13 @@ export default defineComponent({
   }
   .container {
     padding: 14px 0 14px;
-    .text {
+    display: flex;
+    justify-content: center;
+    .copyright, .filings {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      margin: 0;
       text-align: center;
       line-height: 1;
       font-size: 1rem;
@@ -69,9 +73,9 @@ export default defineComponent({
     }
   }
 }
-.github-link {
+.link {
   color: #555;
-  border-bottom: 1px solid rgba(#7d7d7d, .3);
+  // border-bottom: 1px solid rgba(#7d7d7d, .3);
   transition: border .3s ease-in-out;
   margin-left: 6px;
   &:hover {
