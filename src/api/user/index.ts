@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export interface postRegisterReq {
     userName: string
     passWord: string
-    photo: string
+    userPortrait: string
 }
 export interface postLoginReq {
     userName: any

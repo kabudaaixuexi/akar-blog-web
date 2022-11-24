@@ -25,7 +25,7 @@
       <el-form-item label="密码：" prop="passWord">
         <el-input v-model="ruleForm.passWord" placeholder="请输入"/>
       </el-form-item>
-      <el-form-item label="设置头像：" prop="photo">
+      <el-form-item label="设置头像：" prop="userPortrait">
         <el-upload
           action="http://124.220.16.124:8099/upload/setFilesNote"
           :show-file-list="false"
@@ -35,8 +35,8 @@
         >
           <img
             style="border-radius: 6px; border: 1px solid #f6f6f6; width: 64px; height: 64px"
-            v-if="ruleForm.photo"
-            :src="ruleForm.photo"
+            v-if="ruleForm.userPortrait"
+            :src="ruleForm.userPortrait"
             alt=""
           />
           <svg
@@ -92,8 +92,8 @@ const router = useRouter()
 const [ruleForm, setRuleForm] = useState({
   userName: "",
   passWord: "",
-  photo: "",
-  phone: null,
+  userPortrait: "",
+  userPhone: null,
 });
 
 const [rules, setRules] = useState({
@@ -119,7 +119,7 @@ const ruleFormRef: any = ref();
 const handleExceed = (ev: { data: any }) => {
   setRuleForm((el) => ({
     ...el.value,
-    photo: ev.data,
+    userPortrait: ev.data,
   }));
 };
 const chatRegister = async () => {

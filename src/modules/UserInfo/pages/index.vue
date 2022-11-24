@@ -11,7 +11,7 @@
     </template> -->
     <template #content>
       <header class="userinfo-header">
-        <img :src="user.photo" alt="" />
+        <img :src="user.userPortrait" alt="" />
         <div class="userinfo-header__detail">
           <p>
             <span class="b500 mr12">{{ user.userName }}</span>

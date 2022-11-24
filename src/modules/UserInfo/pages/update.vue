@@ -19,7 +19,7 @@
             >
               <img
                 style="border-radius: 6px; border: 1px solid #f6f6f6; width: 64px; height: 64px"
-                :src="userInfo.photo"
+                :src="userInfo.userPortrait"
                 alt=""
               />
             </el-upload>

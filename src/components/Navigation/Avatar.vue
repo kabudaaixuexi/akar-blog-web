@@ -1,7 +1,7 @@
 <template>
   <el-dropdown class="navigation-avatar" trigger="click">
     <div style="padding: 0 12px">
-      <img v-if="userInfo.photo" :src="userInfo.photo" />
+      <img v-if="userInfo.userPortrait" :src="userInfo.userPortrait" />
       <img v-else src="@/assets/images/navigation-avatar.webp" />
     </div>
     <template #dropdown>

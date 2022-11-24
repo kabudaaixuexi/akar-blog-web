@@ -44,7 +44,7 @@
       <article id="xs-editor-note"></article>
       <footer class="result-detail-footer">
         <div class="result-detail-footer__left">
-          <img v-if="user.photo" :src="user.photo" />
+          <img v-if="user.userPortrait" :src="user.userPortrait" />
           <img v-else src="@/assets/images/navigation-avatar.webp" />
           <b>{{ noteInfo.uid }}</b>
         </div>

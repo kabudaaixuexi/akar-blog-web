@@ -6,7 +6,7 @@
     class="blogger-card-container"
   >
     <header class="blogger-card-container__header">
-      <img class="cp" @click="() => router.push(`/uf/${user.userName}/hp`)" v-if="user.photo" :src="user.photo" alt="" />
+      <img class="cp" @click="() => router.push(`/uf/${user.userName}/hp`)" v-if="user.userPortrait" :src="user.userPortrait" alt="" />
       <img v-else src="../../assets/images/navigation-avatar.webp" alt="" />
       <figure>
         <span style="font-weight: 500">{{ user.userName || "--" }}</span>
@@ -144,14 +144,14 @@ const handleFollow = async () => {
           ...JSON.parse(user.extData || '{}'),
           fans: [...fans.value, {
             userName: userInfo.userName,
-            photo: userInfo.photo
+            userPortrait: userInfo.userPortrait
           }],
         }
       ),
     });
     setFans([...fans.value, {
             userName: userInfo.userName,
-            photo: userInfo.photo
+            userPortrait: userInfo.userPortrait
           }]);
     ElMessage.success("关注成功");
 

@@ -3,7 +3,7 @@
     <article class="dialogue-nav">
       <header class="dialogue-nav__header nav-cur">
         <div class="left">
-          <img v-if="userInfo.photo" :src="userInfo.photo" alt="" />
+          <img v-if="userInfo.userPortrait" :src="userInfo.userPortrait" alt="" />
           <img v-else src="@/assets/images/navigation-avatar.webp" alt="" />
           <span class="nowrap">{{ userInfo.userName }}</span>
         </div>
@@ -49,7 +49,7 @@
           </p>
           <p class="self" v-else>
             <span v-html="decodeURI(item.message)" />
-            <img v-if="userInfo.photo" :src="userInfo.photo" alt="" />
+            <img v-if="userInfo.userPortrait" :src="userInfo.userPortrait" alt="" />
             <img v-else src="@/assets/images/navigation-avatar.webp" alt="" />
           </p>
         </article>
