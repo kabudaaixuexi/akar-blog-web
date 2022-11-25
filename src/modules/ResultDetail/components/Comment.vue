@@ -45,7 +45,6 @@ const props = defineProps<{
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const [myEval, setMyEval] = useState('')
 const [evals, setEvals] = useState([])
-const noteInfo = props.getNoteInfo()
 
 const handleDeleteEval = async (info) => {
   let temExtData;
@@ -55,11 +54,11 @@ const handleDeleteEval = async (info) => {
       cancelButtonText: '取消',
     }).then(async () => {
       temExtData = {
-        ...noteInfo.extData,
+        ...props.getNoteInfo().extData,
         eval: evals.value.filter(i => (i.evalId !== info.evalId)),
       };
       await Api.adornNote({
-        ...noteInfo,
+        ...props.getNoteInfo(),
         extData: temExtData,
       });
       setEvals(temExtData.eval);
@@ -68,11 +67,11 @@ const handleDeleteEval = async (info) => {
     return
   }
   temExtData = {
-    ...noteInfo.extData,
+    ...props.getNoteInfo().extData,
     eval: evals.value.filter(i => (i.id !== info.id)),
   };
   await Api.adornNote({
-    ...noteInfo,
+    ...props.getNoteInfo(),
     extData: temExtData,
   });
   setEvals(temExtData.eval);
@@ -103,7 +102,7 @@ const handleWriteEval = (info) => {
             evalContent: myEval.value
         })
         temExtData = {
-          ...noteInfo.extData,
+          ...props.getNoteInfo().extData,
           eval: newEval,
         };
       } else {
@@ -132,12 +131,12 @@ const handleWriteEval = (info) => {
           })
         }
         temExtData = {
-          ...noteInfo.extData,
+          ...props.getNoteInfo().extData,
           eval: newEval,
         };
       }
       await Api.adornNote({
-        ...noteInfo,
+        ...props.getNoteInfo(),
         extData: temExtData,
       });
       setEvals(filterEval(temExtData.eval));
