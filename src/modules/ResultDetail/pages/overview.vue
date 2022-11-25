@@ -7,7 +7,7 @@
     </template>
 
     <template #sideLeft>
-      <BloggerCard :getState="getNoteInfo" />
+      <BloggerCard :getState="() => (noteInfo)" />
       <!-- <BlogRanking :type="6"/> -->
     </template>
     <template #content>
@@ -17,27 +17,14 @@
           <p>
             <span style="padding-right: 24px"
               ><span class="cp" @click="() => router.push(`/uf/${noteInfo.uid}/hp`)" style="color: #000; padding-right: 12px">{{ noteInfo.uid }}</span>
-              <!-- <span
-                ><el-icon color="var(--xs-color-primary)" :size="16"><Clock /></el-icon
-              ></span> -->
               <span style="padding-left: 6px; color: var(--xs-color-info)"
                 >于 {{ noteInfo.latestTime }} 发布</span
               >
-              <!-- <span style="padding-left: 12px"
-                ><el-icon color="var(--xs-color-primary)" :size="16"><ChatLineSquare /></el-icon
-              ></span> -->
               <span style="padding-left: 6px; color: var(--xs-color-info)"
                 >已有 {{ noteInfo.extData?.eval?.length || 0 }} 条评论</span
               >
             </span>
-            <span></span>
           </p>
-          <!-- <p style="color: var(--xs-color-info)">
-            <span style="padding-right: 12px">文章分类：
-              <span class="my-tag">{{draweOptions.find(i => i.value == drawe)?.label || '全部'}}</span>
-            </span>
-            <span>文章标签： <el-tag v-for="(item, index) in (drawe || [])" :key="index">{{item}}</el-tag></span>
-          </p> -->
         </div>
         <div class="result-detail-header__options"></div>
       </header>
@@ -85,17 +72,18 @@
               >
             </div>
           </TooltipCustom>
-          <TooltipCustom :content="`评论功能暂时还未开发～`">
+          <!-- <TooltipCustom :content="`评论功能暂时还未开发～`">
             <div>
               <el-icon :size="16"><ChatLineSquare /></el-icon>
               <span style="padding-left: 6px">{{ noteInfo.extData?.eval?.length || 0 }}</span>
             </div>
-          </TooltipCustom>
+          </TooltipCustom> -->
           <div class="my-tag">
             {{ draweOptions.find((i) => i.value == noteInfo.drawe)?.label || "全部" }}
           </div>
         </figure>
       </footer>
+      <Comment :getEvals="() => (evals)" :getNoteInfo="() => (noteInfo)"/>
     </template>
   </LayoutArea>
 </template>
@@ -105,6 +93,7 @@ import NavigationSideGoBack from "@/components/Navigation/Side/SideGoBack.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 import BloggerCard from '@/components/Plates/BloggerCard.vue'
 import BlogRanking from '@/components/Plates/BlogRanking.vue'
+import Comment from '../components/Comment.vue'
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted } from "vue";
@@ -112,7 +101,7 @@ import Store from "@/store";
 import Api from "@/api";
 import foundEdit from "@akar/xs-editor";
 import { useState } from '@akar/vue-hooks'
-import { Star, ChatLineSquare, Present, Clock, Sugar } from "@element-plus/icons-vue";
+import { Star, Present, Clock, Sugar } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const draweOptions = Store.getState('noteClassify')
@@ -120,12 +109,12 @@ const route = useRoute();
 const router = useRouter()
 // 文章信息
 const [noteInfo, setNoteInfo] = useState({})
-const getNoteInfo = () => { return noteInfo.value }
 // 作者信息
 const [user, setUser] = useState({});
 // 点赞评论收藏
 const [stars, setStars] = useState([]);
 const [takes, setTakes] = useState([]);
+const [evals, setEvals] = useState([]);
 
 const checkLogin = () => {
   if (!Object.getOwnPropertyNames(userInfo).length) {
@@ -133,6 +122,7 @@ const checkLogin = () => {
   }
   return Object.getOwnPropertyNames(userInfo).length
 }
+// 点赞
 const changeStar = async () => {
   if (!checkLogin()) {
     return;
@@ -155,6 +145,7 @@ const changeStar = async () => {
   });
   setStars(temExtData.star);
 };
+// 收藏
 const changeTake = async () => {
   if (!checkLogin()) {
     return;
@@ -177,25 +168,7 @@ const changeTake = async () => {
   });
   setTakes(temExtData.take);
 };
-// const changeEval = async (val) => {
-//   if (!Object.getOwnPropertyNames(userInfo).length) {
-//     ElMessage.error("登录后才能评论");
-//     return;
-//   }
-//   await Api.adornNote({
-//     ...noteInfo,
-//     extData: {
-//       ...extData,
-//       eval: [
-//         ...extData?.eval,
-//         {
-//           uid: userInfo.userName,
-//           value: val,
-//         },
-//       ],
-//     },
-//   });
-// };
+
 // 展示富文本
 const foundXsEditor = (value, watermark) => {
   foundEdit(
@@ -214,6 +187,7 @@ onMounted(async () => {
   const { data } = await Api.getNoteListPublished({ type: 2, noteid: route.params.noteId });
   setStars(data.extData?.star || [])
   setTakes(data.extData?.take || [])
+  setEvals(data.extData?.eval || [])
   setNoteInfo(data)
   document.title = data.subtitle
   foundXsEditor(data.vNode, data.uid);

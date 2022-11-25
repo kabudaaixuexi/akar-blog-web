@@ -21,16 +21,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, nextTick, onMounted, reactive, ref } from "vue";
-import { ElMessage } from "element-plus";
 import AccountContainerLogin from "@/modules/Account/components/ContainerLogin.vue";
 import AccountContainerRegister from "@/modules/Account/components/ContainerRegister.vue";
 import Background from '@/components/Background/index.vue'
-import Cookie from "js-cookie";
-import Api from "@/api";
-import { useRoute, useRouter } from "vue-router";
-import useCurrentInstance from "@/hooks/useCurrentInstance";
-import Store from "@/store";
 import { useState } from "@akar/vue-hooks";
 
 const [preLogin, setPreLogin] = useState(2)
