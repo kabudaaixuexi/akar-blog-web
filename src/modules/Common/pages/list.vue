@@ -39,7 +39,6 @@ import BlogRanking from "@/components/Plates/BlogRanking.vue";
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 
-import CommonForm from "@/modules/Common/components/CommonForm.vue";
 import CommonTableBody from "@/modules/Common/components/TableBody.vue";
 import CommonDrawes from "@/modules/Common/components/CommonDrawes.vue";
 

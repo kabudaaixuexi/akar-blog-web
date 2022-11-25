@@ -8,7 +8,7 @@
       <div class="eval-head">
         <img :src="i.userPortrait" alt="">
         <div class="eval-head__other">
-          <b>{{ i.userName }} <span v-if="false">作者</span> <span class="reply" v-if="i.reply">&nbsp;回复&nbsp;{{i.reply}}&nbsp;的评论</span></b>
+          <b>{{ i.userName }} <span v-if="false">作者</span> <span class="reply" v-if="i.reply">&nbsp;回复&nbsp;<u>{{i.reply}}</u>&nbsp;的评论</span></b>
           <p>{{ i.evalTime}}</p>
         </div>
       </div>
@@ -107,15 +107,29 @@ const handleWriteEval = (info) => {
         };
       } else {
         let newEval = evals.value
-        newEval.splice(newEval.map(i => i.evalId).lastIndexOf(info.evalId) + 1,0,{
-            id: getUuiD(),
-            evalId: info.evalId,
-            reply: info.userName,
-            evalTime: getTime(),
-            userName: userInfo.userName,
-            userPortrait: userInfo.userPortrait,
-            evalContent: myEval.value
-        })
+        console.log(newEval,'lll');
+        // 回复回复
+        if (info.reply) {
+          newEval.splice(newEval.map(i => i.id).lastIndexOf(info.id) + 1,0,{
+              id: getUuiD(),
+              evalId: info.evalId,
+              reply: info.userName + `：${info.evalContent}`,
+              evalTime: getTime(),
+              userName: userInfo.userName,
+              userPortrait: userInfo.userPortrait,
+              evalContent: myEval.value
+          })
+        } else {
+          newEval.splice(newEval.map(i => i.evalId).lastIndexOf(info.evalId) + 1,0,{
+              id: getUuiD(),
+              evalId: info.evalId,
+              reply: info.userName  + `：${info.evalContent}`,
+              evalTime: getTime(),
+              userName: userInfo.userName,
+              userPortrait: userInfo.userPortrait,
+              evalContent: myEval.value
+          })
+        }
         temExtData = {
           ...noteInfo.extData,
           eval: newEval,

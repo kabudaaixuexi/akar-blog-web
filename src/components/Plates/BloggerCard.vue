@@ -97,6 +97,7 @@ const getList = async () => {
   });
   setStar(temStar);setSkim(temSkim);setTake(temTake);
   setIntegral(pulish.length * 100 + fans.value.length * 100 + temSkim.length * 1 + temStar.length * 20 + temTake.length * 50) // 积分计算规则：原创 = 100; 粉丝 = 100; 浏览 = 1; 获赞 = 20; 被收藏 = 50;
+  setLoading(false);
 };
 // 关注 follow // fans
 const handleFollow = async () => {
@@ -182,10 +183,13 @@ const handleDialogue = () => {
   router.push(`/bu4g/${user.value.userName}`)
 }
 onMounted(() => {
-  setTimeout(() => {
-    setLoading(false);
-    getList();
-  }, 1600);
+  if (props.getState().uid) {
+    getList()
+  } else {
+    setTimeout(() => {
+      getList()
+    }, 1888);
+  }
 });
 </script>
 
