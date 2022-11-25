@@ -81,6 +81,7 @@ const props = defineProps<{ getState: any }>();
 const getList = async () => {
   console.log(props.getState(),'props.getState().value');
   const { uid } = props.getState();
+  if (!uid) {setTimeout(() => getList(), 300); return }
   const { data: user } = await Api.getUser({ uid });
   setUser(user);
   setFans(JSON.parse(user.extData || '{}').fans || []);
@@ -183,13 +184,7 @@ const handleDialogue = () => {
   router.push(`/bu4g/${user.value.userName}`)
 }
 onMounted(() => {
-  if (props.getState().uid) {
-    getList()
-  } else {
-    setTimeout(() => {
-      getList()
-    }, 1888);
-  }
+  getList()
 });
 </script>
 

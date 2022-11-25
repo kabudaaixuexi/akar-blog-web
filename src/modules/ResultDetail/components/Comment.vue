@@ -8,7 +8,9 @@
       <div class="eval-head">
         <img :src="i.userPortrait" alt="">
         <div class="eval-head__other">
-          <b>{{ i.userName }} <span v-if="false">作者</span> <span class="reply" v-if="i.reply">&nbsp;回复&nbsp;<u>{{i.reply}}</u>&nbsp;的评论</span></b>
+          <b>{{ i.userName }}
+            <small v-if="i.userName === props.getNoteInfo().uid">( 作者 )</small>
+            <span class="reply" v-if="i.reply">&nbsp;回复&nbsp;<u>{{i.reply}}</u>&nbsp;的评论</span></b>
           <p>{{ i.evalTime}}</p>
         </div>
       </div>
@@ -43,9 +45,9 @@ const props = defineProps<{
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const [myEval, setMyEval] = useState('')
 const [evals, setEvals] = useState([])
+const noteInfo = props.getNoteInfo()
 
 const handleDeleteEval = async (info) => {
-  const noteInfo = props.getNoteInfo()
   let temExtData;
   if (!info.reply) {
     ElMessageBox.confirm('确定删除该条评论？（此评论的回复将被一并删除）', '提示', {
@@ -87,7 +89,6 @@ const handleWriteEval = (info) => {
     confirmButtonText: '发表',
     message: h('textarea', { oninput: (e) => setMyEval(e.target.value), style: 'font-family: serif;color: #333;font-size: 14px;padding:10px;width: 100%;border-color: #c0c4cc;border-radius: 4px;', rows:"5", }),
   }).then(async () => {
-      const noteInfo = props.getNoteInfo()
       let temExtData;
       // 发表对文章的评论
       if (!info.evalId) {
@@ -169,7 +170,7 @@ setTimeout(() => setEvals(filterEval(props.getEvals())), 1888)
     align-items: center;
     padding: 12px 0;
     img {
-      background-color: aqua;
+      background-color: #f6f6f6;
       width: 36px;
       height: 36px;
       border-radius: 50%;
