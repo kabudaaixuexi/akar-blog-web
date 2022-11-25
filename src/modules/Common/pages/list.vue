@@ -21,10 +21,10 @@
     </template>
 
     <template #sideRight>
-      <BlogRanking :type="6" />
-      <BlogRanking :type="7" />
-      <BlogRanking :type="9" />
-      <BlogRanking :type="8" />
+      <BlogRanking v-if="list.length" :type="6" />
+      <BlogRanking v-if="list.length" :type="7" />
+      <BlogRanking v-if="list.length" :type="9" />
+      <BlogRanking v-if="list.length" :type="8" />
       <Copyright />
     </template>
 

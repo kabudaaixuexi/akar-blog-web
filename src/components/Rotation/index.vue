@@ -18,10 +18,17 @@ const { pop } = defineProps<{
   pop: string
  }>();
 const router = useRouter()
-const [list, setList] = useState([])
+const [list, setList] = useState([
+{
+  "uri": "http://124.220.16.124:8099/files/rotations/2.jpeg",
+  "type": 0,
+  "expl": "2",
+  "link": "http://124.220.16.124:8099/files/rotations/2.jpeg"
+}
+])
 const getWalkCharts = async () => {
-  const { data: list } = await Api.getWalkCharts({})
-  setList(list)
+  // const { data: list } = await Api.getWalkCharts({})
+  // setList(list)
 }
 onMounted(() => {
   getWalkCharts()
