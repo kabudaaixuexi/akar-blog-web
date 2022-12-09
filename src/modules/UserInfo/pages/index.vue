@@ -77,6 +77,7 @@
         <img @click="() => router.push('/kv5i')" src="@/assets/images/rg.png" alt="">
         <Introduce v-if="user.showExtend" :state="user.userExtend" />
         <OtherChain v-if="user.showLinks" :state="user.userLinks" />
+        <Annex v-if="user.showAnnexs" />
         <Dialogue :state="getState()" />
       </article>
     </template>
@@ -90,6 +91,7 @@ import CommonItem from "@/modules/Common/components/CommonItem.vue";
 import Introduce from "@/modules/UserInfo/components/Introduce.vue"
 import OtherChain from "@/modules/UserInfo/components/OtherChain.vue"
 import Dialogue from "@/modules/UserInfo/components/Dialogue.vue"
+import Annex from "@/modules/UserInfo/components/Annex.vue"
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted, computed, watch } from "vue";

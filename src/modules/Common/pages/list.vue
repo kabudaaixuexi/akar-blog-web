@@ -21,10 +21,10 @@
     </template>
 
     <template #sideRight>
-      <BlogRanking v-if="list.length" :type="6" />
-      <BlogRanking v-if="list.length" :type="7" />
-      <BlogRanking v-if="list.length" :type="9" />
-      <BlogRanking v-if="list.length" :type="8" />
+      <BlogRanking v-if="list" :type="6" />
+      <BlogRanking v-if="list" :type="7" />
+      <BlogRanking v-if="list" :type="9" />
+      <BlogRanking v-if="list" :type="8" />
       <Copyright />
     </template>
 
@@ -48,7 +48,7 @@ import Cookies from "js-cookie";
 import { useState } from "@akar/vue-hooks";
 import Store from "@/store";
 
-const [list, setList] = useState([]);
+const [list, setList] = useState(false);
 const [currentDrawe, setCurrentDrawe] = useState(0);
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 // 获取文章列表

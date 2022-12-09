@@ -39,6 +39,36 @@
 .ml20 {
     margin-left: 20px;
 }
+.mr6 {
+    margin-right: 6px;
+}
 .mr12 {
     margin-right: 12px;
+}
+
+.flex {
+    display: flex;
+}
+
+.br2{
+    border-radius: 2px;
+}
+.br4{
+    border-radius: 4px;
+}
+.br6{
+    border-radius: 6px;
+}
+.br8{
+    border-radius: 8px;
+}
+.br10{
+    border-radius: 10px;
+}
+
+.otw {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 100%;
 }

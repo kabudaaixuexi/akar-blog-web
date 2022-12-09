@@ -81,7 +81,6 @@ onUnmounted(() => {
 .intorduce-container {
   margin-top: 30px;
   width: 60%;
-  // background-color: #bad2d8;
   background-color: rgb(247, 245, 241);
   border-radius: 2px;
   padding: 20px;

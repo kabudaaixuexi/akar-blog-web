@@ -1,6 +1,6 @@
 <template>
   <section
-    v-loading="false"
+    v-loading="loading"
     :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50"
     class="intorduce-container"
@@ -33,7 +33,7 @@ const svg = `
 `;
 const router = useRouter()
 
-const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState(false);
 
 const props = defineProps<{ state: any }>();
 const state = JSON.parse(props.state || '{}')
@@ -49,7 +49,6 @@ onMounted(() => {
 .intorduce-container {
   margin-top: 30px;
     width: 60%;
-    // background-color: #bad2d8;
     background-color: rgb(247, 245, 241);
     border-radius: 2px;
     padding: 20px;
