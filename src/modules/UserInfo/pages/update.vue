@@ -122,12 +122,12 @@
           :key="key"
         >
           <el-col :span="8"
-            ><el-input :maxlength="30" v-model="item.label" placeholder="说明，例：gitHub地址"
+            ><el-input :maxlength="30" v-model="item.label" placeholder="例：gitHub地址"
           /></el-col>
           <el-col :span="13"
             ><el-input
               v-model="item.value"
-              placeholder="链接，例：https://github.com/kabudaaixuexi"
+              placeholder="例：https://github.com/kabudaaixuexi"
           /></el-col>
           <el-col :span="3">
             <el-button
