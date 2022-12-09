@@ -184,7 +184,7 @@ const handleDialogue = () => {
   router.push(`/bu4g/${user.value.userName}`)
 }
 onMounted(() => {
-  getList()
+  setTimeout(() => getList(), 0)
 });
 </script>
 

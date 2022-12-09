@@ -11,7 +11,9 @@
         <img v-if="noteInfo.cover" :src="noteInfo.cover" />
       </figure>
       <BloggerCard :getState="() => (noteInfo)" />
-      <!-- <BlogRanking :type="6"/> -->
+      <figure class="calendar">
+        <vue-hash-calendar />
+      </figure>
     </template>
     <template #content>
       <header class="result-detail-header">
@@ -107,7 +109,6 @@
 import NavigationSideGoBack from "@/components/Navigation/Side/SideGoBack.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 import BloggerCard from '@/components/Plates/BloggerCard.vue'
-import BlogRanking from '@/components/Plates/BlogRanking.vue'
 import Comment from '../components/Comment.vue'
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
@@ -239,9 +240,13 @@ onMounted(async () => {
   padding: 6px;
   background-color: #fff;
   border-radius: 4px;
+  min-height: 80px;
     img {
       width: 100%;
     }
+}
+.calendar {
+  width: 100%;
 }
 .result-detail-header {
   background: #fff;
