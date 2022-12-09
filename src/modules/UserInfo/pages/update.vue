@@ -43,23 +43,22 @@
               />
             </el-select>
           </el-col>
-          <el-col :span="9">
+          <el-col :span="6">
             <!-- 邮箱 -->
             <el-input :maxlength="20" v-model="userInfo.userEmail" placeholder="还没有设置邮箱" />
           </el-col>
-          <el-col :span="9">
+          <el-col :span="6">
             <!-- 手机号 -->
             <el-input :maxlength="11" v-model="userInfo.userPhone" placeholder="还没有关联手机号" />
           </el-col>
         </el-row>
         <el-row :gutter="24" class="mt20" style="margin-bottom: 6px">
-
           <el-col :span="6">
-          <!-- 任职 -->
+            <!-- 任职 -->
             <el-input :maxlength="30" v-model="userInfo.userOffice" placeholder="任职" />
           </el-col>
-           <el-col :span="9">
-          <!-- 生日 -->
+          <el-col :span="6">
+            <!-- 生日 -->
             <el-date-picker
               v-model="userInfo.userBirth"
               type="date"
@@ -68,10 +67,13 @@
               value-format="YYYY-MM-DD"
             />
           </el-col>
-          <el-col :span="9">
-        <!-- IP属地 -->
+          <el-col :span="6">
+            <!-- IP属地 -->
             <el-input :maxlength="10" disabled v-model="userInfo.userRegion" placeholder="IP属地" />
-        </el-col>
+          </el-col>
+          <el-col :span="6">
+            <span class="f12">是否展示附件：</span> <el-switch v-model="userInfo.showAnnexs" />
+          </el-col>
         </el-row>
       </el-card>
       <!-- 扩展信息 -->
@@ -83,21 +85,24 @@
           </div>
         </template>
         <el-row :gutter="24">
-          <el-col :span="8">
+          <el-col :span="6">
+            <el-input :maxlength="20" v-model="userExtend.school" placeholder="毕业院校名称" />
+          </el-col>
+          <el-col :span="6">
             <el-input :maxlength="20" v-model="userExtend.major" placeholder="所学专业" />
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
+            <el-input :maxlength="20" v-model="userExtend.residence" placeholder="户籍属地" />
+          </el-col>
+          <el-col :span="6">
             <el-select v-model="userExtend.workyears" placeholder="工作年限">
               <el-option
-                v-for="item in ['0-1年', '1-3年', '3-5年' , '5-7年', '7-10年', '10年以上']"
+                v-for="item in ['1年', '2年', '3年', '4年', '5年', '6年', '7年以上']"
                 :key="item"
                 :label="item"
                 :value="item"
               />
             </el-select>
-          </el-col>
-          <el-col :span="8">
-            <el-input :maxlength="20" v-model="userExtend.residence" placeholder="户籍属地" />
           </el-col>
         </el-row>
       </el-card>
@@ -109,17 +114,49 @@
             <el-switch v-model="userInfo.showLinks" />
           </div>
         </template>
-        <el-row :gutter="24" class="mt20" style="margin-bottom: 6px" v-for="(item, key) in userLinks" :key="key">
-          <el-col :span="8"><el-input :maxlength="30" v-model="item.label" placeholder="说明，例：gitHub地址" /></el-col>
-          <el-col :span="13"><el-input v-model="item.value" placeholder="链接，例：https://github.com/kabudaaixuexi" /></el-col>
+        <el-row
+          :gutter="24"
+          class="mt20"
+          style="margin-bottom: 6px"
+          v-for="(item, key) in userLinks"
+          :key="key"
+        >
+          <el-col :span="8"
+            ><el-input :maxlength="30" v-model="item.label" placeholder="说明，例：gitHub地址"
+          /></el-col>
+          <el-col :span="13"
+            ><el-input
+              v-model="item.value"
+              placeholder="链接，例：https://github.com/kabudaaixuexi"
+          /></el-col>
           <el-col :span="3">
-              <el-button type="primary" @click="() => handleDelLink(item)" size="small" :icon="Minus" circle />
+            <el-button
+              type="primary"
+              @click="() => handleDelLink(item)"
+              size="small"
+              :icon="Minus"
+              circle
+            />
           </el-col>
         </el-row>
-        <el-button style="margin-left: 94%;" class="mt20" type="primary" @click="handleAddLink" :icon="Plus" circle />
+        <el-button
+          style="margin-left: 94%"
+          class="mt20"
+          type="primary"
+          @click="handleAddLink"
+          :icon="Plus"
+          circle
+        />
       </el-card>
 
-      <el-button type="primary" class="mt20" style="margin-left: 52%;" size="large" @click="handleSubmit">更新</el-button>
+      <el-button
+        type="primary"
+        class="mt20"
+        style="margin-left: 52%"
+        size="large"
+        @click="handleSubmit"
+        >更新</el-button
+      >
     </template>
   </LayoutArea>
 </template>
@@ -135,55 +172,59 @@ import Api from "@/api";
 import { useState } from "@akar/vue-hooks";
 import { Edit, Plus, Minus } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import { getUuiD } from "@/utils"
+import { getUuiD } from "@/utils";
 const [userInfo, setUserInfo] = useState(JSON.parse(Cookies.get("userInfo") || "{}"));
 
 // 扩展信息
-const [userExtend, setUserExtend] = useState(JSON.parse(Cookies.get("userInfo") || "{}").userExtend || {})
+const [userExtend, setUserExtend] = useState(
+  JSON.parse(Cookies.get("userInfo") || "{}").userExtend || {}
+);
 // 外链
-const [userLinks, setUserLinks] = useState(JSON.parse(JSON.parse(Cookies.get("userInfo") || "{}").userLinks || '[]'))
-
+const [userLinks, setUserLinks] = useState(
+  JSON.parse(JSON.parse(Cookies.get("userInfo") || "{}").userLinks || "[]")
+);
 
 const route = useRoute();
 const router = useRouter();
 
 const handleDelLink = (el) => {
-  setUserLinks(userLinks.value.filter(item => item.key != el.key))
-}
+  setUserLinks(userLinks.value.filter((item) => item.key != el.key));
+};
 const handleAddLink = () => {
   setUserLinks([
-    ...userLinks.value, {
+    ...userLinks.value,
+    {
       label: "",
       value: "",
-      key: getUuiD()
-    }
-  ])
-}
+      key: getUuiD(),
+    },
+  ]);
+};
 
 const handleSubmit = async () => {
   await Api.postModify({
     ...userInfo.value,
-    userLinks: JSON.stringify(userLinks.value.filter(i => i.label || i.value)),
+    userLinks: JSON.stringify(userLinks.value.filter((i) => i.label || i.value)),
     userExtend: JSON.stringify(userExtend.value),
     role: 0,
-  })
-  router.back()
+  });
+  router.back();
 };
 onMounted(async () => {
   document.title = `更新个人信息`;
   const { data: user } = await Api.getUser({ uid: route.params.uid });
-  user.uid !== userInfo.value.uid && router.push('/kv5i')
+  user.uid !== userInfo.value.uid && router.push("/kv5i");
   // const { data: res } = await Api.getRegion()
   // user.userRegion = res.address
   setUserInfo(user);
-  setUserLinks(JSON.parse(user.userLinks || '[]'))
-  setUserExtend(JSON.parse(user.userExtend || '{}'))
+  setUserLinks(JSON.parse(user.userLinks || "[]"));
+  setUserExtend(JSON.parse(user.userExtend || "{}"));
 });
 </script>
 
 <style lang="scss" scoped>
 .box-card {
-  width: 60%;
+  width: 100%;
   &:deep() {
     .card-header {
       display: flex;

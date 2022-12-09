@@ -16,7 +16,7 @@
           </div>
         </aside>
         <!-- content -->
-        <section :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''}; background-color: ${contentColor}`" id="content-section-container" class="content-section-container">
+        <section :class="`${$slots.sideRight ? 'content-section-container-a' : ($slots.sideLeft ? 'content-section-container-b' : 'content-section-container-c')}`" :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''}; background-color: ${contentColor}`" id="content-section-container" class="content-section-container">
           <main class="main-content-box">
             <div
               class="inner-content"
@@ -173,7 +173,13 @@ $headerHeight: 48px;
   }
 }
 @media screen and (max-width: 600px) {
-  .content-section-container {
+  .content-section-container-a {
+    transform: translate(170px) scale(.5);
+  }
+  .content-section-container-b {
+    transform: translate(-170px) scale(.5);
+  }
+  .content-section-container-c {
     transform: scale(.5);
   }
 }

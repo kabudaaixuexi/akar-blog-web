@@ -83,11 +83,11 @@
             :data-path="pack"
           >
             <img
-              :src="`${pack}?${new Date().getTime()}`"
+              :src="`${iconSet.get(pack.substr(pack.length-4,4)) || pack}?${new Date().getTime()}`"
               data-type="package"
               :data-path="pack"
             />
-            <figcaption data-type="package" :data-path="pack">
+            <figcaption class="f12" data-type="package" :data-path="pack">
               {{ pack.substring(pack.lastIndexOf("/") + 1, pack.length) }}
             </figcaption>
           </figure>
@@ -109,6 +109,10 @@ import Api from "@/api";
 import Cookies from "js-cookie";
 import { useState } from "@akar/vue-hooks";
 
+const iconSet = new Map([
+  ['.pdf', require('../../../assets/images/pdf.jpeg')],
+  ['pptx', require('../../../assets/images/pptx.jpeg')],
+])
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const [superior, setSuperior] = useState("");
 const getSuperior = () => { return superior.value }
@@ -293,7 +297,7 @@ const handleClick = async (e, v) => {
 const uploadSuccess = (response: any) => {
   setPackageList([...packageList.value, ...response.data]);
 };
-//
+
 onMounted(() => {
   getPackages();
   getPortfolio();
@@ -323,7 +327,7 @@ onMounted(() => {
     overflow-y: auto;
     figure {
       float: left;
-      width: 100px;
+      width: 110px;
       margin: 12px 6px;
       padding: 12px 0;
       display: flex;
@@ -371,7 +375,7 @@ onMounted(() => {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100px;
+        max-width: 110px;
         padding: 0 6px;
       }
     }

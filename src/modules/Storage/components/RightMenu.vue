@@ -10,8 +10,6 @@
         :headers="{
           'Authorization': 'Bearer ' + Cookies.get('token')
         }"
-        multiple
-        :limit="1"
         :show-file-list="false"
       >
         <span

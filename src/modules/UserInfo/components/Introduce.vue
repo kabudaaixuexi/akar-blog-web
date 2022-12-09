@@ -5,7 +5,11 @@
     element-loading-svg-view-box="-10, -10, 50, 50"
     class="intorduce-container"
   >
-    <el-card v-if="state.major" class="intorduce-container-card">
+    <el-card v-if="state.school" class="intorduce-container-card">
+      <span>毕业院校：</span>
+      <span>{{state.school}}</span>
+    </el-card>
+    <el-card v-if="state.major" class="intorduce-container-card mt20">
       <span>所学专业：</span>
       <span>{{state.major}}</span>
     </el-card>
