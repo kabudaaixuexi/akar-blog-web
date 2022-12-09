@@ -142,7 +142,7 @@ const star = computed(() => {
 const skim = computed(() => {
   let count = 0;
   list.value.map((i) => {
-    count += i.extData?.skim?.length || 0;
+    count +=  Number(i.extData?.skim || 0)
   });
   return count;
 });

@@ -19,7 +19,7 @@
         <span class="c666">原创</span>
       </div>
       <div>
-        <span class="b500">{{ skim.length || 0 }}</span>
+        <span class="b500">{{ skim || 0 }}</span>
         <span class="c666">浏览</span>
       </div>
       <div>
@@ -69,7 +69,7 @@ const userInfo = JSON.parse(Cookie.get("userInfo") || "{}");
 const [user, setUser] = useState({});
 const [loading, setLoading] = useState(true);
 const [pulish, setPulish] = useState([]);
-const [skim, setSkim] = useState([]); // 浏览
+const [skim, setSkim] = useState(0); // 浏览
 const [take, setTake] = useState([]); // 收藏
 const [star, setStar] = useState([]); // 点赞
 const [integral, setIntegral] = useState(0); // 积分
@@ -89,15 +89,15 @@ const getList = async () => {
   const { data: pulish } = await Api.getNoteListPublished({ type: 0, uid });
   setPulish(pulish);
   // 计算浏览 获赞 被收藏
-  let temStar:any[] = [], temTake:any[] = [], temSkim:any[] = []
+  let temStar:any[] = [], temTake:any[] = [], temSkim:any = 0
   pulish.forEach(et => {
     const extData = et.extData || {}
     temStar = [...temStar, ...(extData.star || [])]
     temTake = [...temTake, ...(extData.take || [])]
-    temSkim = [...temSkim, ...(extData.skim || [])]
+    temSkim = Number(extData.skim) + temSkim
   });
   setStar(temStar);setSkim(temSkim);setTake(temTake);
-  setIntegral(pulish.length * 100 + fans.value.length * 100 + temSkim.length * 1 + temStar.length * 20 + temTake.length * 50) // 积分计算规则：原创 = 100; 粉丝 = 100; 浏览 = 1; 获赞 = 20; 被收藏 = 50;
+  setIntegral(pulish.length * 100 + fans.value.length * 100 + temSkim * 1 + temStar.length * 20 + temTake.length * 50) // 积分计算规则：原创 = 100; 粉丝 = 100; 浏览 = 1; 获赞 = 20; 被收藏 = 50;
   setLoading(false);
 };
 // 关注 follow // fans
@@ -197,11 +197,12 @@ onMounted(() => {
   min-height: 180px;
   margin-bottom: 12px;
   padding-bottom: 18px;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1);
   &__header {
     display: flex;
     padding: 12px;
+    border-bottom: calc(1px / 2) solid rgb(239, 236, 236);
     img {
       display: block;
       width: 36px;
@@ -220,7 +221,7 @@ onMounted(() => {
     display: grid;
     font-size: 12px;
     transform: scale(0.94);
-    padding: 6px 12px;
+    padding: 10px 12px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     div {
@@ -256,14 +257,14 @@ onMounted(() => {
     padding: 0 10%;
     margin-top: 12px;
     div {
-      padding: 3px 40px;
+      padding: 6px 40px;
       white-space: nowrap;
       display: grid;
       place-content: center;
       border-radius: 22px;
-      border: calc(1px / 2) solid var(--xs-color-info);
-      transition: all 0.2s;
-      transform: scale(0.9);
+      border: calc(1px / 2) solid var(--xs-color-warning-light-3);
+      transition: all 0.3s;
+      transform: scale(0.88);
       &:hover {
         transform: scale(1);
         cursor: pointer;

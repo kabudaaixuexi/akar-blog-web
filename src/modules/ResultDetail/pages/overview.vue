@@ -7,6 +7,9 @@
     </template>
 
     <template #sideLeft>
+      <figure class="cover mb12">
+        <img v-if="noteInfo.cover" :src="noteInfo.cover" />
+      </figure>
       <BloggerCard :getState="() => (noteInfo)" />
       <!-- <BlogRanking :type="6"/> -->
     </template>
@@ -26,7 +29,19 @@
             </span>
           </p>
         </div>
-        <div class="result-detail-header__options"></div>
+        <div class="result-detail-header__options flex">
+          <figcaption class="f12 ml12">标签：</figcaption>
+          <el-tag
+            v-for="item in noteInfo.tags"
+            :key="item"
+            type="success"
+            effect="plain"
+            class="ml12"
+          >
+            {{ item }}
+          </el-tag>
+          <span v-if="!noteInfo.tags?.length" class="f12 ml12 c666">无</span>
+        </div>
       </header>
       <article id="xs-editor-note"></article>
       <footer class="result-detail-footer">
@@ -220,6 +235,14 @@ onMounted(async () => {
   min-height: calc(100% - 236px);
 }
 
+.cover {
+  padding: 6px;
+  background-color: #fff;
+  border-radius: 4px;
+    img {
+      width: 100%;
+    }
+}
 .result-detail-header {
   background: #fff;
   width: 100%;
@@ -243,10 +266,11 @@ onMounted(async () => {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
   &__options {
-    border: calc(1px / 2) solid var(--xs-color-info-light-9);
+    border: calc(1px / 2) solid var(--xs-color-primary-light-9);
     margin-top: 12px;
     height: 36px;
     width: 100%;
+    align-items: center;
   }
 }
 .result-detail-footer {
