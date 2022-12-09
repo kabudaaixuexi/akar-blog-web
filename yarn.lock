@@ -5310,6 +5310,11 @@ vite@^2.9.8:
   optionalDependencies:
     fsevents "~2.3.2"
 
+vue-baidu-calendar@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.npmjs.org/vue-baidu-calendar/-/vue-baidu-calendar-1.0.8.tgz#a5818b9f7d75e511bcb13d70763e540b8bd05b8a"
+  integrity sha512-zuqkfaZt81C2hnG0Mk1DeMz1JrhWV2WEsfn2OOCOfwh2k+HLmGwidWAvurTvVWeEZeC6jfuSbb2Iebbp4YyDDA==
+
 vue-demi@*:
   version "0.12.5"
   resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.12.5.tgz"

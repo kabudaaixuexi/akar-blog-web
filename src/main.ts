@@ -11,11 +11,13 @@ import ElementPlus from 'element-plus'
 import './utils/socket.io'
 import Fonts from '@/assets/fonts'
 import '@akar/xs-editor/lib/style/common.css'
-
+// import 'vue-baidu-calendar/dist/index.css'
 
 import GlobalComponents from '@/components'
 import Mixin from './mixins'
 import Widgets from './widgets'
+import BaiduCalendar from "vue-baidu-calendar"
+
 
 const app = createApp(App)
 
@@ -32,6 +34,7 @@ app
       // ...其它选项
     },
   })
+  .use(BaiduCalendar)
   .use(Fonts)
   .mixin(Mixin)
   .mount('#app')

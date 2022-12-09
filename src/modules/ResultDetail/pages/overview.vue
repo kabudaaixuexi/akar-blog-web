@@ -12,7 +12,7 @@
       </figure>
       <BloggerCard :getState="() => (noteInfo)" />
       <figure class="calendar">
-        <vue-hash-calendar />
+        <baidu-calendar @change="() => {}"  />
       </figure>
     </template>
     <template #content>
@@ -247,6 +247,19 @@ onMounted(async () => {
 }
 .calendar {
   width: 100%;
+  height: 316px;
+  padding: 6px;
+  background-color: #fff;
+  border-radius: 4px;
+  &:deep() {
+    .op-calendar-pc {
+      box-shadow: none;
+    }
+    .op-calendar-pc-left {
+      transform: scale(.64) translate(-141px,-133px);
+      border: none;
+    }
+  }
 }
 .result-detail-header {
   background: #fff;
