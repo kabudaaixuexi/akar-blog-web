@@ -7,10 +7,10 @@
     </template>
 
     <template #sideLeft>
+      <BloggerCard :getState="() => (noteInfo)" />
       <figure class="cover mb12">
         <img v-if="noteInfo.cover" :src="noteInfo.cover" />
       </figure>
-      <BloggerCard :getState="() => (noteInfo)" />
       <figure class="calendar">
         <baidu-calendar @change="() => {}"  />
       </figure>
