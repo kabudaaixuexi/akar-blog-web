@@ -83,7 +83,7 @@ onMounted(async () => {
   outline: none;
   flex: 1;
   z-index: 1;
-  height: 100%;
+  max-height: calc(100vh - 120px);
   width: 100%;
   background: #fff;
 }

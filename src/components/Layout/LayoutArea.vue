@@ -96,6 +96,7 @@ $headerHeight: 48px;
   overflow: hidden;
   background-color: var(--bgCommomColor);
   background-image: url('../../assets/images/logo-background.jpg');
+  background-size: auto 100vh;
   .layout-area-container__top {
 
   }
