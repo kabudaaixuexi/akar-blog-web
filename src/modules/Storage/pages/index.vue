@@ -347,6 +347,7 @@ onMounted(() => {
       }
       img {
         max-height: 66px;
+        max-width: 100%;
         min-height: 66px;
         width: auto;
         margin-bottom: 10px;
