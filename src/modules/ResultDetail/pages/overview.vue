@@ -8,8 +8,8 @@
 
     <template #sideLeft>
       <BloggerCard :getState="() => (noteInfo)" />
-      <figure class="cover mb12">
-        <img v-if="noteInfo.cover" :src="noteInfo.cover" />
+      <figure v-if="noteInfo.cover" class="cover mb12">
+        <img :src="noteInfo.cover" />
       </figure>
       <figure class="calendar">
         <baidu-calendar @change="() => {}"  />
