@@ -8,20 +8,20 @@
 
     <template #sideLeft>
       <BloggerCard :getState="() => (noteInfo)" />
-      <figure v-if="noteInfo.cover" class="cover mb12">
+      <figure v-if="noteInfo.cover" class="cover mb12 BgColor_Content">
         <img :src="noteInfo.cover" />
       </figure>
-      <figure class="calendar">
+      <figure class="calendar BgColor_Calendar">
         <baidu-calendar @change="() => {}"  />
       </figure>
     </template>
     <template #content>
-      <header class="result-detail-header">
-        <div class="result-detail-header__title">{{ noteInfo.subtitle || "--" }}</div>
+      <header class="result-detail-header BgColor_Content">
+        <div class="result-detail-header__title Color_Content">{{ noteInfo.subtitle || "--" }}</div>
         <div class="result-detail-header__detail">
           <p>
             <span style="padding-right: 24px"
-              ><span class="cp" @click="() => router.push(`/uf/${noteInfo.uid}/hp`)" style="color: #000; padding-right: 12px">{{ noteInfo.uid }}</span>
+              ><span class="cp Color_Content" @click="() => router.push(`/uf/${noteInfo.uid}/hp`)" style="padding-right: 12px">{{ noteInfo.uid }}</span>
               <span style="padding-left: 6px; color: var(--xs-color-info)"
                 >于 {{ noteInfo.latestTime }} 发布</span
               >
@@ -32,13 +32,13 @@
           </p>
         </div>
         <div class="result-detail-header__options flex">
-          <figcaption class="f12 ml12">标签：</figcaption>
+          <figcaption class="f12 ml12 Color_Content">标签：</figcaption>
           <el-tag
             v-for="item in noteInfo.tags"
             :key="item"
             type="success"
             effect="plain"
-            class="ml12"
+            class="ml12 BgColor_Content"
           >
             {{ item }}
           </el-tag>
@@ -46,13 +46,20 @@
         </div>
       </header>
       <article id="xs-editor-note"></article>
-      <footer class="result-detail-footer">
+      <footer class="result-detail-footer BgColor_Content">
         <div class="result-detail-footer__left">
           <img v-if="user?.userPortrait" :src="user?.userPortrait" />
           <img v-else src="@/assets/images/navigation-avatar.webp" />
-          <b>{{ noteInfo.uid }}</b>
+          <b class="Color_Content">{{ noteInfo.uid }}</b>
         </div>
-        <figure class="result-detail-footer__right">
+        <figure class="result-detail-footer__right Color_Content">
+          <TooltipCustom
+            :content="'好文章当然要分享啦！'"
+          >
+            <div @click="changeShare">
+              <el-icon class="mr6 ml12" :size="16"><Share /></el-icon>
+            </div>
+          </TooltipCustom>
           <TooltipCustom
             :content="
               stars.length
@@ -62,7 +69,7 @@
           >
             <div @click="changeStar">
               <el-icon :size="16" :color="stars.includes(userInfo.userName) ? '#FA5555' : ''"
-                ><Sugar /></el-icon
+                ><MagicStick /></el-icon
               ><span
                 :style="`padding-left: 6px;color: ${
                   stars.includes(userInfo.userName) ? '#FA5555' : ''
@@ -80,7 +87,7 @@
           >
             <div @click="changeTake">
               <el-icon :size="16" :color="takes.includes(userInfo.userName) ? '#FA5555' : ''"
-                ><Star /></el-icon
+                ><StarFilled /></el-icon
               ><span
                 :style="`padding-left: 6px;color: ${
                   takes.includes(userInfo.userName) ? '#FA5555' : ''
@@ -89,12 +96,6 @@
               >
             </div>
           </TooltipCustom>
-          <!-- <TooltipCustom :content="`评论功能暂时还未开发～`">
-            <div>
-              <el-icon :size="16"><ChatLineSquare /></el-icon>
-              <span style="padding-left: 6px">{{ noteInfo.extData?.eval?.length || 0 }}</span>
-            </div>
-          </TooltipCustom> -->
           <div class="my-tag">
             {{ draweOptions.find((i) => i.value == noteInfo.drawe)?.label || "全部" }}
           </div>
@@ -114,10 +115,11 @@ import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted } from "vue";
 import Store from "@/store";
+import { copyText } from "@/utils"
 import Api from "@/api";
 import foundEdit from "@akar/xs-editor";
 import { useState } from '@akar/vue-hooks'
-import { Star, Present, Clock, Sugar } from "@element-plus/icons-vue";
+import { StarFilled, MagicStick, Share } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const draweOptions = Store.getState('noteClassify')
@@ -137,6 +139,11 @@ const checkLogin = () => {
     ElMessage.error("登录后才能进行点赞");
   }
   return Object.getOwnPropertyNames(userInfo).length
+}
+// 分享
+const changeShare = () => {
+  copyText(import.meta.env.VITE_LOCATION + route.path)
+  ElMessage.success('链接已复制到剪切板，快去分享吧～')
 }
 // 点赞
 const changeStar = async () => {
@@ -186,20 +193,29 @@ const changeTake = async () => {
 };
 
 // 展示富文本
-const foundXsEditor = (value, watermark) => {
+const themeMap = new Map([
+  ['dark', 'silent'],
+  ['light', 'classic'],
+])
+const foundXsEditor = (value, watermark, pattern = themeMap.get(Store.getState('theme') || 'light')) => {
   foundEdit(
     document.querySelector("#xs-editor-note"),
     {
       value,
       operable: false,
       watermark,
-      pattern: "classic", // silent | classic
+      pattern, // silent | classic
     },
     () => {}
   );
 };
-
+const handleTheme = () => {
+  Store.watch('theme', (value) => {
+    foundXsEditor(noteInfo.value.vNode, noteInfo.value.uid, value === 'dark' ? 'silent' : 'classic')
+  })
+}
 onMounted(async () => {
+
   const { data } = await Api.getNoteListPublished({ type: 2, noteid: route.params.noteId });
   setStars(data.extData?.star || [])
   setTakes(data.extData?.take || [])
@@ -209,6 +225,7 @@ onMounted(async () => {
   foundXsEditor(data.vNode, data.uid);
   const { data: user } = await Api.getUser({ uid:data.uid });
   setUser(user);
+  handleTheme()
 });
 </script>
 
@@ -237,10 +254,7 @@ onMounted(async () => {
 }
 
 .cover {
-  padding: 6px;
-  background-color: #fff;
   border-radius: 4px;
-  min-height: 80px;
     img {
       width: 100%;
     }
@@ -262,12 +276,11 @@ onMounted(async () => {
   }
 }
 .result-detail-header {
-  background: #fff;
   width: 100%;
   padding-bottom: 12px;
   &__title {
     font-size: 22px;
-    padding: 12px 0;
+    padding: 12px;
     font-weight: 600;
   }
   &__detail {
@@ -276,7 +289,6 @@ onMounted(async () => {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    background: var(--xs-color-info-light-9);
     padding: 12px 12px 8px 12px;
     margin: 6px 0;
     border-radius: 4px;

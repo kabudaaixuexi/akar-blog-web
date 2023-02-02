@@ -1,6 +1,6 @@
 <template>
   <router-link :to="`/lett/${dataset.noteid}/ov`">
-    <ul class="project-item-container">
+    <ul class="project-item-container BgColor_Notice">
       <li style="flex: 1; min-width: 0">
         <div class="project-item__name">
           <div class="project-item__name-left">
@@ -13,7 +13,7 @@
             <IconFont v-else icon="iconfile" />
           </div>
           <div class="project-item__name-desc">
-            <div class="project-item__name-desc__corpname">
+            <div class="project-item__name-desc__corpname Color_Content">
               <span class="project-item__name-desc__corpname-maintext text_nowrap">{{
                 dataset.subtitle || "未设置文章标题"
               }}</span>
@@ -32,7 +32,7 @@
         </div>
       </li>
 
-      <li class="project-item-time text_nowrap">
+      <li class="project-item-time text_nowrap Color_Content">
         {{ dataset.createTime }}
       </li>
       <li
@@ -53,7 +53,7 @@
               : '发布到社区，别人也可以看到哦'
           "
         >
-          <span @click.prevent="handlePublish(dataset.noteid)" class="project-item-action__status">
+          <span @click.prevent="handlePublish(dataset.noteid)" class="project-item-action__status Color_Content">
             {{ dataset.published ? "停止分享" : "发布" }}
           </span>
         </TooltipCustom>
@@ -177,16 +177,10 @@ export default defineComponent({
   padding: 0 24px;
   box-shadow: 0px 1px 4px 0px rgba(#000, 0.08);
   border-radius: 8px;
-  background: #fff;
   margin-bottom: 16px;
-  transition: all 0.3s;
-  color: #303133;
   user-select: none;
   border: 1px solid transparent;
-  &:hover {
-    box-shadow: 0 10px 30px -20px rgba(#000, 0.24);
-    background: linear-gradient(to right,#f3f8f1,#fff);
-  }
+
   .project-item__name {
     display: flex;
     align-items: center;
@@ -213,7 +207,7 @@ export default defineComponent({
         display: flex;
         align-items: center;
         font-size: 14px;
-        color: #303133;
+        padding: 2px 6px;
         .project-item__name-desc__corpname-maintext {
           max-width: 80%;
           margin-right: 10px;

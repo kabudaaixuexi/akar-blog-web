@@ -6,7 +6,7 @@
         'fixed-header': fixed
       }"
     >
-      <div class="navbar-header-box">
+      <div class="navbar-header-box BgColor_Header">
         <slot></slot>
         <div style="flex: 1;"></div>
         <NavigationSideAction />
@@ -52,8 +52,7 @@ $headerHeight: 48px;
   .navbar-header-box {
     display: flex;
     height: 100%;
-    padding: 0 16px;
-    background-color: var(--bgHeaderColor);
+    padding: 0 10px;
   }
 }
 </style>

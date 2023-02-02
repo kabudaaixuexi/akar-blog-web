@@ -16,7 +16,7 @@
           v-if="!inputVisible && showInput"
           :title="title"
           @click="(showInput && heihei) ? setInputVisible(true) : () => {}"
-          class="layout-section-container__header-title text_nowrap"
+          class="layout-section-container__header-title text_nowrap Color_Content"
         >
           {{ title || '点击设置文章标题'}}
         </h1>
@@ -118,6 +118,7 @@ export default defineComponent({
         height: 18px;
         font-size: 18px;
         line-height: 18px;
+        width: min-content;
         font-weight: 500;
       }
     }

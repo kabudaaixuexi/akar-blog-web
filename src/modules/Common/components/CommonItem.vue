@@ -1,6 +1,6 @@
 <template>
   <router-link :to="`/e98f/${dataset.noteid}/ov`">
-    <article @click="changeSkim" class="common-item-container">
+    <article @click="changeSkim" class="common-item-container Color_Content">
       <h4 style="margin-bottom: 12px">{{dataset.subtitle || '无文章标题'}}</h4>
       <div class="common-item-content">
         <img v-if="dataset.cover" class="common-item-content__img" :src="dataset.cover" alt="">
@@ -110,16 +110,11 @@ export default defineComponent({
   border-radius: 8px;
   box-sizing: border-box;
   margin-bottom: 16px;
-  transition: all 0.3s;
-  color: #303133;
   user-select: none;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.15), 1px 2px 6px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 0px 0px var(--shadowColor_Content), 1px 2px 6px 0px var(--shadowColor_Content) ;
   display: flex;
   flex-direction: column;
-  &:hover {
-    font-weight: 460;
-    background-color:#f3f8f1;
-  }
+
   h4 {
     width: 100%;
     white-space: nowrap;
@@ -148,7 +143,8 @@ export default defineComponent({
       justify-content: space-between;
       height: 120px;
       padding: 8px 16px;
-      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      // font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-family:monospace;
       .common-item-content-text {
         font-size: 12px;
         line-height: 150%;

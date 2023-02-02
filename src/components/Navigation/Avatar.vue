@@ -1,9 +1,10 @@
 <template>
-  <el-dropdown class="navigation-avatar" trigger="click">
+  <el-dropdown class="navigation-avatar cp" trigger="click">
     <div style="padding: 0 12px">
       <img v-if="userInfo.userPortrait" :src="userInfo.userPortrait" />
       <img v-else src="@/assets/images/navigation-avatar.webp" />
     </div>
+
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
@@ -21,6 +22,7 @@
       </el-dropdown-menu>
     </template>
   </el-dropdown>
+  <Trans1s />
 </template>
 
 <script lang="ts">
@@ -28,6 +30,7 @@ import Cookie from "js-cookie";
 import { computed, defineComponent } from "vue";
 import Store from "@/store";
 import { getUuiD } from "@/utils";
+import Trans1s from "@/components/Trans1s/index.vue"
 import { SwitchButton, User, Switch, Right } from "@element-plus/icons-vue";
 import { useRoute, useRouter } from "vue-router";
 
@@ -38,11 +41,13 @@ export default defineComponent({
     User,
     Switch,
     Right,
+    Trans1s
   },
   setup() {
     const router = useRouter();
     const route = useRoute();
     const userInfo = JSON.parse(Cookie.get("userInfo") || "{}");
+    console.log(JSON.parse(userInfo.extData || '{}'),'userInfo');
 
     const logined = userInfo && Object.getOwnPropertyNames(userInfo).length;
     const commandList = computed(() => [
@@ -54,14 +59,6 @@ export default defineComponent({
           userInfo.userName && router.push({ path: `/uf/${userInfo.userName}/hp`, replace: true });
         },
       },
-      // {
-      //   visible: true,
-      //   label: `前往极简版`,
-      //   icon: "right",
-      //   click: () => {
-      //     window.open("http://124.220.16.124/simplel291dvdg.html#/");
-      //   },
-      // },
       {
         visible: !logined,
         label: "前往登录",
@@ -97,15 +94,15 @@ export default defineComponent({
 <style lang="scss">
 .navigation-avatar {
   display: flex;
+  padding-right: 6px;
   align-items: center;
-  cursor: pointer;
   user-select: none;
   img {
-    transition: .2s;
-    width: 26px;
-    border: 1px solid $color-primary;
+    width: 35px;
     border-radius: 50%;
+    transition: all .5s;
   }
+
 }
 .navigation-avatar__dropdown-command {
   display: flex;

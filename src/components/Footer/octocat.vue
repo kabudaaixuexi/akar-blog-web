@@ -413,7 +413,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .octocat-link {
   width: 22px;
-  margin: 0 6px;
+  height: 22px;
+  margin: 6px;
   color: #71717a;
   transition: .2s color;
   &:hover {

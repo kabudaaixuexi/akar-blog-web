@@ -16,8 +16,8 @@
     </template>
 
     <template #content>
-      <section class="storage-content" id="storage-content">
-        <header class="storage-content__header">
+      <section class="storage-content BgColor_Content" id="storage-content">
+        <header class="storage-content__header Color_Content">
           <span style="padding-right: 24px; line-height: 60%" @click="upperLevel">
             <svg
               t="1653725158648"
@@ -71,7 +71,7 @@
                 :data-path="port"
               ></path>
             </svg>
-            <figcaption data-type="portfolio" :data-path="port">
+            <figcaption class="Color_Content" data-type="portfolio" :data-path="port">
               {{ port.substring(port.lastIndexOf("/") + 1, port.length) }}
             </figcaption>
           </figure>
@@ -370,7 +370,7 @@ onMounted(() => {
       &:hover {
         transition: 0.23s;
         color: #000;
-        background-color: rgb(226, 223, 223);
+        background-color: var(--shadowColor_Content);
       }
       figcaption {
         white-space: nowrap;

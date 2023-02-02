@@ -1,5 +1,5 @@
 <template>
-  <div  class="common-select-tag-container">
+  <div  class="common-select-tag-container Color_Content">
     <figcaption @click="handleChange(item.value)" :class="`${(currentDrawe || 0) == item.value ? 'current': ''}`" v-for="(item, i) in draweOptions" :key="i">
       {{item.value == 0 ? '全部' : item.label}}
     </figcaption>
@@ -25,7 +25,6 @@ const handleChange = (e) => {
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
   display: flex;
   overflow-x: auto;
-  background-color: var(--bgContentColor);
   flex-wrap: nowrap;
   figcaption {
     transition: all .2s;
@@ -36,7 +35,6 @@ const handleChange = (e) => {
     font-size: 12px;
     font-weight: 500;
     font-family: 'Courier New', Courier, monospace;
-    color: var(--xs-color-info-dark-2);
     cursor: pointer;
     &:hover {
       color: var(--xs-color-danger);

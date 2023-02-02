@@ -1,23 +1,23 @@
 <template>
   <article class="result-detail-comment">
     <header>
-      <span>全部评论（{{evals.length}}）</span>
+      <span class="Color_Content">全部评论（{{evals.length}}）</span>
       <el-button size="small" @click="handleWriteEval" :icon="Edit" type="primary" round plain>写评论</el-button>
     </header>
     <div :style="i.reply ? 'padding-left:40px' : ''" :key="key" v-for="(i, key) in evals">
       <div class="eval-head">
         <img :src="i.userPortrait" alt="">
-        <div class="eval-head__other">
+        <div class="eval-head__other Color_Content">
           <b>{{ i.userName }}
             <small v-if="i.userName === props.getNoteInfo().uid">( 作者 )</small>
             <span class="reply" v-if="i.reply">&nbsp;回复&nbsp;<u>{{i.reply}}</u>&nbsp;的评论</span></b>
           <p>{{ i.evalTime}}</p>
         </div>
       </div>
-      <div class="eval-cont">
+      <div class="eval-cont Color_Content">
         {{i.evalContent}}
       </div>
-      <div class="eval-option">
+      <div class="eval-option Color_Content">
         <b @click="() => handleWriteEval(i)"><el-icon><Comment /></el-icon> 回复</b>
         <b v-if="userInfo.userName === i.userName" @click="() => handleDeleteEval(i)"><el-icon><DeleteFilled /></el-icon> 删除</b>
       </div>
@@ -179,6 +179,8 @@ setTimeout(() => setEvals(filterEval(props.getEvals())), 1888)
       display: flex;
       flex-direction: column;
       font-size: 16px;
+      padding: 2px;
+      border-radius: 2px;
       p {
         font-size: 12px;
         margin-top: 6px;
@@ -194,10 +196,12 @@ setTimeout(() => setEvals(filterEval(props.getEvals())), 1888)
   }
   .eval-cont {
     padding-left: 48px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
   .eval-option {
     padding: 12px 0 18px 48px;
-    border-bottom: calc(1px / 2) solid #f1f1f1;
+    border-bottom: calc(1px / 2) solid var(--shadowColor_Content);
     display: flex;
     b {
       cursor: pointer;
@@ -205,7 +209,6 @@ setTimeout(() => setEvals(filterEval(props.getEvals())), 1888)
       font-size: 12px;
       margin-right: 14px;
       align-items: center;
-      color: #666;
       width: 40px;
       font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
       justify-content: space-between;

@@ -16,7 +16,7 @@
           </div>
         </aside>
         <!-- content -->
-        <section :class="`${$slots.sideRight ? 'content-section-container-a' : ($slots.sideLeft ? 'content-section-container-b' : 'content-section-container-c')}`" :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''}; background-color: ${contentColor}`" id="content-section-container" class="content-section-container">
+        <section :class="`${$slots.sideRight ? 'content-section-container-a' : ($slots.sideLeft ? 'content-section-container-b' : 'content-section-container-c')}`" :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''};`" id="content-section-container" class="content-section-container BgColor_Content">
           <main class="main-content-box">
             <div
               class="inner-content"
@@ -46,7 +46,6 @@
 <script lang="ts">
 import Background from '@/components/Background/index.vue'
 import { defineComponent } from 'vue'
-
 /**
  * 上下左右布局，顶部导航 + (底部左侧侧边栏 + 底部右侧内容区域)
  */
@@ -74,10 +73,6 @@ export default defineComponent({
     contentBottom: {
       type: Number
     },
-    contentColor: {
-      type: String,
-      default: 'var(--bgPlateColor)'
-    }
   }
 })
 </script>
@@ -94,9 +89,9 @@ $headerHeight: 48px;
   height: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background-color: var(--bgCommomColor);
-  background-image: url('../../assets/images/logo-background.jpg');
-  background-size: auto 100vh;
+  background-image: var(--bgImage_Content);
+  background-size: 100vw 100vh;
+  transition: 1s;
   .layout-area-container__top {
 
   }

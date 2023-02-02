@@ -3,53 +3,53 @@
     v-loading="loading"
     :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50"
-    class="blogger-card-container"
+    class="blogger-card-container BgColor_Content"
   >
     <header class="blogger-card-container__header">
       <img class="cp" @click="() => router.push(`/uf/${user.userName}/hp`)" v-if="user.userPortrait" :src="user.userPortrait" alt="" />
       <img v-else src="../../assets/images/navigation-avatar.webp" alt="" />
       <figure>
-        <span style="font-weight: 500">{{ user.userName || "--" }}</span>
-        <span style="font-size: 12px; color: #666">{{ user.createdAt }} 加入社区</span>
+        <span class="Color_Content" style="font-weight: 500">{{ user.userName || "--" }}</span>
+        <span class="Color_Content" style="font-size: 12px;">{{ user.createdAt }} 加入社区</span>
       </figure>
     </header>
     <article class="blogger-card-container__harvest">
       <div>
-        <span class="b500">{{ pulish.length || 0 }}</span>
-        <span class="c666">原创</span>
+        <span class="b500 Color_Content">{{ pulish.length || 0 }}</span>
+        <span class="Color_Content">原创</span>
       </div>
       <div>
-        <span class="b500">{{ skim || 0 }}</span>
-        <span class="c666">浏览</span>
+        <span class="b500 Color_Content">{{ skim || 0 }}</span>
+        <span class="Color_Content">浏览</span>
       </div>
       <div>
-        <span class="b500">{{ star.length || 0 }}</span>
-        <span class="c666">获赞</span>
+        <span class="b500 Color_Content">{{ star.length || 0 }}</span>
+        <span class="Color_Content">获赞</span>
       </div>
       <div>
-        <span class="b500">{{ take.length || 0 }}</span>
-        <span class="c666">收藏</span>
+        <span class="b500 Color_Content">{{ take.length || 0 }}</span>
+        <span class="Color_Content">收藏</span>
       </div>
     </article>
     <article class="blogger-card-container__info">
       <div>
-        <span class="b500">{{ fans.length || 0 }}</span>
-        <span class="c666">粉丝</span>
+        <span class="b500 Color_Content">{{ fans.length || 0 }}</span>
+        <span class="Color_Content">粉丝</span>
       </div>
       <div>
-        <span class="b500">{{ follow.length || 0 }}</span>
-        <span class="c666">关注</span>
+        <span class="b500 Color_Content">{{ follow.length || 0 }}</span>
+        <span class="Color_Content">关注</span>
       </div>
       <div>
-        <span class="b500">{{ integral }}</span>
-        <span class="c666">积分</span>
+        <span class="b500 Color_Content">{{ integral }}</span>
+        <span class="Color_Content">积分</span>
       </div>
     </article>
     <article v-if="userInfo.userName != user.userName" class="blogger-card-container__footer">
-      <div @click="handleFollow">
+      <div class="Color_Content" @click="handleFollow">
         {{ fans.find(ev => ev.userName == userInfo.userName) ? "已关注" : "关 注" }}
       </div>
-      <div @click="handleDialogue">私 信</div>
+      <div class="Color_Content" @click="handleDialogue">私 信</div>
     </article>
   </div>
 </template>
@@ -191,7 +191,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 .blogger-card-container {
   position: relative;
-  background: #fff;
   overflow: hidden;
   width: 100%;
   min-height: 180px;
@@ -202,7 +201,7 @@ onMounted(() => {
   &__header {
     display: flex;
     padding: 12px;
-    border-bottom: calc(1px / 2) solid rgb(239, 236, 236);
+    border-bottom: calc(1px / 2) solid var(--shadowColor_Content);
     img {
       display: block;
       width: 36px;
@@ -237,7 +236,7 @@ onMounted(() => {
     font-size: 12px;
     padding: 6px 0;
     transform: scale(0.9);
-    border-top: calc(1px / 2) solid var(--xs-color-info-light-9);
+    border-top: calc(1px / 2) solid var(--shadowColor_Content);
     grid-template-columns: 1fr 1fr 1fr;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     div {
@@ -268,7 +267,6 @@ onMounted(() => {
       &:hover {
         transform: scale(1);
         cursor: pointer;
-        background-color: var(--xs-color-warning-light-8);
         border: none;
       }
     }

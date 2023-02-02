@@ -4,11 +4,8 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 
-export default {
-  name: 'NotFound'
-}
 </script>
 
 <style>

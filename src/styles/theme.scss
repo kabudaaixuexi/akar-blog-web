@@ -1,18 +1,96 @@
 
-@use '@/styles/element-variables.scss' as *;
-@use "element-plus/theme-chalk/src/index" as *;
+@mixin themeTransition {
+  transition: all 1s
+}
+body.light { // b
+  --bgImage_Content: url('../assets/images/login-bg.jpeg'); // 全局背景图
+  --iconImage_Header: url('../assets/images/logo-akar.svg'); // 头部icon
+  
 
+  --bgColor_Header : #fff; // 顶部导航背景
+  .BgColor_Header {
+    @include themeTransition;
+    background-color: #fff;
+  }
 
+  --color_Header: #000;
+  .Color_Header {
+    color: #000;
+  }
 
-#nprogress .bar {
-  background: $color-primary !important;
+  .Color_Content {
+    transition: .3s;
+    color: #000;
+  }
+  --shadowColor_Content : rgba(0,0,0,.15);
+  .Color_Content:hover {
+    transition: .3s;
+    background-color:#f3f8f1;
+  }
+  .BgColor_Content {
+    @include themeTransition;
+    background-color: #fff;
+  }
+
+  .BgColor_Calendar {
+    @include themeTransition;
+    background-color: #fff;
+  }
+  
+  .BgColor_Notice {
+    @include themeTransition;
+    background-color: #fff;
+    &:hover {
+      box-shadow: 0 10px 30px -20px rgba(#000, 0.24);
+      background: linear-gradient(to right,#f3f8f1,#fff);
+    }
+  }
+  
 }
 
-#nprogress .peg {
-  box-shadow: 0 0 10px $color-primary, 0 0 5px $color-primary !important;
-}
+body.dark { // h
+  --bgImage_Content: url('../assets/images/logo-background.jpg'); // 全局背景图
+  --iconImage_Header: url('../assets/images/logo-akar.svg'); // 头部icon
+  
 
-#nprogress .spinner-icon {
-  border-top-color: $color-primary;
-  border-left-color: $color-primary;
+  --bgColor_Header : #333; // 顶部导航背景
+  .BgColor_Header {
+    @include themeTransition;
+    background-color: #333;
+  }
+
+  --color_Header: #fff;
+  .Color_Header {
+    color: #fff;
+  }
+ 
+  .Color_Content {
+    transition: .3s;
+    color: #fff;
+  }
+  --shadowColor_Content : rgba(255,255,255,.35);
+  .Color_Content:hover {
+    transition: .3s;
+    background-color:#4a4b4a;
+  }
+  .BgColor_Content {
+    @include themeTransition;
+    background-color: #333;
+  }
+
+  .BgColor_Calendar {
+    @include themeTransition;
+    background-color: rgb(211, 202, 202);
+  }
+
+  .BgColor_Notice {
+    transition: 0;
+    background-color: #535151;
+    &:hover {
+      transition: .5s;
+      box-shadow: 0 10px 30px -20px rgba(#000, 0.24);
+      background: linear-gradient(to right,#626362,rgb(92, 90, 90));
+    }
+  }
+  
 }

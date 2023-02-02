@@ -53,7 +53,6 @@ export default defineComponent({
   padding: 10px 24px;
   font-weight: 400;
   line-height: 20px;
-  background-color: var(--bgContentColor);
   color: #909399;
   .project-table-header-container__head-item {
   }

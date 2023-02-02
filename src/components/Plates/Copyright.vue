@@ -1,10 +1,10 @@
 <template>
-  <article class="copyright-container">
+  <article class="copyright-container BgColor_Content">
     <div class="copyright-container__index">
-      <a class="link" href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2022021650号-1</a>
+      <a class="link Color_Content" href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2022021650号-1</a>
     </div>
     <div class="copyright-container__aboutus">
-      <a class="link" href="">联系站长 「kaburda@163.com」</a>
+      <a class="link Color_Content" href="">联系站长 「kaburda@163.com」</a>
     </div>
 
     <div class="copyright-container__wechat">
@@ -17,7 +17,7 @@
         <!-- <figcaption>weChat</figcaption> -->
       </figure>
     </div>
-    <div class="copyright-container__copyright">
+    <div class="copyright-container__copyright Color_Content">
       <Octocat />
         版权所有 © 2020-PRESENT <a
           target="_blank"
@@ -49,12 +49,12 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .copyright-container {
-  background: #fff;
   margin-bottom: 12px;
   padding: 10px;
   border-radius: 6px;
   font-size: 13px;
-  box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-shadow: 0 0 1px 0 var(--shadowColor_Content);
   &__aboutus {
     margin: 4px 0;
   }
@@ -76,10 +76,10 @@ onMounted(() => {
   }
   &__copyright {
     display: flex;
+    align-items: center;
   }
 }
 .link {
-  color: #555;
   transition: border .3s ease-in-out;
   margin-left: 6px;
   &:hover {

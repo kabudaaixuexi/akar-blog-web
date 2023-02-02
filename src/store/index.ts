@@ -2,6 +2,7 @@ import createStore from '@akar/proxy-property'
 
 export default createStore({
   default: 'akar',
+  theme: 'light',
   noteClassify: [
     {
       label: '不设置分类',

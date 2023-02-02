@@ -17,14 +17,19 @@ const route = useRoute();
 const [noteInfo, setNoteInfo] = useState({})
 const [title, setTitle] = useState('');
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
-const foundXsEditor = (value, watermark) => {
+// 展示富文本
+const themeMap = new Map([
+  ['dark', 'silent'],
+  ['light', 'classic'],
+])
+const foundXsEditor = (value, watermark, pattern = themeMap.get(Store.getState('theme') || 'light')) => {
   foundEdit(
     document.querySelector("#xs-editor-note"),
     {
       value,
       operable: true,
       watermark,
-      pattern: "classic", // silent | classic
+      pattern, // silent | classic
       upFileUrl: `${import.meta.env.VITE_BASE_API}/upload/setPackages?superior=_article`,
       onChange: (vm: Element, vn: any) => {
         editNote(vn);
@@ -54,12 +59,18 @@ const changeTitle = async (t) => {
 const getTitle = () => {
   return title
 }
+const handleTheme = () => {
+  Store.watch('theme', (value) => {
+    foundXsEditor(noteInfo.value.vNode, noteInfo.value.uid, value === 'dark' ? 'silent' : 'classic')
+  })
+}
 onMounted(async () => {
   ElMessage.warning('编辑文章会自动保存，编辑完可重新发布')
   const { data } = await Api.getNoteListPublished({ type: 2, noteid: route.params.noteId });
   setTitle(data.subtitle)
   setNoteInfo(data)
   foundXsEditor(data.vNode, data.uid);
+  handleTheme()
 });
 </script>
 

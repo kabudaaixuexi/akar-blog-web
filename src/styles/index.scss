@@ -5,6 +5,8 @@
 @use '@/styles/element-status.scss';
 @use '@/styles/introjs.scss';
 @use 'nprogress/nprogress.css';
+@use '@/styles/element-variables.scss' as *;
+@use "element-plus/theme-chalk/src/index" as *;
 
 body {
   width: 100vw;
@@ -131,11 +133,4 @@ input:-webkit-autofill {
 .unlogin {
   border: none !important; color: #3c40c6;
   font-size: 12px;
-}
-// default
-:root {
-  --bgContentColor : #f5f8fa;
-  --bgCommomColor : #f0f1f3;
-  --bgPlateColor : #fff;
-  --bgHeaderColor : #fff;
 }
