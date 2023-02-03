@@ -1,5 +1,5 @@
 <template>
-  <section v-loading="loading" :element-loading-svg="svg"
+  <section v-loading="loading" element-loading-background="var(--shadowColor_Content)" :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50" class="blog-ranking-container BgColor_Content">
     <header v-if="[6].includes(type)" :class="`blog-ranking-container__header hot`">
       {{ typeEnum.get(type) }}

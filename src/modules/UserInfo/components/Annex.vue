@@ -3,12 +3,12 @@
     v-loading="false"
     :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50"
-    class="annex-container"
+    class="annex-container BgColor_Content"
   >
-    <p class="ml12 mt12 b500">ta的附件 (点击预览)</p>
+    <p class="ml12 mt12 b500 Color_Content">ta的附件 (点击预览)</p>
     <div class="annex-container__item mt12 flex br4" v-for="({url, name, type}, key) in annexList" :key="key" @click="download(url, name + '.' + type)">
       <figure class="ml12 mr6 flex"><img :src="iconSet.get(type) || url" :alt="name" /></figure>
-      <figcaption class="flex">
+      <figcaption class="flex Color_Content">
         <span class="otw">{{name}}</span>
       </figcaption>
     </div>

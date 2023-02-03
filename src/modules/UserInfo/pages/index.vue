@@ -14,7 +14,7 @@
         <img :src="user.userPortrait" alt="" />
         <div class="userinfo-header__detail">
           <p>
-            <span class="b500 mr12">{{ user.userName }}</span>
+            <span class="b500 mr12 Color_Content">{{ user.userName }}</span>
             <span class="f12 c666">{{ user.createdAt }} 加入社区</span>
             <el-button v-if="user.uid === userInfo.uid" @click="() => router.push(`/uf/${user.userName}/up`)" class="ml20" type="primary" :icon="Edit" circle />
           </p>
@@ -25,7 +25,7 @@
                   ElMessage.error('暂未开放查看粉丝')
                 }
               "
-              class="f12 mr12"
+              class="f12 mr12 Color_Content"
               >粉丝
               <span class="b500 f14">{{
                 JSON.parse(user.extData || "{}").fans?.length || 0
@@ -37,7 +37,7 @@
                   ElMessage.error('暂未开放查看关注');
                 }
               "
-              class="f12"
+              class="f12 Color_Content"
               >关注
               <span class="b500 f14">{{
                 JSON.parse(user.extData || "{}").follow?.length || 0
@@ -46,18 +46,18 @@
           </p>
         </div>
       </header>
-      <p class="userinfo-brief mt20 f12 b500">{{user.userIntro || '这个人没有任何简介'}}</p>
-      <el-card v-if="user.userEmail || user.userOffice || user.userBirth" class="userinfo-card mt20">
+      <p class="userinfo-brief mt20 f12 b500 Color_Content">{{user.userIntro || '这个人没有任何简介'}}</p>
+      <el-card v-if="user.userEmail || user.userOffice || user.userBirth" class="BgColor_Content userinfo-card mt20">
          <el-row :gutter="24">
           <el-col :key="key" v-for="(item, key) in introduceMap" :span="8">
-            <div v-if="user[item[1]]">
+            <div class="Color_Content" v-if="user[item[1]]">
               {{item[0]}} <span class="b500">{{user[item[1]]}}</span>
             </div>
           </el-col>
         </el-row>
       </el-card>
       <article class="userinfo-center mt12">
-        <el-tabs v-model="activeTab" class="demo-tabs" @tab-click="(e) => getList(e.props.name)">
+        <el-tabs v-model="activeTab" class="demo-tabs Color_Content" @tab-click="(e) => getList(e.props.name)">
           <el-tab-pane v-for="(item, key) in tabs" :key="key" :label="item.label" :name="item.type">
             <p v-if="item.show" class="userinfo-remark f12">
               ta 贡献 {{ list.length }} 篇好文， 共收到 {{ star }} 个点赞， 被 {{ skim }} 次浏览。

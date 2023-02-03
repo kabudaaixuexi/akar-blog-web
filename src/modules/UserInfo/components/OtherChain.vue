@@ -3,13 +3,13 @@
     v-loading="false"
     :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50"
-    class="intorduce-container"
+    class="intorduce-container BgColor_Content"
   >
-    <p class="ml12 mt12 b500">了解更多可点击下方链接</p>
-    <div class="intorduce-container-link" v-for="(item, key) in state" :key="key">
-        <a target="_blank" :href="item.value">{{item.label}}</a>
+    <p class="ml12 mt12 b500 Color_Content">了解更多可点击下方链接</p>
+    <div class="intorduce-container-link " v-for="(item, key) in state" :key="key">
+        <a class="Color_Content" target="_blank" :href="item.value">{{item.label}}</a>
     </div>
-    <div class="c666 ml12 mt20 mb12" v-if="!state.length"> ta还没有设置任何外部链接</div>
+    <div class="Color_Content ml12 mt20 mb12" v-if="!state.length"> ta还没有设置任何外部链接</div>
   </section>
 </template>
 
@@ -50,7 +50,6 @@ onMounted(() => {
     .intorduce-container-link {
       margin: 12px;
       a {
-        color: #333;
         text-decoration:underline;
       }
     }

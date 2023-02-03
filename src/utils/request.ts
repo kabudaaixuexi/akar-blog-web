@@ -66,7 +66,7 @@ let loading: any = null
 // request拦截器
 service.interceptors.request.use(
   request => {
-    if (!["/note/getNoteListPublished", '/note/editNote', '/user/decorate', '/soc/getNewsUserList'].includes((request as any).url)) {
+    if (!["/user/getUser", "/soc/getNewsUserList", "/upload/getPackages", "/upload/getPortfolio", "/note/getNoteList", "/note/getNoteListPublished", '/note/editNote', '/user/decorate', '/soc/getNewsUserList'].includes((request as any).url)) {
       loading = ElLoading.service({
         lock: true,
         text: '',

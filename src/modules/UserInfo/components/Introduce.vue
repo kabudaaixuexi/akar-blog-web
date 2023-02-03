@@ -3,7 +3,7 @@
     v-loading="loading"
     :element-loading-svg="svg"
     element-loading-svg-view-box="-10, -10, 50, 50"
-    class="intorduce-container"
+    class="intorduce-container BgColor_Content"
   >
     <el-card v-if="state.school" class="intorduce-container-card">
       <span>毕业院校：</span>
