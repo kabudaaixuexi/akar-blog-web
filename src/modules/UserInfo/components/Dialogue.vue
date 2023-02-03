@@ -12,7 +12,7 @@
       placeholder="给ta留言，ta会以私信的形式收到你的留言，最多100个字哦"
     />
     <div style="display: flex; justify-content: flex-end">
-      <el-button class="mt20 Color_Content" @click="handleSubmit" type="primary">发送留言</el-button>
+      <el-button class="mt20" @click="handleSubmit" type="primary">发送留言</el-button>
     </div>
   </section>
 </template>
