@@ -69,7 +69,7 @@ onMounted(async () => {
   const { data } = await Api.getNoteListPublished({ type: 2, noteid: route.params.noteId });
   setTitle(data.subtitle)
   setNoteInfo(data)
-  foundXsEditor(data.vNode, data.uid);
+  foundXsEditor(data.vNode, data.uid, Store.getState('theme') === 'dark' ? 'silent' : 'classic');
   handleTheme()
 });
 </script>
