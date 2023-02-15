@@ -113,12 +113,12 @@ export default defineComponent({
     const getVal = (vNode) => {
       let value = "";
       const forVal = (v) => {
-        if (v.children && v.children.length) {
+        if (v && v.children && v.children.length) {
           v.children.forEach((el) => {
             forVal(el);
           });
         }
-        v.xs_value && (value += v.xs_value);
+        if (v && v.xs_value) (value += v.xs_value)
       };
       forVal(vNode);
       return value;
