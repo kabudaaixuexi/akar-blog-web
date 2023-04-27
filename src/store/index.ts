@@ -54,7 +54,7 @@ export default createStore({
       value: 9,
       disabled: false
     }
-  ]
+  ],
 }, {
     usePersisted: true
 })

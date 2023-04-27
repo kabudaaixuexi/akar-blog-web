@@ -85,6 +85,25 @@ const childrenRoutes = [
       }
     ]
   },
+  {
+    path: '/jc4c',
+    component: Layout,
+    name: 'Major',
+    icon: 'eye',
+    redirect: {
+      name: 'MajorList'
+    },
+    children: [
+      {
+        path: 'l',
+        name: 'MajorList',
+        component: importModule['../modules/Major/pages/list.vue'],
+        meta: {
+          title: '专栏'
+        }
+      }
+    ]
+  },
   // 文件存储
   {
     path: '/ef6u',

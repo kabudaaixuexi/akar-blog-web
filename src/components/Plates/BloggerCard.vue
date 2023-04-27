@@ -82,7 +82,7 @@ const getList = async () => {
   console.log(props.getState(),'props.getState().value');
   const { uid } = props.getState();
   if (!uid) {setTimeout(() => getList(), 300); return }
-  const { data: user } = await Api.getUser({ uid });
+  const { data: user } = await Api.getUserInfo({ uid });
   setUser(user);
   setFans(JSON.parse(user.extData || '{}').fans || []);
   setFollow(JSON.parse(user.extData || '{}').follow || []);
@@ -94,9 +94,10 @@ const getList = async () => {
     const extData = et.extData || {}
     temStar = [...temStar, ...(extData.star || [])]
     temTake = [...temTake, ...(extData.take || [])]
-    temSkim = Number(extData.skim) + temSkim
+    temSkim = (Number(extData.skim) || 0) + temSkim
   });
   setStar(temStar);setSkim(temSkim);setTake(temTake);
+
   setIntegral(pulish.length * 100 + fans.value.length * 100 + temSkim * 1 + temStar.length * 20 + temTake.length * 50) // 积分计算规则：原创 = 100; 粉丝 = 100; 浏览 = 1; 获赞 = 20; 被收藏 = 50;
   setLoading(false);
 };

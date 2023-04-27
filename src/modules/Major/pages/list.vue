@@ -10,10 +10,6 @@
       </NavigationNavBar>
     </template>
 
-    <template #sideLeft>
-      <BlogRanking v-if="list" :type="9" />
-    </template>
-
     <template #content>
       <Rotation pop="16-9" />
       <LayoutSection has-divider flex-content>
@@ -25,10 +21,7 @@
     </template>
 
     <template #sideRight>
-      <BlogRanking :type="6" />
-      <BlogRanking :type="9" />
-      <UserSuggest />
-      <Copyright />
+11
     </template>
 
   </LayoutArea>
@@ -37,9 +30,6 @@
 <script lang="ts" setup>
 import { defineComponent, ref, reactive, onMounted } from "vue";
 import Rotation from "@/components/Rotation/index.vue";
-import Copyright from "@/components/Plates/Copyright.vue";
-import BlogRanking from "@/components/Plates/BlogRanking.vue";
-import UserSuggest from "@/components/Plates/UserSuggest.vue";
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 

@@ -18,9 +18,9 @@ export default {
         return data
     },
     /** 获取某个用户信息 */
-    getUser: async (payload) => {
+    getUserInfo: async (payload) => {
       const { data } = await request.post(
-        '/user/getUser',{ ...payload })
+        '/user/getUserInfo',{ ...payload })
       return data
   },
     /** 注册 */

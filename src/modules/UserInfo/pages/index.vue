@@ -149,7 +149,7 @@ const skim = computed(() => {
 const createdInit = async (uid) => {
   if (!uid) return
   document.title = `${uid} 的主页`;
-  const { data: user } = await Api.getUser({ uid });
+  const { data: user } = await Api.getUserInfo({ uid });
   setUser(user);
   getList(0);
 }

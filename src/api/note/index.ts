@@ -58,7 +58,7 @@ export default {
     });
     return data;
   },
-  /** 获取笔记列表 */
+  /** 根据用户获取笔记列表 */
   getNoteList: async (payload: getNoteListReq) => {
     const { data } = await request.post("/note/getNoteList", {
       ...payload,

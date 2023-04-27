@@ -8,7 +8,7 @@
 
     <template #sideLeft>
       <BloggerCard :getState="() => (noteInfo)" />
-      <figure v-if="noteInfo.cover" class="cover mb12 BgColor_Content">
+      <figure v-if="noteInfo.cover" class="cover mb12">
         <img :src="noteInfo.cover" />
       </figure>
       <figure class="calendar BgColor_Calendar">
@@ -223,7 +223,7 @@ onMounted(async () => {
   setNoteInfo(data)
   document.title = data.subtitle
   foundXsEditor(data.vNode, data.uid);
-  const { data: user } = await Api.getUser({ uid:data.uid });
+  const { data: user } = await Api.getUserInfo({ uid:data.uid });
   setUser(user);
   handleTheme()
 });
