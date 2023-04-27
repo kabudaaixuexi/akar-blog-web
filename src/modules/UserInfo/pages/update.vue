@@ -2,7 +2,7 @@
   <LayoutArea :showFooter="false">
     <template #top>
       <NavigationNavBar :fixed="false">
-        <NavigationSideLogo :title="`更新个人主页`" />
+        <NavigationSideGoBack :title="'返回'" />
       </NavigationNavBar>
     </template>
 
@@ -12,7 +12,7 @@
         <template #header>
           <div class="card-header">
             <el-upload
-              action="http://124.220.16.124:8099/upload/setFilesNote"
+              action="http://60.204.134.228:8099/upload/setFilesNote"
               :show-file-list="false"
               :multiple="false"
               :limit="1"
@@ -162,7 +162,7 @@
 </template>
 
 <script lang="ts" setup>
-import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
+import NavigationSideGoBack from "@/components/Navigation/Side/SideGoBack.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";

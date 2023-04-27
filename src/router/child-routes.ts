@@ -134,7 +134,7 @@ const childrenRoutes = [
   },
   {
     path: '/lett/:noteId',
-    component: LayoutView,
+    component: Layout,
     name: 'resultEdit',
     icon: 'eye',
     redirect: {

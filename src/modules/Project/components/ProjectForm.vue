@@ -86,7 +86,7 @@
           :show-file-list="false"
           drag
           :on-success="handleExceed"
-          action="http://124.220.16.124:8099/upload/setFilesNote"
+          action="http://60.204.134.228:8099/upload/setFilesNote"
         >
           <el-icon class="el-icon--upload"><upload-filled /></el-icon>
           <div class="el-upload__text">拖拽或者 <em>点击上传</em></div>
@@ -95,17 +95,29 @@
           </template>
         </el-upload>
       </el-form-item>
+      <el-form-item
+        prop="editorType"
+        label="编辑器"
+      >
+        <el-select v-model="modelValue.editorType" placeholder="选一个喜欢的编辑器吧～">
+          <el-option
+            v-for="item in editorMap"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
-import useCurrentInstance from "@/hooks/useCurrentInstance";
 import { defineComponent, reactive, ref, toRefs, nextTick } from "vue";
 import { ElInput } from "element-plus";
 import { UploadFilled } from "@element-plus/icons-vue";
 import { useState } from "@akar/vue-hooks";
-import Api from "@/api"
+import { editorMap } from '../data'
 import Store from "@/store"
 export default defineComponent({
   name: "ProjectForm",
@@ -130,7 +142,6 @@ export default defineComponent({
     const showInput = () => {
       state.inputVisible = true;
       nextTick(() => {
-        console.log(InputRef);
         InputRef.value!.input!.focus();
       });
     };
@@ -171,6 +182,7 @@ export default defineComponent({
       coverUrl,
       setCoverUrl,
       validateRules,
+      editorMap
     };
   },
 });

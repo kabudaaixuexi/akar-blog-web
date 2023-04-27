@@ -1,7 +1,7 @@
 {
   "name": "vite-ts-starter",
   "description": "🐬 Akar personal blog on Vite 2.x + Vue 3.x + Typescript",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "author": "Akar <kaburda@163.com>",
   "license": "MIT",
   "scripts": {
@@ -46,7 +46,7 @@
   "dependencies": {
     "@akar/proxy-property": "^0.1.4",
     "@akar/vue-hooks": "^0.1.5",
-    "@akar/xs-editor": "^0.1.6",
+    "@akar/xs-editor": "^0.1.8",
     "@element-plus/icons-vue": "1.1.4",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/free-brands-svg-icons": "6.1.1",

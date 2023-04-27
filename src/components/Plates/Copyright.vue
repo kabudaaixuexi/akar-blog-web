@@ -9,12 +9,10 @@
 
     <div class="copyright-container__wechat">
       <figure>
-        <img class="" src="http://124.220.16.124:8099/files/packages/Akar/_section/WechatIMG129.jpeg" alt="">
-        <!-- <figcaption>weChat</figcaption> -->
+        <img class="" v-publicSrc="`/files/packages/Akar/_section/WechatIMG129.jpeg`" alt="">
       </figure>
       <figure>
-        <img class="" src="http://124.220.16.124:8099/files/packages/Akar/_section/gh_3fa57951f854_344.jpg" alt="">
-        <!-- <figcaption>weChat</figcaption> -->
+        <img class="" v-publicSrc="`/files/packages/Akar/_section/gh_3fa57951f854_344.jpg`" alt="">
       </figure>
     </div>
     <div class="copyright-container__copyright Color_Content">

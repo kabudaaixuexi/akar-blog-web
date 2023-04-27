@@ -43,12 +43,12 @@ import ProjectTableHeader from "@/modules/Project/components/TableHeader.vue";
 import ProjectTableBody from "@/modules/Project/components/TableBody.vue";
 
 import SearchCorporation from "@/components/SearchSelect/SearchCorporation.vue";
-import Api from "@/api";
 import useCurrentInstance from "@/hooks/useCurrentInstance";
-import Cookies from "js-cookie";
 import { useState } from "@akar/vue-hooks";
-import Store from "@/store";
 import { creatEmptyVNode } from '../data'
+import Cookies from "js-cookie";
+import Api from "@/api";
+
 
 const { proxy } = useCurrentInstance();
 const [list, setList] = useState([]);
@@ -68,6 +68,7 @@ function handleCreateProject() {
     tags: [],
     drawe: 0,
     cover: "",
+    editorType: 'ckeditor'
   });
   proxy.$ModalDialog({
     title: "新文章",
@@ -83,7 +84,7 @@ function handleCreateProject() {
     async onConfirm(instance, context) {
       const isValid = await instance.validateRules();
       if (!isValid) return Promise.reject(new Error("error"));
-      const { title: subtitle, cover, tags, drawe } = formData;
+      const { title: subtitle, cover, tags, drawe, editorType } = formData;
       // 新增笔记
       await Api.addNote({
         uid: userInfo.userName,
@@ -93,7 +94,8 @@ function handleCreateProject() {
         lock: false,
         cover,
         tags,
-        drawe
+        drawe,
+        editorType
       });
       context.fullLoading = true;
       getNoteList();

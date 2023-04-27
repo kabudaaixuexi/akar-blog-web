@@ -2,8 +2,8 @@
   <el-carousel :class="`pop${pop} mb20`" height="137px" ref="myRef" :interval="10000" width="100%" >
     <img class="empty_this" src="../../assets/images/loading.gif" alt="">
     <el-carousel-item v-for="item in list" :key="item">
-      <a target="_blank" :href="item.link">
-        <img style="border-radius: 4px" :class="`pop${pop}`" :src="item.uri" :alt="item.expl">
+      <a target="_blank" v-publicHref="item.link">
+        <img style="border-radius: 4px" :class="`pop${pop}`" v-publicSrc="item.uri" :alt="item.expl">
       </a>
     </el-carousel-item>
   </el-carousel>
@@ -20,10 +20,10 @@ const { pop } = defineProps<{
 const router = useRouter()
 const [list, setList] = useState([
 {
-  "uri": "http://124.220.16.124:8099/files/rotations/2.jpeg",
+  "uri": "/files/rotations/2.jpeg",
   "type": 0,
   "expl": "2",
-  "link": "http://124.220.16.124:8099/files/rotations/2.jpeg"
+  "link": "/files/rotations/2.jpeg"
 }
 ])
 const getWalkCharts = async () => {

@@ -7,3 +7,5 @@ interface ImportMetaEnv extends Readonly<Record<string, string>> {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+declare let PublicPath: string

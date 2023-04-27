@@ -23,7 +23,7 @@
       </el-form-item>
       <el-form-item label="上传头像：" prop="userPortrait">
         <el-upload
-          action="http://124.220.16.124:8099/upload/setFilesNote"
+          action="http://60.204.134.228:8099/upload/setFilesNote"
           :show-file-list="false"
           :multiple="false"
           :limit="1"
@@ -82,8 +82,8 @@ const [rules, setRules] = useState({
     { required: true, message: "昵称不能为空", trigger: "blur" },
     {
       min: 1,
-      max: 12,
-      message: "昵称长度不能超过12个字节",
+      max: 18,
+      message: "昵称长度不能超过18个字节",
       trigger: "blur",
     },
   ],

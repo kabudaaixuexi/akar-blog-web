@@ -5,3 +5,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.ck-editor__main, .ck-editor, .ck-content {
+  height: 100% !important;
+}
+.ck-toolbar {
+  border: 1px solid #f1f1f1 !important;
+}
+.ck-focused,.ck-content{
+  border: none !important;
+  box-shadow: none !important;
+}

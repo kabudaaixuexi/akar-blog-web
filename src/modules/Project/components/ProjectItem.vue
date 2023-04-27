@@ -128,7 +128,7 @@ export default defineComponent({
       if (isLoading.value) return;
       const { published } = props.dataset;
       if (!published && !getVal(props.dataset.vNode)) {
-        ElMessage.error('好歹也写点东西吧～')
+        ElMessage.error('不能发布空文章哦～')
         return
       }
       isLoading.value = true;

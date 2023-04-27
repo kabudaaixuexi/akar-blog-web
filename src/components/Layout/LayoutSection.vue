@@ -2,24 +2,6 @@
   <div class="layout-section-container">
     <div class="layout-section-container__header">
       <div class="layout-section-container__header-head text_nowrap">
-        <el-input
-          v-if="inputVisible && showInput"
-          size="default"
-          ref="InputRef"
-          v-model="inputValue"
-          style="width: 300px;"
-          :maxlength="30"
-          placeholder="按下回车保存此次修改"
-          @keyup.enter="handleInputConfirm"
-        />
-        <h1
-          v-if="!inputVisible && showInput"
-          :title="title"
-          @click="(showInput && heihei) ? setInputVisible(true) : () => {}"
-          class="layout-section-container__header-title text_nowrap Color_Content"
-        >
-          {{ title || '点击设置文章标题'}}
-        </h1>
         <slot name="head"></slot>
       </div>
       <div class="layout-section-container__header-action">
@@ -45,9 +27,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useState } from '@akar/vue-hooks'
 import { useRoute } from 'vue-router'
-import { title } from 'process'
 /**
  * 上下布局，顶部 header 大标题 + 底部内容区域
  */
@@ -62,39 +42,11 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    getTitle: {
-      type: Function,
-      default: ()=>{}
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    changeTitle: {
-      type: Function,
-      default: ()=> {}
-    },
-    showInput: {
-      type: Boolean,
-      default: false
-    },
-    heihei: {
-      type: Boolean,
-      default: false
-    }
   },
   setup(props) {
     const route = useRoute()
-    // props传递proxy数据需要以实例的形式去传 getTitle返回proxy title
-    const [inputValue] = useState(props.getTitle() || props.title)
-    const [inputVisible, setInputVisible] = useState(false)
-    const handleInputConfirm = (e) => {
-      setInputVisible(false)
-      props.changeTitle(inputValue.value)
-    }
     return {
-      inputVisible, setInputVisible, handleInputConfirm,
-      inputValue, route
+       route
     }
   }
 })

@@ -11,3 +11,14 @@ export const creatEmptyVNode = () => {
       _value: undefined
   }
 }
+
+export const editorMap = [
+  {
+    label: 'AKAR_Editor（富文本）',
+    value: 'xseditor'
+  },
+  {
+    label: 'CK_Editor（富文本）',
+    value: 'ckeditor'
+  }
+]

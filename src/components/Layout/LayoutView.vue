@@ -1,12 +1,8 @@
 <template>
   <LayoutArea :showFooter="false">
     <template #top>
-      <NavigationNavBar
-        :fixed="false"
-      >
-        <NavigationSideGoBack
-          :title="'返回'"
-        />
+      <NavigationNavBar :fixed="false">
+        <NavigationSideGoBack :title="'返回'"/>
       </NavigationNavBar>
     </template>
     <!-- <template #sideLeft>
