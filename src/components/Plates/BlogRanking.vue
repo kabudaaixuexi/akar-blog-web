@@ -69,7 +69,6 @@ onMounted(() => {
   overflow: hidden;
   width: 100%;
   height: max-content;
-  min-height: 180px;
   margin-bottom: 12px;
   border-radius: 6px;
   box-shadow: 0 0 1px 0 var(--shadowColor_Content);

@@ -57,7 +57,7 @@ const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 // 获取文章列表
 const getNoteList = async () => {
   const { data } = await Api.getNoteList({
-    uid: userInfo.userName,
+    uid: userInfo.uid,
   });
   setList(data);
 };
@@ -87,7 +87,9 @@ function handleCreateProject() {
       const { title: subtitle, cover, tags, drawe, editorType } = formData;
       // 新增笔记
       await Api.addNote({
-        uid: userInfo.userName,
+        uid: userInfo.uid,
+        userName: userInfo.userName,
+        userPortrait: userInfo.userPortrait,
         vNode: creatEmptyVNode(),
         subtitle,
         lockValue: "",

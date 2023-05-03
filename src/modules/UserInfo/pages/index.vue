@@ -1,48 +1,25 @@
 <template>
-  <LayoutArea :showFooter="false">
+  <LayoutArea :showFooter="false" :sideLeftWidth="388">
     <template #top>
       <NavigationNavBar :fixed="false">
         <NavigationSideLogo :title="`${user.userName} 的主页`" />
       </NavigationNavBar>
     </template>
 
-    <!-- <template #sideLeft>
+    <template #sideLeft >
+        <AboutInfo v-if="user" :user="user"/>
+        <Cat />
+    </template>
 
-    </template> -->
     <template #content>
       <header class="userinfo-header">
-        <img :src="user.userPortrait" alt="" />
+        <img v-if="userInfo.userPortrait" :src="userInfo.userPortrait" />
+        <img v-else src="@/assets/images/navigation-avatar.webp" />
         <div class="userinfo-header__detail">
           <p>
             <span class="b500 mr12 Color_Content">{{ user.userName }}</span>
-            <span class="f12 c666">{{ user.createdAt }} 加入社区</span>
-            <el-button v-if="user.uid === userInfo.uid" @click="() => router.push(`/uf/${user.userName}/up`)" class="ml20" type="primary" :icon="Edit" circle />
-          </p>
-          <p class="cp">
-            <span
-              @click="
-                () => {
-                  ElMessage.error('暂未开放查看粉丝')
-                }
-              "
-              class="f12 mr12 Color_Content"
-              >粉丝
-              <span class="b500 f14">{{
-                JSON.parse(user.extData || "{}").fans?.length || 0
-              }}</span></span
-            >
-            <span
-              @click="
-                () => {
-                  ElMessage.error('暂未开放查看关注');
-                }
-              "
-              class="f12 Color_Content"
-              >关注
-              <span class="b500 f14">{{
-                JSON.parse(user.extData || "{}").follow?.length || 0
-              }}</span></span
-            >
+            <span v-if="user.createdAt" class="f12 c666">{{ user.createdAt }} 加入社区</span>
+            <el-button v-if="user.uid === userInfo.uid" @click="() => router.push(`/uf/${user.uid}/up`)" class="ml20" type="primary" :icon="Edit" circle />
           </p>
         </div>
       </header>
@@ -56,8 +33,8 @@
           </el-col>
         </el-row>
       </el-card>
-      <article class="userinfo-center mt12">
-        <el-tabs v-model="activeTab" class="demo-tabs Color_Content" @tab-click="(e) => getList(e.props.name)">
+      <article class="userinfo-center Color_Content mt12">
+        <el-tabs v-model="activeTab" class="demo-tabs" @tab-click="(e) => getList(e.props.name)">
           <el-tab-pane v-for="(item, key) in tabs" :key="key" :label="item.label" :name="item.type">
             <p v-if="item.show" class="userinfo-remark f12">
               ta 贡献 {{ list.length }} 篇好文， 共收到 {{ star }} 个点赞， 被 {{ skim }} 次浏览。
@@ -87,19 +64,19 @@
 <script lang="ts" setup>
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";
+import AboutInfo from "@/components/Plates/AboutInfo.vue"
 import CommonItem from "@/modules/Common/components/CommonItem.vue";
 import Introduce from "@/modules/UserInfo/components/Introduce.vue"
 import OtherChain from "@/modules/UserInfo/components/OtherChain.vue"
 import Dialogue from "@/modules/UserInfo/components/Dialogue.vue"
 import Annex from "@/modules/UserInfo/components/Annex.vue"
+import Cat from "@/components/Plates/Cat.vue";
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { onMounted, computed, watch } from "vue";
-import Store from "@/store";
 import Api from "@/api";
 import { useState } from "@akar/vue-hooks";
 import { Edit } from "@element-plus/icons-vue";
-import { ElMessage } from "element-plus";
 import { introduceMap } from '../data'
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const route = useRoute();
@@ -183,6 +160,7 @@ onMounted(() => {
 .userinfo-brief {
   border-radius: 6px;
   width: 55%;
+  padding: 4px 12px;
 }
 .userinfo-card {
   width: 70%;
@@ -191,6 +169,8 @@ onMounted(() => {
 }
 .userinfo-center {
   width: 70%;
+  height: 88%;
+  padding: 4px 12px;
   .userinfo-remark {
     width: 100%;
     padding: 12px;

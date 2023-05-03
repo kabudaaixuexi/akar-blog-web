@@ -135,7 +135,6 @@ export default defineComponent({
       await Api.editNote({
         ...props.dataset,
         published: !published,
-        uid: userInfo.userName,
       });
       isLoading.value = false;
       ElMessage.success({
@@ -146,7 +145,7 @@ export default defineComponent({
     // 删除文章
     async function handleDelete(noteid) {
       await Api.removeNote({
-        uid: userInfo.userName,
+        uid: userInfo.uid,
         noteid,
       });
       props.list?.forEach(

@@ -6,7 +6,7 @@
     class="blogger-card-container BgColor_Content"
   >
     <header class="blogger-card-container__header">
-      <img class="cp" @click="() => router.push(`/uf/${user.userName}/hp`)" v-if="user.userPortrait" :src="user.userPortrait" alt="" />
+      <img class="cp" @click="() => router.push(`/uf/${user.uid}/hp`)" v-if="user.userPortrait" :src="user.userPortrait" alt="" />
       <img v-else src="../../assets/images/navigation-avatar.webp" alt="" />
       <figure>
         <span class="Color_Content" style="font-weight: 500">{{ user.userName || "--" }}</span>
@@ -45,9 +45,9 @@
         <span class="Color_Content">积分</span>
       </div>
     </article>
-    <article v-if="userInfo.userName != user.userName" class="blogger-card-container__footer">
+    <article v-if="userInfo.uid != user.uid" class="blogger-card-container__footer">
       <div class="Color_Content" @click="handleFollow">
-        {{ fans.find(ev => ev.userName == userInfo.userName) ? "已关注" : "关 注" }}
+        {{ fans.find(ev => ev.uid == userInfo.uid) ? "已关注" : "关 注" }}
       </div>
       <div class="Color_Content" @click="handleDialogue">私 信</div>
     </article>
@@ -107,37 +107,39 @@ const handleFollow = async () => {
     ElMessage.error("登录后才能进行关注");
     return
   }
-  const { uid } = props.getState();
-  const rd = fans.value.find(ev => ev.userName == userInfo.userName)
+  const { uid, userName, userPortrait } = props.getState();
+  const rd = fans.value.find(ev => ev.uid == userInfo.uid)
   if (rd) {
     // 减粉丝
+    const comFans = [...fans.value.filter((i) => i.uid !== userInfo.uid)]
     await Api.postDecorate({
       uid,
       extData: JSON.stringify(
         {
           ...JSON.parse(user.value.extData),
-          fans: [...fans.value.filter((i) => i.userName !== userInfo.userName)],
+          fans: comFans,
         }
       )
      ,
     });
-    setFans([...fans.value.filter((i) => i.userName !== userInfo.userName)])
-    ElMessage.success("已取消关注");
+    setFans(comFans)
+
     // 减关注
     const extData = JSON.stringify(
         {
           ...JSON.parse(userInfo.extData),
-          follow: JSON.parse(userInfo.extData).follow.filter((i) => i !== uid),
+          follow: JSON.parse(userInfo.extData).follow.filter((i) => i.uid !== uid),
         }
       )
     await Api.postDecorate({
-      uid: userInfo.userName,
+      uid: userInfo.uid,
       extData
     });
     Cookie.set("userInfo", JSON.stringify({
       ...userInfo,
       extData
     }));
+    ElMessage.success("已取消关注");
   } else {
     // 加粉丝
     await Api.postDecorate({
@@ -146,6 +148,7 @@ const handleFollow = async () => {
         {
           ...JSON.parse(user.extData || '{}'),
           fans: [...fans.value, {
+            uid: userInfo.uid,
             userName: userInfo.userName,
             userPortrait: userInfo.userPortrait
           }],
@@ -153,26 +156,29 @@ const handleFollow = async () => {
       ),
     });
     setFans([...fans.value, {
+            uid: userInfo.uid,
             userName: userInfo.userName,
             userPortrait: userInfo.userPortrait
           }]);
-    ElMessage.success("关注成功");
 
     // 加关注
     const extData = JSON.stringify(
         {
           ...JSON.parse(userInfo.extData),
-          follow: Array.from(new Set([...(JSON.parse(userInfo.extData).follow || []), uid])),
+          follow: Array.from(new Set([...(JSON.parse(userInfo.extData).follow || []), {
+            uid, userName, userPortrait
+          }])),
         }
       )
     await Api.postDecorate({
-      uid: userInfo.userName,
+      uid: userInfo.uid,
       extData,
     });
     Cookie.set("userInfo", JSON.stringify({
       ...userInfo,
       extData
     }));
+    ElMessage.success("关注成功");
   }
 };
 

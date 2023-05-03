@@ -21,7 +21,7 @@
         <div class="result-detail-header__detail">
           <p>
             <span style="padding-right: 24px"
-              ><span class="cp Color_Content" @click="() => router.push(`/uf/${noteInfo.uid}/hp`)" style="padding-right: 12px">{{ noteInfo.uid }}</span>
+              ><span class="cp Color_Content" @click="() => router.push(`/uf/${noteInfo.uid}/hp`)" style="padding-right: 12px">{{ noteInfo.userName }}</span>
               <span style="padding-left: 6px; color: var(--xs-color-info)"
                 >于 {{ noteInfo.latestTime }} 发布</span
               >
@@ -50,7 +50,7 @@
         <div class="result-detail-footer__left">
           <img v-if="user?.userPortrait" :src="user?.userPortrait" />
           <img v-else src="@/assets/images/navigation-avatar.webp" />
-          <b class="Color_Content">{{ noteInfo.uid }}</b>
+          <b class="Color_Content">{{ noteInfo.userName }}</b>
         </div>
         <figure class="result-detail-footer__right Color_Content">
           <TooltipCustom
@@ -211,7 +211,7 @@ const foundXsEditor = (value, watermark, pattern = themeMap.get(Store.getState('
 };
 const handleTheme = () => {
   Store.watch('theme', (value) => {
-    foundXsEditor(noteInfo.value.vNode, noteInfo.value.uid, value === 'dark' ? 'silent' : 'classic')
+    foundXsEditor(noteInfo.value.vNode, noteInfo.value.userName, value === 'dark' ? 'silent' : 'classic')
   })
 }
 onMounted(async () => {
@@ -222,7 +222,7 @@ onMounted(async () => {
   setEvals(data.extData?.eval || [])
   setNoteInfo(data)
   document.title = data.subtitle
-  foundXsEditor(data.vNode, data.uid);
+  foundXsEditor(data.vNode, data.userName);
   const { data: user } = await Api.getUserInfo({ uid:data.uid });
   setUser(user);
   handleTheme()

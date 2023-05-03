@@ -12,9 +12,9 @@ export interface postLoginReq {
 }
 export default {
     /** 获取全部用户 */
-    getUserList: async () => {
+    getUserList: async (payload) => {
         const { data } = await request.post(
-          '/user/getUserList',{})
+          '/user/getUserList',{ ...payload })
         return data
     },
     /** 获取某个用户信息 */

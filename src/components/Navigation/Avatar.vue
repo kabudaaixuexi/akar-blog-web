@@ -47,7 +47,6 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
     const userInfo = JSON.parse(Cookie.get("userInfo") || "{}");
-    console.log(JSON.parse(userInfo.extData || '{}'),'userInfo');
 
     const logined = userInfo && Object.getOwnPropertyNames(userInfo).length;
     const commandList = computed(() => [
@@ -56,7 +55,7 @@ export default defineComponent({
         label: `${userInfo.userName ? '个人主页' : `游客${getUuiD()}`}`,
         icon: "user",
         click: () => {
-          userInfo.userName && router.push({ path: `/uf/${userInfo.userName}/hp`, replace: true });
+          userInfo.userName && router.push({ path: `/uf/${userInfo.uid}/hp`, replace: true });
         },
       },
       {

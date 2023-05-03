@@ -11,7 +11,6 @@
     </template>
 
     <template #sideLeft>
-      <BlogRanking v-if="list" :type="9" />
     </template>
 
     <template #content>

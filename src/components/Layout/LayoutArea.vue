@@ -16,10 +16,10 @@
           </div>
         </aside>
         <!-- content -->
-        <section :class="`${$slots.sideRight ? 'content-section-container-a' : ($slots.sideLeft ? 'content-section-container-b' : 'content-section-container-c')}`" :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''};`" id="content-section-container" class="content-section-container BgColor_Content">
+        <section v-if="$slots.content" :class="`${$slots.sideRight ? 'content-section-container-a' : ($slots.sideLeft ? 'content-section-container-b' : 'content-section-container-c')}`" :style="`${contentWidth ? `width: ${contentWidth}px`: 'flex: auto'}; ${contentBottom ? `margin-bottom: ${contentBottom}px` : ''};`" id="content-section-container" class="content-section-container BgColor_Content">
           <main class="main-content-box">
             <div
-              class="inner-content"
+              class="inner-content affix-container"
             >
               <slot name="content"></slot>
             </div>
@@ -61,11 +61,11 @@ export default defineComponent({
     },
     sideLeftWidth: {
       type: Number,
-      default: 336
+      default: 330
     },
     sideRightWidth: {
       type: Number,
-      default: 336
+      default: 316
     },
     contentWidth: {
       type: Number
