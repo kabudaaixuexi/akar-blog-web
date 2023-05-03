@@ -33,6 +33,7 @@
           </el-col>
         </el-row>
       </el-card>
+
       <article class="userinfo-center Color_Content mt12">
         <el-tabs v-model="activeTab" class="demo-tabs" @tab-click="(e) => getList(e.props.name)">
           <el-tab-pane v-for="(item, key) in tabs" :key="key" :label="item.label" :name="item.type">
