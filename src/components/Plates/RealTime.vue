@@ -114,8 +114,10 @@ const initSocketIo = () => {
       getForumAll()
       return
     }
-    (document.querySelector('.new-forum') as HTMLElement).className += ' anime-new-forum';
-    setTimeout(() => (document.querySelector('.new-forum') as HTMLElement).className = 'new-forum', 500)
+    if (document.querySelector('.new-forum')) {
+      (document.querySelector('.new-forum') as HTMLElement).className += ' anime-new-forum';
+      setTimeout(() => (document.querySelector('.new-forum') as HTMLElement).className = 'new-forum', 500)
+    }
     payload.extData = JSON.parse(payload.extData || '{}')
     setForumList([
       payload,
