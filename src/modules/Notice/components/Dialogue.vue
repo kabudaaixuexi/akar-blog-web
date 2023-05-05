@@ -157,7 +157,7 @@ const uploadSuccess = (response: any) => {
     needFeedBack: false,
     sid: curKey.value,
   };
-  socket.emit("letter", news);
+  socket.emit("news", news);
 };
 const getUploadUrl = () => `${import.meta.env.VITE_BASE_API}/upload/setPackages?superior=_section`;
 // 聚焦
@@ -217,7 +217,7 @@ const initSocketIo = async () => {
   // 加入通信
   console.log(socket);
 
-  socket.on("letter", (payload) => {
+  socket.on("news", (payload) => {
     // ElMessage.success(
     //   `${payload.formUserId}发了一条消息给${payload.sid}：【${payload.message}】 -- ${payload.sendTime}`
     // );
@@ -293,7 +293,7 @@ const foundTextarea = (value) => {
             needFeedBack: false,
             sid: curKey.value,
           };
-          socket.emit("letter", news);
+          socket.emit("news", news);
         }
         setTimeout(() => foundTextarea(""));
       },
@@ -306,7 +306,7 @@ onMounted(() => {
   initSocketIo();
 });
 onUnmounted(() => {
-  socket.removeAllListeners('letter')
+  socket.removeAllListeners('news')
 })
 </script>
 

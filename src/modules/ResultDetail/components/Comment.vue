@@ -97,6 +97,7 @@ const handleWriteEval = (info) => {
             evalId: getUuiD(),
             reply: false,
             evalTime: getTime(),
+            uid: userInfo.uid,
             userName: userInfo.userName,
             userPortrait: userInfo.userPortrait,
             evalContent: myEval.value
@@ -115,6 +116,7 @@ const handleWriteEval = (info) => {
               evalId: info.evalId,
               reply: info.userName + `：${info.evalContent}`,
               evalTime: getTime(),
+              uid: userInfo.uid,
               userName: userInfo.userName,
               userPortrait: userInfo.userPortrait,
               evalContent: myEval.value
@@ -125,6 +127,7 @@ const handleWriteEval = (info) => {
               evalId: info.evalId,
               reply: info.userName  + `：${info.evalContent}`,
               evalTime: getTime(),
+              uid: userInfo.uid,
               userName: userInfo.userName,
               userPortrait: userInfo.userPortrait,
               evalContent: myEval.value

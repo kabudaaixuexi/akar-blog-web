@@ -13,14 +13,15 @@ const socket = inject('socket') as Socket;
 
 /**
  * 初始化 - 房间/模块
- * 加入文章消息通知模块 // essay
- * 加入聊天消息通知模块 // letter
+ * 通告通道 // notice
+ * 沸点通道 // forum
+ * 聊天通道 // news
  */
 const initSocketIo = () => {
   socket.onAny((eventName, payload) => console.dir(eventName, payload));
   socket.on('joinRoomSuccess', (payload) => console.log(payload));
-  socket.emit('joinRoom', 'essay');
-  socket.emit('joinRoom', 'letter');
+  socket.emit('joinRoom', 'news');
+  socket.emit('joinRoom', 'forum');
 }
 onMounted(() => {
   initSocketIo()

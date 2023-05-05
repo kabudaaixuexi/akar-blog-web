@@ -22,7 +22,12 @@ body.light { // b
     transition: .3s;
     color: #000;
   }
+  .Color_Content_Unhover {
+    transition: .3s;
+    color: #000;
+  }
   --shadowColor_Content : rgba(0,0,0,.15);
+  --bgEmpty_Content: #f6f6f6;
   .Color_Content:hover {
     transition: .3s;
     background-color:#f3f8f1;
@@ -68,7 +73,12 @@ body.dark { // h
     transition: .3s;
     color: #fff;
   }
+  .Color_Content_Unhover {
+    transition: .3s;
+    color: #fff;
+  }
   --shadowColor_Content : rgba(255,255,255,.35);
+  --bgEmpty_Content: #666;
   .Color_Content:hover {
     transition: .3s;
     background-color:#4a4b4a;

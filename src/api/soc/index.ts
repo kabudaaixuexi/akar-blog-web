@@ -19,5 +19,21 @@ export default {
         const { data } = await request.post(
           '/soc/getNewsUserList',{})
         return data
-    }
+    },
+    /** 获取全部沸点 */
+    getForumAll: async () => {
+      const { data } = await request.post(
+        '/soc/getForumAll',{})
+      return data
+    },
+    editForum: async (params) => {
+      const { data } = await request.post(
+        '/soc/editForum',{...params})
+      return data
+    },
+    deleteForum: async (params) => {
+      const { data } = await request.post(
+        '/soc/deleteForum',{...params})
+      return data
+    },
 }

@@ -1,3 +1,4 @@
+const emptyImg = require('@/assets/images/v_empty.png')
 export default {
   install(app) {
     app.directive('publicSrc', {
@@ -15,7 +16,7 @@ export default {
           if (!el.innerHTML) {
             const empty = document.createElement('article')
             empty.id = 'v_empty'
-            empty.innerHTML = '<img src="/src/assets/images/v_empty.png" />'
+            empty.innerHTML = `<img src="${emptyImg}" />`
             el.appendChild(empty)
           } else {
             document.getElementById('v_empty') && el.removeChild(document.getElementById('v_empty'))

@@ -57,7 +57,7 @@ const handleSubmit = () => {
       needFeedBack: false,
       sid: state.value.userName,
     };
-    socket.emit("letter", news);
+    socket.emit("news", news);
     setMessage('')
   } else {
     ElMessage.error("不能什么也不说哦");
@@ -65,7 +65,7 @@ const handleSubmit = () => {
 };
 
 onMounted(() => {
-  socket.on("letter", (payload) => {
+  socket.on("news", (payload) => {
     ElMessage.success("留言成功，可在私信处查看留言内容");
   });
   setTimeout(() => {
@@ -73,7 +73,7 @@ onMounted(() => {
   }, 1200);
 });
 onUnmounted(() => {
-  socket.removeAllListeners('letter')
+  socket.removeAllListeners('news')
 })
 </script>
 

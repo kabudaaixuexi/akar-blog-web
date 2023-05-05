@@ -11,6 +11,7 @@
     </template>
 
     <template #sideLeft>
+      <RealTime />
     </template>
 
     <template #content>
@@ -38,6 +39,7 @@ import { defineComponent, ref, reactive, onMounted } from "vue";
 import Rotation from "@/components/Rotation/index.vue";
 import Copyright from "@/components/Plates/Copyright.vue";
 import BlogRanking from "@/components/Plates/BlogRanking.vue";
+import RealTime from "@/components/Plates/RealTime.vue";
 import UserSuggest from "@/components/Plates/UserSuggest.vue";
 import NavigationSideLogo from "@/components/Navigation/Side/SideLogo.vue";
 import NavigationNavBar from "@/components/Navigation/NavBar.vue";

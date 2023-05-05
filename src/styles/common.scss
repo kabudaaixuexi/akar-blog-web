@@ -14,6 +14,7 @@
 }
 .c666 {
     color: #666;
+    font-weight: 400;
 }
 
 .f12 {
@@ -25,6 +26,13 @@
 
 .mt4 {
     margin-top: 4px;
+}
+
+.mt2 {
+    margin-top: 2px;
+}
+.mb2 {
+    margin-bottom: 2px;
 }
 
 .mt12 {
@@ -39,6 +47,9 @@
 .mb20 {
     margin-bottom: 20px;
 }
+.ml6 {
+    margin-left: 6px;
+}
 .ml12 {
     margin-left: 12px;
 }
@@ -47,6 +58,12 @@
 }
 .mr6 {
     margin-right: 6px;
+}
+.mb6 {
+    margin-bottom: 6px;
+}
+.mt6 {
+    margin-top: 6px;
 }
 .mr12 {
     margin-right: 12px;
@@ -77,4 +94,13 @@
    text-overflow: ellipsis;
    white-space: nowrap;
    width: 100%;
+}
+.ts09{
+    transform: scale(.9);
+}
+
+.flex-center-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
