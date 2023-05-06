@@ -58,10 +58,10 @@ const [currentDrawe, setCurrentDrawe] = useState(0);
 const getNoteList = async (drawe) => {
   if (Number(drawe)) {
     const { data } = await Api.getNoteListPublished({ type: 1, drawe });
-    setList(data);
+    setList(data.sort((a, b) => !!b.stickyTop - !!a.stickyTop));
   } else {
     const { data } = await Api.getNoteListPublished({});
-    setList(data);
+    setList(data.sort((a, b) => !!b.stickyTop - !!a.stickyTop));
   }
 };
 // 选择分类

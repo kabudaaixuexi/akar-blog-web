@@ -37,6 +37,7 @@ app
     options: {
       autoConnect: true, //关闭自动连接
       // ...其它选项
+      // pingInterval: 2500
     },
   })
   .use(BaiduCalendar)

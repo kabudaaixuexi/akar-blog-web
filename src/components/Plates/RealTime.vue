@@ -144,6 +144,8 @@ const handleSubmit = () => {
     ElMessage.error("不能发布空内容哦～");
     return;
   }
+  console.log(socket);
+
   socket.emit('forum', {
     uid: userInfo.uid,
     forumId: getUuiD(),

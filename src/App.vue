@@ -22,6 +22,8 @@ const initSocketIo = () => {
   socket.on('joinRoomSuccess', (payload) => console.log(payload));
   socket.emit('joinRoom', 'news');
   socket.emit('joinRoom', 'forum');
+  socket.on("connect_error", () => socket.connect());
+  socket.on("disconnect", () => socket.connect());
 }
 onMounted(() => {
   initSocketIo()

@@ -97,7 +97,8 @@ function handleCreateProject() {
         cover,
         tags,
         drawe,
-        editorType
+        editorType,
+        stickyTop: false, // 是否置顶
       });
       context.fullLoading = true;
       getNoteList();

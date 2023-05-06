@@ -45,7 +45,8 @@
           <span v-if="!noteInfo.tags?.length" class="f12 ml12 c666">无</span>
         </div>
       </header>
-      <article id="xs-editor-note"></article>
+      <article v-if="noteInfo.editorType === 'xseditor'" id="xs-editor-note"></article>
+      <article v-else id="ck-editor-note"></article>
       <footer class="result-detail-footer BgColor_Content">
         <div class="result-detail-footer__left">
           <img v-if="user?.userPortrait" :src="user?.userPortrait" />
@@ -117,10 +118,11 @@ import { onMounted } from "vue";
 import Store from "@/store";
 import { copyText } from "@/utils"
 import Api from "@/api";
-import foundEdit from "@akar/xs-editor";
+import foundEdit, { createDom, createVdom } from "@akar/xs-editor";
 import { useState } from '@akar/vue-hooks'
 import { StarFilled, MagicStick, Share } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
+let ckEditor: any = null;
 const userInfo = JSON.parse(Cookies.get("userInfo") || "{}");
 const draweOptions = Store.getState('noteClassify')
 const route = useRoute();
@@ -197,6 +199,7 @@ const themeMap = new Map([
   ['dark', 'silent'],
   ['light', 'classic'],
 ])
+// 加载XsEditor
 const foundXsEditor = (value, watermark, pattern = themeMap.get(Store.getState('theme') || 'light')) => {
   foundEdit(
     document.querySelector("#xs-editor-note"),
@@ -207,6 +210,19 @@ const foundXsEditor = (value, watermark, pattern = themeMap.get(Store.getState('
       pattern, // silent | classic
     },
     () => {}
+  );
+};
+
+// 加载CkEditor
+const foundCkEditor = () => {
+  (window as any).ClassicEditor.create(document.getElementById("ck-editor-note")).then(
+    (_editor: any) => {
+      _editor.plugins.get("FileRepository").createUploadAdapter = (loader: any) => {};
+      ckEditor = _editor;
+      (document.querySelector('.ck-editor__top') as any).style.display = 'none';
+      (document.querySelector('.ck-editor__main') as any).style.outline = 'none'
+      _editor.data.set(createDom(noteInfo.value.vNode).innerHTML);
+    }
   );
 };
 const handleTheme = () => {
@@ -222,10 +238,10 @@ onMounted(async () => {
   setEvals(data.extData?.eval || [])
   setNoteInfo(data)
   document.title = data.subtitle
-  foundXsEditor(data.vNode, data.userName);
   const { data: user } = await Api.getUserInfo({ uid:data.uid });
   setUser(user);
   handleTheme()
+  data.editorType === "xseditor" ? foundXsEditor(data.vNode, data.userName) : foundCkEditor();
 });
 </script>
 
