@@ -38,6 +38,7 @@
     <template #content>
       <component :is="currentComponent.tabComp"></component>
     </template>
+
   </LayoutArea>
 </template>
 

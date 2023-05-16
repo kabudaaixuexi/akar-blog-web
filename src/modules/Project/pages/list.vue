@@ -29,6 +29,9 @@
       </LayoutSection>
     </template>
 
+    <template #sideRight>
+        <iframe src="https://apaas-test.uban360.com/unified-login/#/baas-login" width="315" height="700" frameborder="0"></iframe>
+    </template>
   </LayoutArea>
 </template>
 
